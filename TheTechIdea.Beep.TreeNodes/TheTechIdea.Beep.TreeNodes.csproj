@@ -1,0 +1,291 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <RootNamespace>TheTechIdea.Beep</RootNamespace>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>TheTechIdea.Beep.TreeNodes</PackageId>
+    <Title>TheTechIdea.Beep.TreeNodes</Title>
+    <Authors>The Tech Idea</Authors>
+    <Company>The Tech Idea</Company>
+    <Product>TheTechIdea.Beep.TreeNodes</Product>
+    <Description>TreeNode for Beep enterprize</Description>
+    <Copyright>2022</Copyright>
+    <PackageIcon>SimpleODM.png</PackageIcon>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <AssemblyName>TheTechIdea.Beep.TreeNodes</AssemblyName>
+    <Version>1.0.15</Version>
+    <IncludeSymbols>False</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\InstallationScripts\LogoGFx\128\SimpleODM.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="InMemory\" />
+		<Folder Include="Library\" />
+	</ItemGroup>
+	<Target Name="CopyPackage" AfterTargets="Pack">
+		<Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="..\..\..\LocalNugetFiles" />
+	</Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy SourceFiles="$(TargetDir)$(PackageId).dll" DestinationFolder="$(ProjectDir)..\..\outputDLL\$(PackageId)\$(TargetFramework)" SkipUnchangedFiles="false" />
+	</Target>
+
+
+  <ItemGroup>
+    <Compile Remove="App\**" />
+    <Compile Remove="Json\**" />
+    <EmbeddedResource Remove="App\**" />
+    <EmbeddedResource Remove="Json\**" />
+    <None Remove="App\**" />
+    <None Remove="Json\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Remove="GFX\addconnection.png" />
+    <None Remove="GFX\ai.png" />
+    <None Remove="GFX\Category.png" />
+    <None Remove="GFX\clayer.png" />
+    <None Remove="GFX\clayerroot.png" />
+    <None Remove="GFX\cloud.png" />
+    <None Remove="GFX\configadmin.png" />
+    <None Remove="GFX\configuration.png" />
+    <None Remove="GFX\copy.png" />
+    <None Remove="GFX\createentity.png" />
+    <None Remove="GFX\createnewentities.png" />
+    <None Remove="GFX\createview.png" />
+    <None Remove="GFX\createwebapi.png" />
+    <None Remove="GFX\csv.png" />
+    <None Remove="GFX\database.png" />
+    <None Remove="GFX\databaseentities.png" />
+    <None Remove="GFX\DataManagement.png" />
+    <None Remove="GFX\datasources.png" />
+    <None Remove="GFX\dataview.png" />
+    <None Remove="GFX\dbconnection.png" />
+    <None Remove="GFX\ddl.png" />
+    <None Remove="GFX\deletefile.png" />
+    <None Remove="GFX\doc.png" />
+    <None Remove="GFX\dropconnections.png" />
+    <None Remove="GFX\dropentities.png" />
+    <None Remove="GFX\editentity.png" />
+    <None Remove="GFX\folder.png" />
+    <None Remove="GFX\folders.png" />
+    <None Remove="GFX\getchilds.png" />
+    <None Remove="GFX\html.png" />
+    <None Remove="GFX\importdata.png" />
+    <None Remove="GFX\jpg.png" />
+    <None Remove="GFX\json.png" />
+    <None Remove="GFX\loadviewfile.png" />
+    <None Remove="GFX\localdb.png" />
+    <None Remove="GFX\log.png" />
+    <None Remove="GFX\mapping.png" />
+    <None Remove="GFX\nosql.png" />
+    <None Remove="GFX\nosqlentity.png" />
+    <None Remove="GFX\parquet.png" />
+    <None Remove="GFX\paste.png" />
+    <None Remove="GFX\pdf.png" />
+    <None Remove="GFX\png.png" />
+    <None Remove="GFX\ppt.png" />
+    <None Remove="GFX\project.png" />
+    <None Remove="GFX\projects.png" />
+    <None Remove="GFX\projectsmanagement.png" />
+    <None Remove="GFX\properties.png" />
+    <None Remove="GFX\refresh.png" />
+    <None Remove="GFX\removeconnection.png" />
+    <None Remove="GFX\removefile.png" />
+    <None Remove="GFX\reportdesigner.png" />
+    <None Remove="GFX\reports.png" />
+    <None Remove="GFX\select.png" />
+    <None Remove="GFX\settings.png" />
+    <None Remove="GFX\sheet.png" />
+    <None Remove="GFX\structure.png" />
+    <None Remove="GFX\svg.png" />
+    <None Remove="GFX\txt.png" />
+    <None Remove="GFX\webapi.png" />
+    <None Remove="GFX\workflow.png" />
+    <None Remove="GFX\xls.png" />
+    <None Remove="GFX\xml.png" />
+    <None Remove="GFX\zip.png" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <EmbeddedResource Include="GFX\addconnection.png" />
+    <EmbeddedResource Include="GFX\ai.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\Category.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\clayer.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\clayerroot.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\cloud.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\configadmin.png" />
+    <EmbeddedResource Include="GFX\configuration.png" />
+    <EmbeddedResource Include="GFX\copy.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\createentity.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\createnewentities.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\createview.png" />
+    <EmbeddedResource Include="GFX\createwebapi.png" />
+    <EmbeddedResource Include="GFX\csv.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\database.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\databaseentities.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\DataManagement.png" />
+    <EmbeddedResource Include="GFX\datasources.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\dataview.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\dbconnection.png" />
+    <EmbeddedResource Include="GFX\ddl.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\deletefile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\doc.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\dropconnections.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\dropentities.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\editentity.png" />
+    <EmbeddedResource Include="GFX\folder.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\folders.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\getchilds.png" />
+    <EmbeddedResource Include="GFX\html.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\importdata.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\jpg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\json.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\loadviewfile.png" />
+    <EmbeddedResource Include="GFX\localdb.png" />
+    <EmbeddedResource Include="GFX\log.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\mapping.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\nosql.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\nosqlentity.png" />
+    <EmbeddedResource Include="GFX\parquet.png" />
+    <EmbeddedResource Include="GFX\paste.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\pdf.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\png.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\ppt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\project.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\projects.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\projectsmanagement.png" />
+    <EmbeddedResource Include="GFX\properties.png" />
+    <EmbeddedResource Include="GFX\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\removeconnection.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\removefile.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\reportdesigner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\reports.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\select.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\settings.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\sheet.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\structure.png" />
+    <EmbeddedResource Include="GFX\svg.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\txt.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\webapi.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\workflow.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\xls.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\xml.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GFX\zip.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  
+
+  <ItemGroup>
+    <PackageReference Include="TheTechIdea.Beep.DataManagementEngine" Version="1.0.572" />
+    <PackageReference Include="TheTechIdea.Beep.DataManagementModels" Version="1.0.254" />
+	  <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="1.0.112" />
+  </ItemGroup>
+	
+	
+</Project>
