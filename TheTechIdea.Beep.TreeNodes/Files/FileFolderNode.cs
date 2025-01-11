@@ -1,12 +1,16 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TheTechIdea.Beep;
+
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace TheTechIdea.Beep.Project
+
+namespace TheTechIdea.Beep.TreeNodes.Files
 {
     [AddinAttribute(Caption = "Folder", BranchType = EnumPointType.Function, Name = "FileFolderNode.Beep", misc = "Beep", iconimage = "folder.png", menu = "Beep", ObjectType = "Beep")]
     public class FileFolderNode : IBranch
@@ -31,6 +35,7 @@ namespace TheTechIdea.Beep.Project
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
 
         #region "Properties"

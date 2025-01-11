@@ -4,14 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module.WebAPI
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
+using TheTechIdea.Beep.Addin;
+
+
+namespace TheTechIdea.Beep.TreeNodes.WebAPI
 {
     [AddinAttribute(Caption = "Web API", BranchType = EnumPointType.DataPoint, Name = "WebApiNode.Beep", misc = "Beep", iconimage = "webapi.png", menu = "Beep", ObjectType = "Beep")]
     public class WebApiNode : IBranch 
@@ -36,7 +41,7 @@ namespace  BeepEnterprize.Vis.Module.WebAPI
             EntityGuidID = _conn.GuidID;
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
@@ -141,7 +146,7 @@ namespace  BeepEnterprize.Vis.Module.WebAPI
                 bool loadv = false;
                 if (ChildBranchs.Count > 0)
                 {
-                    if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==Beep.Vis.Module.DialogResult.Yes)
+                    if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==DialogResult.Yes)
                     {
                        TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
                        loadv = true;

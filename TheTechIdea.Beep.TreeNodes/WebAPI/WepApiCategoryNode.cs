@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 
-namespace  BeepEnterprize.Vis.Module.WebAPI
+
+namespace TheTechIdea.Beep.TreeNodes.WebAPI
 {
     [AddinAttribute(Caption = "Web API", BranchType = EnumPointType.Category, Name = "WepApiCategoryNode.Beep", misc = "Beep", iconimage = "webapi.png", menu = "Beep", ObjectType = "Beep")]
     public class WepApiCategoryNode : IBranch 
@@ -32,7 +34,7 @@ namespace  BeepEnterprize.Vis.Module.WebAPI
 
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

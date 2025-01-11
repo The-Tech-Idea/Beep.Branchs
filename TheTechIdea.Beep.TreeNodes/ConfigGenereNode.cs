@@ -1,4 +1,4 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using TheTechIdea;
@@ -6,11 +6,13 @@ using TheTechIdea.Beep;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.ConfigUtil;
 
-namespace Beep.Tree
+
+namespace TheTechIdea.Beep.TreeNodes
 {
-    [AddinAttribute(Caption = "Configuration and Admin.", BranchType = EnumPointType.Genre, misc = "Beep", FileType = "Beep", iconimage = "configadmin.png", menu = "configadmin", ObjectType = "Beep",order =99999, ClassType = "LJ")]
+    [AddinAttribute(Caption = "Admin.", BranchType = EnumPointType.Genre, misc = "Beep", FileType = "Beep", iconimage = "configadmin.png", menu = "configadmin", ObjectType = "Beep",order =99999, ClassType = "LJ")]
     [AddinVisSchema(BranchType = EnumPointType.Genre, BranchClass = "Genre",Order =9999)]
     public class ConfigGenereNode : IBranch
     {
@@ -24,7 +26,7 @@ namespace Beep.Tree
         public ConfigGenereNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
 
-            BranchText = "Configuration and Admin.";
+            BranchText = "Admin.";
             BranchClass = "CONFIGADMIN.ROOT";
             IconImageName = "configadmin.png";
             BranchType = EnumPointType.Genre;
@@ -33,12 +35,13 @@ namespace Beep.Tree
         }
         public ConfigGenereNode()
         {
-            BranchText = "Configuration and Admin.";
+            BranchText = "Admin.";
             BranchClass = "CONFIGADMIN.ROOT";
             IconImageName = "configadmin.png";
             BranchType = EnumPointType.Genre;
             ID = -1;
         }
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string ObjectType { get; set; } = "Beep";
         public int Order { get; set; } = 0;
@@ -54,7 +57,7 @@ namespace Beep.Tree
         public EntityStructure EntityStructure { get; set; }
         public int MiscID { get; set; }
         public string Name { get; set; }
-        public string BranchText { get; set; } = "Configuration and Admin.";
+        public string BranchText { get; set; } = "Admin.";
         public int Level { get; set; }
         public EnumPointType BranchType { get; set; } = EnumPointType.Genre;
         public int BranchID { get; set; }

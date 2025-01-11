@@ -7,12 +7,17 @@ using System.Threading.Tasks;
  
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.Addin;
+
+
+namespace TheTechIdea.Beep.TreeNodes.WorkFlow
 {
     [AddinAttribute(Caption = "WorkFlows", BranchType = EnumPointType.Entity, Name = "WorkFlowEntityNode.Beep", misc = "Beep", iconimage = "workflow.png", menu = "Beep", ObjectType = "Beep")]
     public class WorkFlowEntityNode  : IBranch , IOrder
@@ -41,7 +46,7 @@ namespace  BeepEnterprize.Vis.Module
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

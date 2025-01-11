@@ -6,9 +6,13 @@ using TheTechIdea.Beep;
 using TheTechIdea.Beep.AppManager;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using Beep.Vis.Module;
-namespace  BeepEnterprize.Vis.Module.Reports
+
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
+
+namespace TheTechIdea.Beep.TreeNodes.Reports
 {
     [AddinAttribute(Caption = "Reports", BranchType = EnumPointType.Category, Name = "ReportCategoryNode.Beep", misc = "Beep", iconimage = "category.png", menu = "Beep", ObjectType = "Beep")]
     public class ReportCategoryNode : IBranch 
@@ -30,7 +34,7 @@ namespace  BeepEnterprize.Vis.Module.Reports
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
@@ -85,12 +89,12 @@ namespace  BeepEnterprize.Vis.Module.Reports
                 {
                     foreach (string item in p.items)
                     {
-                        AppTemplate i = DMEEditor.ConfigEditor.ReportsDefinition.Where(x => x.Name == item).FirstOrDefault();
+                   //     AppTemplate i = DMEEditor.ConfigEditor.ReportsDefinition.Where(x => x.Name == item).FirstOrDefault();
 
-                        if (i != null)
-                        {
-                            CreateReportNode(i.ID, i.Name); //Path.Combine(i.FilePath, i.FileName)
-                        }
+                        //if (i != null)
+                        //{
+                        //    CreateReportNode(i.ID, i.Name); //Path.Combine(i.FilePath, i.FileName)
+                        //}
                     }
 
                 }

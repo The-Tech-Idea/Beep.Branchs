@@ -4,14 +4,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 
-namespace  BeepEnterprize.Vis.Module
+namespace TheTechIdea.Beep.TreeNodes.DataViews
 {
     [AddinAttribute(Caption = "DataView", BranchType = EnumPointType.Category, Name = "DataViewCategoryNode.Beep", misc = "Beep", iconimage = "dataview.png", menu = "Beep", ObjectType = "Beep")]
     public class DataViewCategoryNode  : IBranch 
@@ -34,6 +35,7 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = ID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;

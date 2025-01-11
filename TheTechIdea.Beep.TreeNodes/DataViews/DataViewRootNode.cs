@@ -4,13 +4,16 @@ using System.IO;
 using System.Linq;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.DataView;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 using TheTechIdea.Beep.Addin;
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.DataView;
+
+namespace TheTechIdea.Beep.TreeNodes.DataViews
 {
     [AddinAttribute(Caption = "DataView", BranchType = EnumPointType.Root, Name = "DataViewRootNode.Beep", misc = "Beep", iconimage = "dataview.png", menu = "DataSource", ObjectType ="Beep",Category = DatasourceCategory.VIEWS)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
@@ -36,6 +39,7 @@ namespace  BeepEnterprize.Vis.Module
             }
             //.GetImageIndex(ParentTree, MainNode, "dataview.png");
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;
@@ -171,7 +175,7 @@ namespace  BeepEnterprize.Vis.Module
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == Beep.Vis.Module.DialogResult.OK)
+                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == DialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json")==false )
                     {
@@ -284,7 +288,7 @@ namespace  BeepEnterprize.Vis.Module
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == Beep.Vis.Module.DialogResult.OK)
+                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == DialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json") == false)
                     {

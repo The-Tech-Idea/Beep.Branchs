@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.AppManager;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module.Reports
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
+using TheTechIdea.Beep.Addin;
+
+
+namespace TheTechIdea.Beep.TreeNodes.Reports
 {
     [AddinAttribute(Caption = "Reports", BranchType = EnumPointType.Function, Name = "ReportNode.Beep", misc = "Beep", iconimage = "report.png", menu = "Beep", ObjectType = "Beep")]
     public class ReportNode : IBranch 
@@ -33,7 +38,7 @@ namespace  BeepEnterprize.Vis.Module.Reports
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
@@ -272,8 +277,8 @@ namespace  BeepEnterprize.Vis.Module.Reports
         {
             try
             {
-                AppTemplate ap = DMEEditor.ConfigEditor.ReportsDefinition[DMEEditor.ConfigEditor.ReportsDefinition.FindIndex(p => p.Name == BranchText)];
-                DMEEditor.ConfigEditor.ReportsDefinition.Remove(ap);
+             //   AppTemplate ap = DMEEditor.ConfigEditor.ReportsDefinition[DMEEditor.ConfigEditor.ReportsDefinition.FindIndex(p => p.Name == BranchText)];
+             //   DMEEditor.ConfigEditor.ReportsDefinition.Remove(ap);
                 DMEEditor.ConfigEditor.SaveReportDefinitionsValues();
                 IBranch parent=TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
                 if (parent != null)
@@ -297,10 +302,7 @@ namespace  BeepEnterprize.Vis.Module.Reports
             try
             {
 
-                foreach (var item in DMEEditor.ConfigEditor.ReportsDefinition)
-                {
-
-                }
+             
                 DMEEditor.AddLogMessage("Success", "Created child Nodes", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)

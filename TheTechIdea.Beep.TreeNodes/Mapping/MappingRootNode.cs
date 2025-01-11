@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using TheTechIdea;
-using  Beep.Vis.Module;
 
-namespace  BeepEnterprize.Vis.Module.Mapping
+using TheTechIdea.Beep.Utilities;
+
+namespace TheTechIdea.Beep.TreeNodes.Mapping
 {
     [AddinAttribute(Caption = "Mapping", BranchType = EnumPointType.Root, Name = "Mapping.Beep", misc = "Beep", iconimage = "mapping.png", menu = "DataManagement", ObjectType = "Beep", Category = DatasourceCategory.NONE)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATAMANAGMENET", RootNodeName = "DataManagementGenereNode")]
@@ -31,7 +33,7 @@ namespace  BeepEnterprize.Vis.Module.Mapping
         public string EntityGuidID { get; set; }
         public string MiscStringID { get; set; }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         #region "Properties"
         public IBranch ParentBranch { get  ; set  ; }
         public string ObjectType { get; set; } = "Beep";

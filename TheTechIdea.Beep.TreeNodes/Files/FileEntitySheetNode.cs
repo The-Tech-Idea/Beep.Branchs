@@ -4,15 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- 
-using TheTechIdea;
+
 using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using Beep.Vis.Module;
 
-namespace  BeepEnterprize.Vis.Module
+namespace TheTechIdea.Beep.TreeNodes.Files
 {
     [AddinAttribute(Caption = "Files", BranchType = EnumPointType.Entity, Name = "FileEntitySheetNode.Beep", misc = "Beep", iconimage = "file.png", menu = "Beep", ObjectType = "Beep")]
     public class FileEntitySheetNode : IBranch 
@@ -47,6 +47,7 @@ namespace  BeepEnterprize.Vis.Module
             }
         }
         public bool Visible { get; set; } = true;
+        public string MenuID { get; set; }
 
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;

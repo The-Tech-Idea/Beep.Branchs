@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Beep.Vis.Module;
-using TheTechIdea;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea.Beep;
-using TheTechIdea.Beep.ConfigUtil;
-using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.DataView;
-using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.DataBase;
+using TheTechIdea.Beep.Vis;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.DataView;
+
+namespace TheTechIdea.Beep.TreeNodes.DataViews
 {
     [AddinAttribute(Caption = "DataView", BranchType = EnumPointType.DataPoint, Name = "DataViewNode.Beep", misc = "Beep", iconimage = "dataview.png", menu = "Beep", ObjectType = "Beep")]
     public class DataViewNode  : IBranch 
@@ -47,6 +49,7 @@ namespace  BeepEnterprize.Vis.Module
           
        
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;
@@ -246,7 +249,7 @@ namespace  BeepEnterprize.Vis.Module
                         bool loadv = false;
                         if (ChildBranchs.Count > 0)
                         {
-                            if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") == Beep.Vis.Module.DialogResult.Yes)
+                            if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") == DialogResult.Yes)
                             {
                                 TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
                                 ds.LoadView();
@@ -347,7 +350,7 @@ namespace  BeepEnterprize.Vis.Module
             string file=string.Empty;
             try
             {
-                if (Visutil.Controlmanager.InputBoxYesNo("Remove View", "Area you Sure ? you want to remove View???") == Beep.Vis.Module.DialogResult.Yes)
+                if (Visutil.Controlmanager.InputBoxYesNo("Remove View", "Area you Sure ? you want to remove View???") == DialogResult.Yes)
                 {
                     ConnectionProperties cn = DMEEditor.ConfigEditor.DataConnections.Where(x => x.ConnectionName.Equals(Path.GetFileName(DataSourceName),StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                     if(cn==null)
@@ -389,7 +392,7 @@ namespace  BeepEnterprize.Vis.Module
                         };
                         if(string.IsNullOrEmpty(file) == false)
                         {
-                            if (Visutil.Controlmanager.InputBoxYesNo("Remove View", "Do you want to Delete the View File ???") == Beep.Vis.Module.DialogResult.Yes)
+                            if (Visutil.Controlmanager.InputBoxYesNo("Remove View", "Do you want to Delete the View File ???") == DialogResult.Yes)
                             {
 
                                 File.Delete(file);

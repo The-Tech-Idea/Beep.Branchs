@@ -4,17 +4,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.FileManager;
-using TheTechIdea.Beep.Project;
-using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace BeepProject.Branchs
+using TheTechIdea.Beep.Vis;
+
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
+using TheTechIdea.Beep.Utilities;
+
+namespace TheTechIdea.Beep.TreeNodes.Project
 {
     [AddinAttribute(Caption = "Projects", BranchType = EnumPointType.Root, Name = "ProjectRootNode.Beep", misc = "Beep", iconimage = "projectsmanagement.png", menu = "Beep", ObjectType = "Beep")]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "PROJECTROOT")]
@@ -59,7 +63,7 @@ namespace BeepProject.Branchs
         // public event EventHandler<PassedArgs> ActionNeeded;
         #endregion "Properties"
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

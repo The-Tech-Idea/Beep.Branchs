@@ -1,21 +1,23 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TheTechIdea;
 using TheTechIdea.Beep;
-using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Addin;
 
-namespace TheTechIdea.Beep.Nodes.Dev
+
+namespace TheTechIdea.Beep.TreeNodes.Dev
 {
     [AddinAttribute(Caption = "Developer", misc = "DEV", FileType = "Beep", iconimage = "dev.png", menu = "DEV", ObjectType = "Beep", ClassType = "LJ")]
     [AddinVisSchema(BranchType = EnumPointType.Root)]
     public class DevRootBranch : IBranch
     {
+        public string MenuID { get; set; }
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
         public string DataSourceConnectionGuidID { get; set; }

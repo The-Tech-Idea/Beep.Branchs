@@ -8,13 +8,15 @@ using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Report;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using  BeepEnterprize.Vis.Module.Reports;
+
+
 using TheTechIdea;
 using TheTechIdea.Beep.AppManager;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 
-namespace  BeepEnterprize.Vis.Module
+namespace TheTechIdea.Beep.TreeNodes.Reports
 {
     [AddinAttribute(Caption = "Reports", BranchType = EnumPointType.Root, Name = "ReportRootNode.Beep", misc = "Beep", iconimage = "report.png", menu = "Beep",ObjectType ="Beep")]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT")]
@@ -44,7 +46,7 @@ namespace  BeepEnterprize.Vis.Module
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
@@ -223,18 +225,18 @@ namespace  BeepEnterprize.Vis.Module
             try
             {
                 TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
-                foreach (AppTemplate i in DMEEditor.ConfigEditor.ReportsDefinition)
-                {
+                //foreach (var i in DMEEditor.ConfigEditor.ReportWritersClasses)
+                //{
 
-                    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.Name, "REPORT") == null)
-                    {
-                        // ObjectDataSourcetemp = i.FileName;
+                //    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.Name, "REPORT") == null)
+                //    {
+                //        // ObjectDataSourcetemp = i.FileName;
 
-                        CreateReportNode(i.ID, i.Name);
+                //        CreateReportNode(i.ID, i.Name);
 
 
-                    }
-                }
+                //    }
+                //}
                 foreach (CategoryFolder i in DMEEditor.ConfigEditor.CategoryFolders.Where(y => y.RootName == "APP"))
                 {
 

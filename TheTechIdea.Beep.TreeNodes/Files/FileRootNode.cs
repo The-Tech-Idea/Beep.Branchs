@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Project;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Utilities;
+
+namespace TheTechIdea.Beep.TreeNodes.Files
 {
     [AddinAttribute(Caption = "Files", BranchType = EnumPointType.Root, Name = "FileRootNode.Beep", misc = "Beep", iconimage = "file.png", menu = "DataSource", ObjectType ="Beep",Category = DatasourceCategory.FILE)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT")]
@@ -45,7 +47,7 @@ namespace  BeepEnterprize.Vis.Module
             //}
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

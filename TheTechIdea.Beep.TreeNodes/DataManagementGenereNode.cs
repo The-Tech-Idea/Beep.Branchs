@@ -1,4 +1,4 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using TheTechIdea;
@@ -6,9 +6,12 @@ using TheTechIdea.Beep;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace Beep.Tree
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.ConfigUtil;
+
+
+namespace TheTechIdea.Beep.TreeNodes
 {
     [AddinAttribute(Caption = "Data Management", misc = "Beep", BranchType = EnumPointType.Genre, FileType = "Beep", iconimage = "datamanagement.png", menu = "DataManagement", ObjectType = "Beep", ClassType = "LJ")]
     [AddinVisSchema(BranchType = EnumPointType.Genre, BranchClass = "Genre")]
@@ -20,7 +23,7 @@ namespace Beep.Tree
         public string EntityGuidID { get; set; }
         public string MiscStringID { get; set; }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public DataManagementGenereNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
 

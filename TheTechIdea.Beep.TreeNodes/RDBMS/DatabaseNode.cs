@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Beep.Vis.Module;
-using TheTechIdea;
-using TheTechIdea.Beep;
-using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Editor;
-using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.DataBase;
+using TheTechIdea.Beep.Vis;
+using TheTechIdea.Beep.Addin;
+
+
+
+namespace TheTechIdea.Beep.TreeNodes.RDBMS
 {
     [AddinAttribute(Caption = "RDBMS", BranchType = EnumPointType.DataPoint, Name = "DatabaseNode.Beep", misc = "Beep", iconimage = "database.png", menu = "Beep", ObjectType = "Beep")]
     public class DatabaseNode  : IBranch 
@@ -64,6 +67,7 @@ namespace  BeepEnterprize.Vis.Module
             };
             return DMEEditor.ErrorObject;
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();

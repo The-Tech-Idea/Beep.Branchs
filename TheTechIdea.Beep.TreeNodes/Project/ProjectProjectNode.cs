@@ -1,4 +1,4 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,12 +6,16 @@ using System.Linq;
 using System.Text;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.FileManager;
+using TheTechIdea.Beep;
+
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
 
 
-namespace TheTechIdea.Beep.Project
+namespace TheTechIdea.Beep.TreeNodes.Project
 {
     [AddinAttribute(Caption = "File", BranchType = EnumPointType.Function, Name = "FileEntityNode.Beep", misc = "Beep", iconimage = "file.png", menu = "Beep", ObjectType = "Beep")]
     public class ProjectProjectNode:IBranch
@@ -37,7 +41,8 @@ namespace TheTechIdea.Beep.Project
             }
         }
         #region "Properties"
-         public IBranch ParentBranch { get  ; set  ; }
+        public string MenuID { get; set; }
+        public IBranch ParentBranch { get  ; set  ; }
         public string ObjectType { get; set; } = "Beep";
         public int ID { get; set; }
         public EntityStructure EntityStructure { get; set; }

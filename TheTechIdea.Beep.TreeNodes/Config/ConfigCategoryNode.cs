@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheTechIdea.Beep.Addin;
-using TheTechIdea;
-using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using Beep.Vis.Module;
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
+
+
+namespace   TheTechIdea.Beep.TreeNodes.Config
 {
     [AddinAttribute(Caption = "Configuration", Name = "ConfigCategoryNode.Beep", misc = "Beep", iconimage = "settings.png", menu = "Beep", ObjectType = "Beep")]
     public class ConfigCategoryNode  : IBranch 
@@ -38,6 +40,7 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = false;
         #region "Properties"

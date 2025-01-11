@@ -1,16 +1,19 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using TheTechIdea.Beep;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.FileManager;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using static System.Net.WebRequestMethods;
+using TheTechIdea.Beep.FileManager;
 
-namespace TheTechIdea.Beep.Project
+
+
+namespace TheTechIdea.Beep.TreeNodes.Project
 {
     [AddinAttribute(Caption = "Folder", BranchType = EnumPointType.Category, Name = "ProjectFolderNode.Beep", misc = "Beep", iconimage = "folder.png", menu = "Beep", ObjectType = "Beep")]
     public class ProjectFolderNode : IBranch
@@ -71,8 +74,9 @@ namespace TheTechIdea.Beep.Project
         // public event EventHandler<PassedArgs> BranchDragDoubleClick;
         // public event EventHandler<PassedArgs> ActionNeeded;
         #endregion "Properties"
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
-
+        
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

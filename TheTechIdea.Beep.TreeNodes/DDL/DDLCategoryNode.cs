@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
 
 
-namespace  BeepEnterprize.Vis.Module
+namespace TheTechIdea.Beep.TreeNodes.DDL
 {
    public  class DDLCategoryNode  : IBranch , IOrder
     {
@@ -41,6 +42,7 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = false;
         #region "Properties"

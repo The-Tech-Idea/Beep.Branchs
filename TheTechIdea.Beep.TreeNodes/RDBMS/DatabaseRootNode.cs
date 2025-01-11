@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 using TheTechIdea.Beep.Addin;
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Utilities;
+
+namespace TheTechIdea.Beep.TreeNodes.RDBMS
 {
     [AddinAttribute(Caption = "RDBMS",BranchType = EnumPointType.Root, Name = "DatabaseRootNode.Beep", misc = "Beep", iconimage = "database.png", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.RDBMS)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
@@ -60,6 +63,7 @@ namespace  BeepEnterprize.Vis.Module
             return DMEEditor.ErrorObject;
 
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();

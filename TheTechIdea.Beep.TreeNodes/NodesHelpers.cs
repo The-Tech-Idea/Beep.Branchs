@@ -1,16 +1,19 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TheTechIdea.Beep.FileManager;
-using TheTechIdea.Beep.Project;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using DataManagementModels.DriversConfigurations;
-using BeepEnterprize.Vis.Module;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.Utilities;
 
-namespace TheTechIdea.Beep
+using TheTechIdea.Beep.DriversConfigurations;
+using TheTechIdea.Beep.TreeNodes.Project;
+using TheTechIdea.Beep.TreeNodes.Files;
+
+namespace TheTechIdea.Beep.TreeNodes
 {
     public static class NodesHelpers
     {

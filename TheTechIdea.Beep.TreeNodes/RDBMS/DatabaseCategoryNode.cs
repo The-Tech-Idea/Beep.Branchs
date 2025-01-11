@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
+
+
+namespace TheTechIdea.Beep.TreeNodes.RDBMS
 {
     [AddinAttribute(Caption = "RDBMS", BranchType = EnumPointType.Category, Name = "DatabaseCategoryNode.Beep", misc = "Beep", iconimage = "database.png", menu = "Beep", ObjectType = "Beep")]
     public class DatabaseCategoryNode  : IBranch 
@@ -59,6 +63,7 @@ namespace  BeepEnterprize.Vis.Module
             return DMEEditor.ErrorObject;
 
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();

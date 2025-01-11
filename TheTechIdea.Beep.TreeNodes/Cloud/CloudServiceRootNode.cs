@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
 
-namespace  BeepEnterprize.Vis.Module
+namespace  TheTechIdea.Beep.TreeNodes.Cloud
 {
     [AddinAttribute(Caption = "Cloud", BranchType = EnumPointType.Root, Name = "CloudServiceRootNode.Beep", misc = "Beep", iconimage = "cloud.png", menu = "DataSource", ObjectType ="Beep", Category = DatasourceCategory.CLOUD)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
@@ -37,6 +39,7 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;

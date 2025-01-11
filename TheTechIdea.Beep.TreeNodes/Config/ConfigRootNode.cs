@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Addin;
 
 
-namespace  BeepEnterprize.Vis.Module
+
+
+namespace TheTechIdea.Beep.TreeNodes.Config
 {
     [AddinAttribute(Caption = "Configuration", Name = "ConfigRootNode.Beep", misc = "Beep", iconimage = "configuration.png", menu = "configadmin", ObjectType = "Beep")]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "CONFIGADMINROOT", RootNodeName = "ConfigGenereNode")]
@@ -38,6 +42,7 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = false;
         #region "Properties"

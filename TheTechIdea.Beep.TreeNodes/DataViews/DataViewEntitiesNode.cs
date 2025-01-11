@@ -4,15 +4,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
-using TheTechIdea;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea.Beep;
-using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.DataView;
-using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.DataBase;
+using TheTechIdea.Beep.Vis;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.DataView;
+
+namespace TheTechIdea.Beep.TreeNodes.DataViews
 {
     [AddinAttribute(Caption = "DataView", BranchType = EnumPointType.Entity, Name = "DataViewEntitiesNode.Beep", misc = "Beep", iconimage = "dataview.png", menu = "Beep", ObjectType = "Beep")]
     public class DataViewEntitiesNode : IBranch 
@@ -55,6 +58,7 @@ namespace  BeepEnterprize.Vis.Module
             }
             Name=entityStructure.EntityName.Trim();
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         #region "Properties"
         public bool IsDataSourceNode { get; set; } = true;
@@ -215,7 +219,7 @@ namespace  BeepEnterprize.Vis.Module
 
             try
             {
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?")==Beep.Vis.Module.DialogResult.Yes)
+                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?")==DialogResult.Yes)
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
@@ -381,7 +385,7 @@ namespace  BeepEnterprize.Vis.Module
                     EventType = "REMOVEENTITY"
 
                 };
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == Beep.Vis.Module.DialogResult.Yes)
+                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == DialogResult.Yes)
                 {
                     TreeEditor.treeBranchHandler.RemoveBranch(this);
                     //---- Remove From View ---- //
@@ -432,7 +436,7 @@ namespace  BeepEnterprize.Vis.Module
 
             try
             {
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==Beep.Vis.Module.DialogResult.Yes)
+                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==DialogResult.Yes)
                 {
                     TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);

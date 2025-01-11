@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- 
-using TheTechIdea;
+
+using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using Beep.Vis.Module;
-namespace  BeepEnterprize.Vis.Module.Mapping
+
+namespace TheTechIdea.Beep.TreeNodes.Mapping
 {
     [AddinAttribute(Caption = "Mapping", BranchType = EnumPointType.DataPoint, Name = "Mapping.Beep", misc = "Beep", iconimage = "mapping.png", menu = "Beep", ObjectType = "Beep")]
     public class MappinSchemaNode : IBranch , IOrder
@@ -35,7 +37,7 @@ namespace  BeepEnterprize.Vis.Module.Mapping
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
 using TheTechIdea;
-using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
 
 
-namespace BeepEnterprize.Vis.Module
+
+
+namespace TheTechIdea.Beep.TreeNodes.AI
 {
     [AddinAttribute(Caption = "AI Category", BranchType = EnumPointType.Category, misc = "AICategoryNode", FileType = "AICategoryNode", iconimage = "category.png", menu = "AICategoryNode ",ObjectType ="Beep")]
     public class AICategoryNode : IBranch 
@@ -40,6 +44,7 @@ namespace BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = false;
         #region "Properties"

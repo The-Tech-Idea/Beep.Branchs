@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Utilities;
 
-namespace  BeepEnterprize.Vis.Module
+namespace TheTechIdea.Beep.TreeNodes.NoSQL
 {
     [AddinAttribute(Caption = "NoSQL", BranchType = EnumPointType.Root, Name = "NoSQL.Beep", misc = "Beep", iconimage = "nosql.png", menu = "DataSource", ObjectType ="Beep", Category = DatasourceCategory.NOSQL)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
@@ -42,7 +44,7 @@ namespace  BeepEnterprize.Vis.Module
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

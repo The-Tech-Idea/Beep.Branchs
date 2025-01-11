@@ -1,16 +1,20 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using TheTechIdea.Beep;
+
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using BeepEnterprize.Vis.Module;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.TreeNodes.RDBMS;
 
-
-namespace TheTechIdea.Beep
+namespace TheTechIdea.Beep.TreeNodes
 {
     public static class DataSourceDefaultMethods
     {

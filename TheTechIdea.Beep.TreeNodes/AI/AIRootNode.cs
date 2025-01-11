@@ -5,19 +5,18 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Beep.Vis.Module;
-using TheTechIdea.Beep.Addin;
-using TheTechIdea;
-using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Report;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea.Beep.Utilities;
 
 
 
-namespace BeepEnterprize.Vis.Module
+
+namespace TheTechIdea.Beep.TreeNodes.AI
 {
     [AddinAttribute(Caption = "AI", BranchType = EnumPointType.Root, misc = "Beep", FileType = "Beep", iconimage = "ai.png", menu = "AI", ObjectType = "Beep", ClassType = "LJ")]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "AI")]
@@ -36,6 +35,7 @@ namespace BeepEnterprize.Vis.Module
             BranchType = EnumPointType.Root;
 
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();

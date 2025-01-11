@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using TheTechIdea;
 using TheTechIdea.Beep;
-using  Beep.Vis.Module;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
 using TheTechIdea.Beep.Workflow;
-using TheTechIdea.Util;
+
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
+
 using TheTechIdea.Beep.Addin;
-namespace  BeepEnterprize.Vis.Module
+
+
+
+
+namespace TheTechIdea.Beep.TreeNodes.WorkFlow
 {
     [AddinAttribute(Caption = "WorkFlows", BranchType = EnumPointType.Root, Name = "WorkFlowRootNode.Beep", misc = "Beep", iconimage = "workflow.png", menu = "DataManagement", ObjectType ="Beep")]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATAMANAGMENET", RootNodeName = "DataManagementGenereNode")]
@@ -39,7 +46,7 @@ namespace  BeepEnterprize.Vis.Module
             }
         }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = false;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }
@@ -237,7 +244,7 @@ namespace  BeepEnterprize.Vis.Module
             try
             {
                 TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
-                foreach (WorkFlow item in DMEEditor.ConfigEditor.WorkFlows)
+                foreach (IWorkFlow item in DMEEditor.ConfigEditor.WorkFlows)
                 {
                     WorkFlowEntityNode  en = new WorkFlowEntityNode(TreeEditor, DMEEditor, this,item.DataWorkFlowName, TreeEditor.SeqID, EnumPointType.DataPoint, "workflowentity.png");
                     en.DataSource = DataSource;

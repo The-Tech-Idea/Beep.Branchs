@@ -5,12 +5,18 @@ using System.Linq;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
-using  BeepEnterprize.Vis.Module.WebAPI;
-using TheTechIdea;
-using  Beep.Vis.Module;
+
+
+
+using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.ConfigUtil;
+using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.Addin;
-namespace  BeepEnterprize.Vis.Module
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.TreeNodes.RDBMS;
+
+
+namespace TheTechIdea.Beep.TreeNodes.WebAPI
 {
     [AddinAttribute(Caption = "Web API", BranchType = EnumPointType.Root, Name = "WebApiRootNode.Beep", misc = "Beep", iconimage = "webapi.png", menu = "DataSource", ObjectType ="Beep", Category = DatasourceCategory.WEBAPI)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
@@ -39,8 +45,9 @@ namespace  BeepEnterprize.Vis.Module
                 BranchID = pID;
             }
         }
+        public string MenuID { get; set; }
         public bool Visible { get; set; } = true;
-
+        
         public bool IsDataSourceNode { get; set; } = true;
         public string GuidID { get; set; } = Guid.NewGuid().ToString();
         public string ParentGuidID { get; set; }

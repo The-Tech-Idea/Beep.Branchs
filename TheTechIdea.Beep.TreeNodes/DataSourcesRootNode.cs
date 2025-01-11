@@ -1,4 +1,4 @@
-﻿using Beep.Vis.Module;
+﻿using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using TheTechIdea.Beep.Addin;
@@ -6,9 +6,11 @@ using TheTechIdea;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
-using TheTechIdea.Util;
 
-namespace Beep.Tree
+using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.ConfigUtil;
+
+namespace TheTechIdea.Beep.TreeNodes
 {
     [AddinAttribute(Caption = "DataSources", misc = "Beep", BranchType = EnumPointType.Genre, FileType = "Beep", iconimage = "DataSources.png", menu = "Datasource", ObjectType = "Beep", ClassType = "LJ")]
     [AddinVisSchema(BranchType = EnumPointType.Genre, BranchClass = "Genre")]
@@ -19,7 +21,7 @@ namespace Beep.Tree
         public string DataSourceConnectionGuidID { get; set; }
         public string EntityGuidID { get; set; }
         public bool Visible { get; set; } = true;
-
+        public string MenuID { get; set; }
         public string MiscStringID { get; set; }
         public DataSourcesRootNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
