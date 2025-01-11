@@ -256,7 +256,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
             };
             return DMEEditor.ErrorObject;
         }
-        [CommandAttribute(Caption = "New DB Connection", Name = "NewDBConnection", iconimage = "dbconnection.png")]
+        [CommandAttribute(Caption = "New DB Connection", Name = "NewDBConnection", PointType = EnumPointType.Root,iconimage = "dbconnection.png", ObjectType = "Beep")]
         public IErrorsInfo NewDBConnection()
         {
             DMEEditor.ErrorObject.Flag = Errors.Ok;

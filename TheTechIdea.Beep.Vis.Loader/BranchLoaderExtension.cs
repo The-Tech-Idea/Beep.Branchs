@@ -4,11 +4,6 @@ using System.Reflection;
 using TheTechIdea.Beep;
 using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea.Beep.ConfigUtil;
-using TheTechIdea.Beep.Editor;
-using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Vis;
-using TheTechIdea.Beep.Addin;
-using TheTechIdea.Beep.Utilities;
 using TheTechIdea.Beep.Tools;
 
 
@@ -17,8 +12,6 @@ namespace AssemblyLoaderExtension
     public class BranchLoaderExtension : ILoaderExtention
     {
         public AppDomain CurrentDomain { get; set; }
-      
-    
         public IAssemblyHandler Loader { get; set; }
         public BranchLoaderExtension(IAssemblyHandler ploader)
         {
@@ -93,54 +86,6 @@ namespace AssemblyLoaderExtension
                         // Get IBranch Definitions
                         if (type.ImplementedInterfaces.Contains(typeof(IBranch)))
                         {
-
-                            //AssemblyClassDefinition xcls = new AssemblyClassDefinition();
-                            //xcls.Methods = new List<MethodsClass>();
-                            //xcls.className = type.Name;
-                            //xcls.dllname = type.Module.Name;
-                            //xcls.PackageName = type.FullName;
-                            //xcls.componentType = "IBranch";
-                            //xcls.type = type;
-                            ////AddinVisSchema
-                            //xcls.VisSchema  = (AddinVisSchema)type.GetCustomAttribute(typeof(AddinVisSchema), false);
-                            //xcls.classProperties = (AddinAttribute)type.GetCustomAttribute(typeof(AddinAttribute), false);
-                            //if (xcls.classProperties != null)
-                            //{
-                            //    xcls.RootName = xcls.classProperties.FileType;
-                            //}
-
-                            ////   xcls.RootName = "AI";
-                            ////   xcls.BranchType = brcls.BranchType;
-                            //foreach (MethodInfo methods in type.GetMethods()
-                            //             .Where(m => m.GetCustomAttributes(typeof(CommandAttribute), false).Length > 0)
-                            //              .ToArray())
-                            //{
-
-                            //    CommandAttribute methodAttribute = methods.GetCustomAttribute<CommandAttribute>();
-                            //    MethodsClass x = new MethodsClass();
-                            //    x.Caption = methodAttribute.Caption;
-                            //    x.Info = methods;
-                            //    x.Hidden = methodAttribute.Hidden;
-                            //    x.Click = methodAttribute.Click;
-                            //    x.DoubleClick = methodAttribute.DoubleClick;
-                            //    x.iconimage = methodAttribute.iconimage;
-                            //    xcls.Methods.Add(x);
-                            //}
-                            //if (type.ImplementedInterfaces.Contains(typeof(IOrder)))
-                            //{
-                            //    try
-                            //    {
-                            //        IOrder cls = (IOrder)Activator.CreateInstance(type);
-                            //        xcls.Order = cls.Order;
-                            //        cls = null;
-                            //    }
-                            //    catch (Exception)
-                            //    {
-
-
-                            //    }
-
-                            //}
                             try
                             {
                                 Loader.ConfigEditor.BranchesClasses.Add(Loader.GetAssemblyClassDefinition(type, "IBranch"));
