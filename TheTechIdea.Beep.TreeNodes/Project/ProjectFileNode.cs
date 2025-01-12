@@ -25,7 +25,7 @@ using TheTechIdea.Beep.FileManager;
 
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
-            ParentBranchID = pParentNode.ID;
+            ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
             BranchText = pBranchText;
             BranchType = EnumPointType.Entity;
             DataSourceName = pParentNode.DataSourceName;

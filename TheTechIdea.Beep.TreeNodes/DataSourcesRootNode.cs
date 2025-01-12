@@ -97,7 +97,7 @@ namespace TheTechIdea.Beep.TreeNodes
             {
                 TreeEditor = pTreeEditor;
                 DMEEditor = pDMEEditor;
-                //ParentBranchID = pParentNode.ID;
+                //ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
                 //BranchText = pBranchText;
                 //BranchType = pBranchType;
                 //IconImageName = pimagename;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TheTechIdea;
-using TheTechIdea.Beep;
-
 using TheTechIdea.Beep.Vis.Modules;
 using TheTechIdea.Beep.ConfigUtil;
 using TheTechIdea.Beep.Editor;
@@ -30,7 +27,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
 
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
-            ParentBranchID = pParentNode.ID;
+            ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
             BranchText = pBranchText;
             BranchType = pBranchType;
             //IconImageName = pimagename;
@@ -117,7 +114,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
             {
                 TreeEditor = pTreeEditor;
                 DMEEditor = pDMEEditor;
-                //ParentBranchID = pParentNode.ID;
+                //ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
                 //BranchText = pBranchText;
                 //BranchType = pBranchType;
                 //IconImageName = pimagename;

@@ -25,7 +25,7 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
         {
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
-            ParentBranchID = pParentNode.ID;
+            ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
             BranchText = pBranchText;
             BranchType = pBranchType;
             // IconImageName = pimagename;
@@ -117,7 +117,7 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
             {
                 TreeEditor = pTreeEditor;
                 DMEEditor = pDMEEditor;
-                ParentBranchID = pParentNode.ID;
+                ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
                 BranchText = pBranchText;
                 BranchType = pBranchType;
                 IconImageName = pimagename;

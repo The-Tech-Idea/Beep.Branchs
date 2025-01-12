@@ -25,7 +25,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
         {
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
-            ParentBranchID = pParentNode.ID;
+            ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
             BranchText = pBranchText;
             BranchType = pBranchType;
             DataSourceName = pDatasourcename;
@@ -114,7 +114,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             {
                 TreeEditor = pTreeEditor;
                 DMEEditor = pDMEEditor;
-                ParentBranchID = pParentNode.ID;
+                ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
                 BranchText = pBranchText;
                 BranchType = pBranchType;
                 DataSourceName = pParentNode.DataSourceName;

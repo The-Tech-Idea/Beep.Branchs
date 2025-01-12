@@ -99,6 +99,7 @@ namespace TheTechIdea.Beep.TreeNodes
         }
         public static IErrorsInfo GetEntities(IBranch DatabaseBranch, IDMEEditor DMEEditor, IVisManager Visutil)
         {
+            if (Visutil == null) return DMEEditor.ErrorObject;
             ITree tree = (ITree)Visutil.Tree;
             string BranchText = DatabaseBranch.BranchText;
             string DataSourceName= DatabaseBranch.DataSourceName;
