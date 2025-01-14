@@ -125,8 +125,8 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                 //    parent = this;
                 //}
                 //categoryBranch = new FileCategoryNode(TreeEditor, DMEEditor, parent, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
-                //TreeEditor.treeBranchHandler.AddBranch(parent, categoryBranch);
-                //ChildBranchs.Add(categoryBranch);
+                //TreeEditor.Treebranchhandler.AddBranch(parent, categoryBranch);
+                //TreeEditor.AddBranchToParentInBranchsOnly(this,categoryBranch);
                 //categoryBranch.CreateChildNodes();
                 categoryBranch= (FileCategoryNode)NodesHelpers.CreateCategoryNode(p, this, TreeEditor, DMEEditor, Visutil);
 

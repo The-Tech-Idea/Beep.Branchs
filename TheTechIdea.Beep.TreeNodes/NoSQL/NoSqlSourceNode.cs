@@ -162,7 +162,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                     if (DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
                     {
                         DataSource.GetEntitesList();
-                        TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                        TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                         int i = 0;
                         foreach (string tb in DataSource.EntitiesNames)
                         {
@@ -171,7 +171,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                             dbent.DataSource = DataSource;
                             dbent.GuidID=DataSource.GuidID;
                             dbent.DataSourceName = DataSource.DatasourceName;
-                            TreeEditor.treeBranchHandler.AddBranch(this, dbent);
+                            TreeEditor.Treebranchhandler.AddBranch(this, dbent);
                             //  dbent.CreateChildNodes();
                           
                             i += 1;

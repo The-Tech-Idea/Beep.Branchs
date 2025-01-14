@@ -148,7 +148,7 @@ namespace TheTechIdea.Beep.TreeNodes.AI
             {
                 CreateFolders();
                 DMEEditor.ConfigEditor.LoadAIScriptsValues();
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 List<AssemblyClassDefinition> ls = DMEEditor.ConfigEditor.BranchesClasses.Where(p => p.classProperties != null).ToList();
                 List<AssemblyClassDefinition> aibranchs = ls.Where(p => p.classProperties.menu.Equals("AI",StringComparison.InvariantCultureIgnoreCase) && p.PackageName!=this.Name).ToList();
                 foreach (AssemblyClassDefinition item in aibranchs)
@@ -168,13 +168,13 @@ namespace TheTechIdea.Beep.TreeNodes.AI
                         br.TreeEditor = TreeEditor;
                         br.BranchID = id;
                         br.ID = id;
-                        TreeEditor.treeBranchHandler.AddBranch(this, br);
+                        TreeEditor.Treebranchhandler.AddBranch(this, br);
                        
                         br.Visutil = Visutil;
 
                         br.DMEEditor = DMEEditor;
 
-                        ChildBranchs.Add(br);
+                        TreeEditor.AddBranchToParentInBranchsOnly(this,br);
 
                         br.CreateChildNodes();
 
@@ -198,8 +198,8 @@ namespace TheTechIdea.Beep.TreeNodes.AI
             try
             {
                  categoryBranch = new AICategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, categoryBranch);
-                ChildBranchs.Add(categoryBranch);
+                TreeEditor.Treebranchhandler.AddBranch(this, categoryBranch);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,categoryBranch);
                 categoryBranch.CreateChildNodes();
 
 

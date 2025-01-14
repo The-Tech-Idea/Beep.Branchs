@@ -123,8 +123,8 @@ namespace TheTechIdea.Beep.TreeNodes.AI
             try
             {
                 AICategoryNode Category = new AICategoryNode(TreeEditor, DMEEditor, Rootbr, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
-                TreeEditor.treeBranchHandler.AddBranch(Rootbr, Category);
-                Rootbr.ChildBranchs.Add(Category);
+                TreeEditor.Treebranchhandler.AddBranch(Rootbr, Category);
+                Rootbr.TreeEditor.AddBranchToParentInBranchsOnly(this,Category);
                 Category.CreateChildNodes();
 
             }
@@ -224,7 +224,7 @@ namespace TheTechIdea.Beep.TreeNodes.AI
                 //    WorkFlowEntityNode en = new WorkFlowEntityNode(TreeEditor, DMEEditor, this, item.DataWorkFlowName, TreeEditor.SeqID, EnumBranchType.DataPoint, "workflowentity.png");
                 //    en.DataSource = DataSource;
                 //    TreeEditor.AddBranch(this, en);
-                //    ChildBranchs.Add(en);
+                //    TreeEditor.AddBranchToParentInBranchsOnly(this,en);
                 //}
 
 

@@ -44,7 +44,7 @@ namespace TheTechIdea.Beep.TreeNodes
                             Visutil.PasstoWaitForm(passedArgs);
                             DataSource.Entities.Clear();
                             DataSource.GetEntitesList();
-                            tree.treeBranchHandler.RemoveChildBranchs(DatabaseBranch);
+                            tree.Treebranchhandler.RemoveChildBranchs(DatabaseBranch);
                             int i = 0;
                             passedArgs.Messege = $"Getting {DataSource.EntitiesNames.Count} Entities";
                             Visutil.PasstoWaitForm(passedArgs);
@@ -64,7 +64,7 @@ namespace TheTechIdea.Beep.TreeNodes
                                     DatabaseEntitesNode dbent = new DatabaseEntitesNode(tree, DMEEditor, DatabaseBranch, tb, tree.SeqID, EnumPointType.Entity, iconimage, DataSource);
                                     dbent.DataSourceName = DataSource.DatasourceName;
                                     dbent.DataSource = DataSource;
-                                    tree.treeBranchHandler.AddBranch(DatabaseBranch, dbent);
+                                    tree.Treebranchhandler.AddBranch(DatabaseBranch, dbent);
                                     i += 1;
                                 }
                             }
@@ -167,7 +167,7 @@ namespace TheTechIdea.Beep.TreeNodes
                                 DatabaseEntitesNode dbent = new DatabaseEntitesNode(tree, DMEEditor, DatabaseBranch, tb, tree.SeqID, EnumPointType.Entity, iconimage, DataSource);
                                 dbent.DataSourceName = DataSource.DatasourceName;
                                 dbent.DataSource = DataSource;
-                                tree.treeBranchHandler.AddBranch(DatabaseBranch, dbent);
+                                tree.Treebranchhandler.AddBranch(DatabaseBranch, dbent);
                                 i += 1;
                             }
                         }

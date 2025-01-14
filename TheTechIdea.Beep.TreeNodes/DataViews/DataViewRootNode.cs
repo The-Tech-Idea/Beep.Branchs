@@ -91,11 +91,11 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.VIEWS))
                 {
 
-                    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.ConnectionName, "VIEW") == null)
+                    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "VIEW") == null)
                     {
                         // ObjectDataSourcetemp = i.FileName;
                         if (!ChildBranchs.Any(p => p.GuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
@@ -329,7 +329,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                             br.CreateChildNodes();
                         }
                       
-                        // IBranch br = TreeEditor.treeBranchHandler.GetBranch(DataView.ViewName);
+                        // IBranch br = TreeEditor.Treebranchhandler.GetBranch(DataView.ViewName);
 
 
 
@@ -362,7 +362,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 viewbr.DataSource = DataSource;
                 viewbr.DataSourceName = i.ConnectionName;
                 viewbr.GuidID= i.GuidID;
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
                
                 DMEEditor.AddLogMessage("Success", "Added DataView Connection", DateTime.Now, 0, null, Errors.Ok);
             }
@@ -381,7 +381,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         try
         {
                 categoryBranch = new DataViewCategoryNode(TreeEditor, DMEEditor,this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, categoryBranch);
+                TreeEditor.Treebranchhandler.AddBranch(this, categoryBranch);
                
                 categoryBranch.CreateChildNodes();
 

@@ -193,8 +193,9 @@ namespace TheTechIdea.Beep.TreeNodes.DDL
                     {
                         DDLEntityNode entityNode = new DDLEntityNode(TreeEditor, DMEEditor, this, item.NodeName, TreeEditor.SeqID, EnumPointType.Entity, item.Imagename);
                         entityNode.AddinTreeStructure = item;
-                        TreeEditor.treeBranchHandler.AddBranch(this, entityNode);
-                        ChildBranchs.Add(entityNode);
+                      
+                        TreeEditor.AddBranchToParentInBranchsOnly(this,entityNode);
+                        TreeEditor.Treebranchhandler.AddBranch(this, entityNode);
                     }
                 }
 

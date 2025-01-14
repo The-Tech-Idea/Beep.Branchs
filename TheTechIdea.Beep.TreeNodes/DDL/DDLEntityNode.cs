@@ -210,8 +210,8 @@ namespace  TheTechIdea.Beep.TreeNodes.DDL
                 //{
                 //    WorkFlowEntityNode en = new WorkFlowEntityNode(TreeEditor, DMEEditor, this, item.DataWorkFlowName, TreeEditor.SeqID, EnumBranchType.DataPoint, "workflowentity.png");
                 //    en.DataSource = DataSource;
-                //    TreeEditor.treeBranchHandler.AddBranch(this, en);
-                //    ChildBranchs.Add(en);
+                //    TreeEditor.Treebranchhandler.AddBranch(this, en);
+                //    TreeEditor.AddBranchToParentInBranchsOnly(this,en);
                 //}
 
 

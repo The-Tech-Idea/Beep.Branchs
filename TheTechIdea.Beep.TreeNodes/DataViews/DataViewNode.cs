@@ -251,7 +251,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         {
                             if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") == DialogResult.Yes)
                             {
-                                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 ds.LoadView();
                                 loadv = true;
                             }
@@ -285,9 +285,9 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                                             DataView.Entities[ds.EntityListIndex(tb.EntityName)].DatasourceEntityName = tb.EntityName;
                                         }
                                         dbent.ID = tb.Id;
-                                        TreeEditor.treeBranchHandler.AddBranch(this, dbent);
+                                        TreeEditor.Treebranchhandler.AddBranch(this, dbent);
                                         dbent.CreateChildNodes();
-                                        ChildBranchs.Add(dbent);
+                                        TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
                                         i += 1;
 
                                     }
@@ -399,7 +399,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                             }
                         }
                         
-                        TreeEditor.treeBranchHandler.RemoveBranch(this);
+                        TreeEditor.Treebranchhandler.RemoveBranch(this);
                     }
                
 
@@ -589,9 +589,9 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
         //                    DataViewEntitiesNode dbent = new DataViewEntitiesNode(TreeEditor, DMEEditor, this, newentity.EntityName, TreeEditor.SeqID, EnumBranchType.Entity, "entity.png", DataView.DataViewDataSourceID, newentity);
 
-        //                    TreeEditor.treeBranchHandler.AddBranch(this, dbent);
+        //                    TreeEditor.Treebranchhandler.AddBranch(this, dbent);
         //                    dbent.CreateChildNodes();
-        //                    ChildBranchs.Add(dbent);
+        //                    TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
         //                }
         //            }
 
@@ -659,7 +659,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         private IErrorsInfo CreateDataViewMethod()
         {
             DMEEditor.ErrorObject.Flag = Errors.Ok;
-            TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+            TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
             PassedArgs passedArgs = new PassedArgs { DatasourceName = BranchText };
             try
             {
@@ -689,7 +689,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         ds.GetEntitesList();
                         List<string> existing = ds.EntitiesNames.ToList();
                         List<string> diffnames = ename.Except(existing).ToList();
-                        TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                        TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                         int i = 0;
                         if (existing.Count > 0) // there is entities in Datasource
                         {
@@ -711,10 +711,11 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                                         DataViewEntitiesNode dbent = new DataViewEntitiesNode(TreeEditor, DMEEditor, this, ent.EntityName, TreeEditor.SeqID, EnumPointType.Entity, ds.GeticonForViewType(ent.Viewtype), DataView.DataViewDataSourceID, ent);
                                         dbent.DataSourceName = DataSource.DatasourceName;
                                         dbent.DataSource = DataSource;
-                                        ChildBranchs.Add(dbent);
-                                        dbent.CreateChildNodes();
-                                        TreeEditor.treeBranchHandler.AddBranch(this, dbent);
-                                        i += 1;
+                                        TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
+                                       
+                                        TreeEditor.Treebranchhandler.AddBranch(this, dbent);
+                                    dbent.CreateChildNodes();
+                                    i += 1;
                                   //  }
 
                                 }
@@ -739,10 +740,11 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                                  
                                     dbent.DataSourceName = DataSource.DatasourceName;
                                     dbent.DataSource = DataSource;
-                                    ChildBranchs.Add(dbent);
-                                    dbent.CreateChildNodes();
-                                    TreeEditor.treeBranchHandler.AddBranch(this, dbent);
-                                    i += 1;
+                                    TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
+                                   
+                                    TreeEditor.Treebranchhandler.AddBranch(this, dbent);
+                                dbent.CreateChildNodes();
+                                i += 1;
                                // }
 
                             }

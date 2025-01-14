@@ -112,7 +112,7 @@ namespace TheTechIdea.Beep.TreeNodes.Dev
             {
                 //CreateFolders();
                // DMEEditor.ConfigEditor.LoadAIScriptsValues();
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 List<AssemblyClassDefinition> ls = DMEEditor.ConfigEditor.BranchesClasses.Where(p => p.classProperties != null).ToList();
                 List<AssemblyClassDefinition> aibranchs = ls.Where(p => p.classProperties.menu.Equals("DEV", StringComparison.InvariantCultureIgnoreCase) && p.PackageName != this.Name).ToList();
                 foreach (AssemblyClassDefinition item in aibranchs)
@@ -125,7 +125,7 @@ namespace TheTechIdea.Beep.TreeNodes.Dev
                     IBranch br = (IBranch)DMEEditor.assemblyHandler.GetInstance(item.PackageName);
                     br.BranchText= item.classProperties.Caption;
                     br.SetConfig(TreeEditor, DMEEditor, this, item.PackageName, 0, EnumPointType.Function, "");
-                    TreeEditor.treeBranchHandler.AddBranch(this, br);
+                    TreeEditor.Treebranchhandler.AddBranch(this, br);
                     //int id = TreeEditor.SeqID;
                     //br.Name = item.PackageName;
 
@@ -137,8 +137,8 @@ namespace TheTechIdea.Beep.TreeNodes.Dev
                     //br.ID = id;
                     //br.Visutil = Visutil;
                     //br.DMEEditor = DMEEditor;
-                    //TreeEditor.treeBranchHandler.AddBranch(this, br);
-                    //ChildBranchs.Add(br);
+                    //TreeEditor.Treebranchhandler.AddBranch(this, br);
+                    //TreeEditor.AddBranchToParentInBranchsOnly(this,br);
                     //br.CreateChildNodes();
                 }
 

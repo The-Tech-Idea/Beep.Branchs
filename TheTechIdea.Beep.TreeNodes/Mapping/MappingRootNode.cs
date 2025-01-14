@@ -110,8 +110,8 @@ namespace TheTechIdea.Beep.TreeNodes.Mapping
                 if (!ChildBranchs.Any(x => x.BranchText == p.FolderName))
                 {
                     Category = new MappingCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
-                    TreeEditor.treeBranchHandler.AddBranch(this, Category);
-                    ChildBranchs.Add(Category);
+                    TreeEditor.Treebranchhandler.AddBranch(this, Category);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,Category);
                     Category.CreateChildNodes();
                 }
 
@@ -201,10 +201,10 @@ namespace TheTechIdea.Beep.TreeNodes.Mapping
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 //foreach (Map_Schema i in DMEEditor.ConfigEditor.MappingSchema)
                 //{
-                //    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.SchemaName, "MAP") == null)
+                //    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.SchemaName, "MAP") == null)
                 //    {
                 //        CreateMappingNode(i.SchemaName);
                        
@@ -237,8 +237,8 @@ namespace TheTechIdea.Beep.TreeNodes.Mapping
             {
 
                 viewbr = new MappinSchemaNode(TreeEditor, DMEEditor, this, mapName, TreeEditor.SeqID, EnumPointType.DataPoint, "app.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
-                ChildBranchs.Add(viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
                 viewbr.CreateChildNodes();
 
                 //    DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);

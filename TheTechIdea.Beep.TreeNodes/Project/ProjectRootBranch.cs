@@ -80,7 +80,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
             DMEEditor.ErrorObject.Flag = Errors.Ok;
             try
             {
-               // TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+               // TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 NodesHelpers.CreateProjectChildNodes(this, TreeEditor, DMEEditor, Visutil);
             }
             catch (Exception ex)
@@ -103,7 +103,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
 
         public IErrorsInfo RemoveChildNodes()
         {
-            TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+            TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
             return DMEEditor.ErrorObject;
         }
 
@@ -159,7 +159,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                                 DMEEditor.ConfigEditor.SaveProjects();
 
                                 ProjectProjectNode FolderNode = new ProjectProjectNode(f.Url, TreeEditor, DMEEditor, this, dirname, TreeEditor.SeqID,f);
-                                TreeEditor.treeBranchHandler.AddBranch(this, FolderNode);
+                                TreeEditor.Treebranchhandler.AddBranch(this, FolderNode);
                                 FolderNode.RootFolder= f;
                                 FolderNode.CreateChildNodes();
                                 //NodesHelpers.CreateProjectStructure(FolderNode, f.GuidID, TreeEditor, DMEEditor, Visutil);

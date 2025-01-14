@@ -109,7 +109,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);  
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);  
                 foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName == "RDBMS" && x.FolderName == BranchText))
                 {
                     foreach (string item in p.items)
@@ -172,9 +172,10 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
-                TreeEditor.treeBranchHandler.AddBranch(this, database);
+              
 
-                ChildBranchs.Add(database);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,database);
+                TreeEditor.Treebranchhandler.AddBranch(this, database);
 
                 //   DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }

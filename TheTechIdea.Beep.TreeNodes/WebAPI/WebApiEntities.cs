@@ -150,7 +150,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                     it.obj = this;
                     it.Name = "Branch";
                     ob.Add(it);
-                    IBranch DataSourceBr = TreeEditor.treeBranchHandler.GetBranch(this.ParentBranchID);
+                    IBranch DataSourceBr = TreeEditor.Treebranchhandler.GetBranch(this.ParentBranchID);
                     it = new ObjectItem();
                     it.obj = DataSourceBr;
                     it.Name = "ParentBranch";
@@ -191,7 +191,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                         {
                             if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==DialogResult.Yes)
                             {
-                                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 loadv = true;
                             }
                         }
@@ -283,12 +283,12 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                         {
                             foreach (int item in TreeEditor.SelectedBranchs)
                             {
-                                IBranch br = TreeEditor.treeBranchHandler.GetBranch(item);
+                                IBranch br = TreeEditor.Treebranchhandler.GetBranch(item);
                                 ents.Add(br.BranchText);
                                 // EntityStructure = DataSource.GetEntityStructure(br.BranchText, true);
 
                             }
-                            IBranch pbr = TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
+                            IBranch pbr = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
                             List<ObjectItem> ob = new List<ObjectItem>(); ;
                             ObjectItem it = new ObjectItem();
                             it.obj = pbr;
@@ -337,7 +337,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             try
 
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 WebApiEntities webent;
                
                 DataSource = DMEEditor.GetDataSource(DataSourceName);
@@ -405,8 +405,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                 webentmain.DataSource = DataSource;
                 webentmain.DataSourceName = DataSource.DatasourceName;
 
-                TreeEditor.treeBranchHandler.AddBranch(this, webentmain);
-                ChildBranchs.Add(webentmain);
+                TreeEditor.Treebranchhandler.AddBranch(this, webentmain);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,webentmain);
               //  TreeEditor.AddCommentsWaiting($"{startcnt} - Added {item.EntityName} to WebAPI DataSource");
                 startcnt += 1;
                 CreateNode(DataSource.Entities, item, webentmain);
@@ -432,8 +432,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                     webent = new WebApiEntities(TreeEditor, DMEEditor, br, item.EntityName, TreeEditor.SeqID, branchType, iconimage, BranchText);
                     webent.DataSource = DataSource;
                     webent.DataSourceName = DataSource.DatasourceName;
-                    TreeEditor.treeBranchHandler.AddBranch(br, webent);
-                    ChildBranchs.Add(webent);
+                    TreeEditor.Treebranchhandler.AddBranch(br, webent);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,webent);
 
                     if (entities.Where(i => i.ParentId == item.Id && i.Id != 0).Any())
                     {

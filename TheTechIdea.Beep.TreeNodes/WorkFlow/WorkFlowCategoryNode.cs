@@ -239,8 +239,8 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
                 {
                     WorkFlowEntityNode en = new WorkFlowEntityNode(TreeEditor, DMEEditor, this, item.DataWorkFlowName, TreeEditor.SeqID, EnumPointType.DataPoint, "workflowentity.png");
                     en.DataSource = DataSource;
-                    TreeEditor.treeBranchHandler.AddBranch(this, en);
-                    ChildBranchs.Add(en);
+                    TreeEditor.Treebranchhandler.AddBranch(this, en);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,en);
                 }
 
 

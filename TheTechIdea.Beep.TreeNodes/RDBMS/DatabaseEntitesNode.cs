@@ -188,7 +188,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //        };
         //        DMEEditor.Passedarguments = args;
         //        IBranch pbr = TreeEditor.Branches.Where(x => x.BranchType == EnumPointType.Root && x.BranchClass == "VIEW").FirstOrDefault();
-        //        TreeEditor.treeBranchHandler.SendActionFromBranchToBranch(pbr,this, "Create View using Table");
+        //        TreeEditor.Treebranchhandler.SendActionFromBranchToBranch(pbr,this, "Create View using Table");
 
         //    }
         //    catch (Exception ex)
@@ -342,7 +342,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //                }
         //                if (DMEEditor.ErrorObject.Flag == Errors.Ok|| !entityexist)
         //                {
-        //                    TreeEditor.treeBranchHandler.RemoveBranch(this);
+        //                    TreeEditor.Treebranchhandler.RemoveBranch(this);
         //                    DataSource.Entities.RemoveAt(DataSource.Entities.FindIndex(p => p.DatasourceEntityName == EntityStructure.DatasourceEntityName));
         //                    DMEEditor.AddLogMessage("Success", $"Droped Entity {EntityStructure.EntityName}", DateTime.Now, -1, null, Errors.Ok);
         //                }

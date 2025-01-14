@@ -205,10 +205,10 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
 
             try
             {
-                //TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                //TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.WEBAPI && c.IsComposite == false))
                 {
-                    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.ConnectionName, "WEBAPI") == null)
+                    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "WEBAPI") == null)
                     {
                         if (!ChildBranchs.Any(p => p.GuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
                         {
@@ -244,8 +244,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             try
             {
                  Category = new DatabaseCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
-                TreeEditor.treeBranchHandler.AddBranch(this, Category);
-                ChildBranchs.Add(Category);
+                TreeEditor.Treebranchhandler.AddBranch(this, Category);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,Category);
                 Category.CreateChildNodes();
 
             }
@@ -266,8 +266,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             {
               
                 viewbr = new WebApiNode(cn,TreeEditor, DMEEditor, this, cn.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, "web.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
-                ChildBranchs.Add(viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
              
             }
             catch (Exception ex)

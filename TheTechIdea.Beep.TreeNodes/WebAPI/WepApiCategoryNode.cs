@@ -134,8 +134,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             {
 
                 viewbr = new WebApiNode(cn,TreeEditor, DMEEditor, this, cn.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, "app.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
-                ChildBranchs.Add(viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
                 viewbr.CreateChildNodes();
 
                 //    DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);

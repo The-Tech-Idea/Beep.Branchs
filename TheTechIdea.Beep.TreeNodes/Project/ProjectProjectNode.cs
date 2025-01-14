@@ -138,7 +138,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                 {
                     ProjectFileNode projectFile = new ProjectFileNode(TreeEditor, DMEEditor, br, filename, TreeEditor.SeqID,folder,null);
                     projectFile.ParentBranchID = br.ID;
-                    TreeEditor.treeBranchHandler.AddBranch(br, projectFile);
+                    TreeEditor.Treebranchhandler.AddBranch(br, projectFile);
                     projectFile.CreateChildNodes();
                 }
              
@@ -156,7 +156,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                 {
                     DMEEditor.ConfigEditor.Projects.Remove(f);
                     DMEEditor.ConfigEditor.SaveProjects();
-                    TreeEditor.treeBranchHandler.RemoveBranch(this);
+                    TreeEditor.Treebranchhandler.RemoveBranch(this);
                 }
               
                 DMEEditor.AddLogMessage("Success", "Removed Project Folder ", DateTime.Now, 0, null, Errors.Ok);

@@ -248,12 +248,12 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //            {
         //                foreach (int item in TreeEditor.SelectedBranchs)
         //                {
-        //                    IBranch br = TreeEditor.treeBranchHandler.GetBranch(item);
+        //                    IBranch br = TreeEditor.Treebranchhandler.GetBranch(item);
         //                    ents.Add(br.BranchText);
         //                    // EntityStructure = DataSource.GetEntityStructure(br.BranchText, true);
 
         //                }
-        //                IBranch pbr = TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
+        //                IBranch pbr = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
         //                List<ObjectItem> ob = new List<ObjectItem>(); ;
         //                ObjectItem it = new ObjectItem();
         //                it.obj = pbr;

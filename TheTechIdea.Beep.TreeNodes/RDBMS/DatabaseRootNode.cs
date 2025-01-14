@@ -113,10 +113,10 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
 
             try
             {
-               // TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+               // TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.RDBMS && c.IsComposite==false))
                 {
-                    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.ConnectionName, "RDBMS")==null)
+                    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "RDBMS")==null)
                     {
                        if(!ChildBranchs.Any(p => p.DataSourceConnectionGuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
                         {
@@ -159,11 +159,12 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
-                TreeEditor.treeBranchHandler.AddBranch(this,database);
+        
              
-                ChildBranchs.Add(database);
-               
-             //   DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,database);
+                TreeEditor.Treebranchhandler.AddBranch(this, database);
+
+                //   DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)
             {
@@ -179,7 +180,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
             try
             {
                  Category = new DatabaseCategoryNode(TreeEditor, DMEEditor, this,p.FolderName, TreeEditor.SeqID, EnumPointType.Category,TreeEditor.CategoryIcon);
-                TreeEditor.treeBranchHandler.AddBranch(this, Category);
+                TreeEditor.Treebranchhandler.AddBranch(this, Category);
                 Category.CreateChildNodes();
                
             }

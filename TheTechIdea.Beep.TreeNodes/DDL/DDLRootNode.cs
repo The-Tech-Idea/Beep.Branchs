@@ -164,8 +164,8 @@ namespace TheTechIdea.Beep.TreeNodes.DDL
                     {
                         ConfigEntityNode entityNode = new ConfigEntityNode(TreeEditor, DMEEditor, this, item.NodeName, TreeEditor.SeqID, EnumPointType.Function, item.Imagename, item.className);
                         entityNode.AddinTreeStructure = item;
-                        TreeEditor.treeBranchHandler.AddBranch(this, entityNode);
-                        ChildBranchs.Add(entityNode);
+                        TreeEditor.AddBranchToParentInBranchsOnly(this,entityNode);
+                        TreeEditor.Treebranchhandler.AddBranch(this, entityNode);
                     }
                 }
                 DMEEditor.AddLogMessage("Success", "Created child Nodes", DateTime.Now, 0, null, Errors.Ok);

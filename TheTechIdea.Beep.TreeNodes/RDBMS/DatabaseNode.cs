@@ -228,7 +228,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //            {
         //                foreach (int item in TreeEditor.SelectedBranchs)
         //                {
-        //                    IBranch br = TreeEditor.treeBranchHandler.GetBranch(item);
+        //                    IBranch br = TreeEditor.Treebranchhandler.GetBranch(item);
         //                    if (br != null)
         //                    {
         //                        if (br.DataSourceName == DataSourceName)
@@ -238,7 +238,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //                            DataSource.ExecuteSql($"Drop Table {ent.DatasourceEntityName}");
         //                            if (DMEEditor.ErrorObject.Flag == Errors.Ok)
         //                            {
-        //                                TreeEditor.treeBranchHandler.RemoveBranch(br);
+        //                                TreeEditor.Treebranchhandler.RemoveBranch(br);
         //                                DataSource.Entities.RemoveAt(DataSource.Entities.FindIndex(p => p.DatasourceEntityName == ent.DatasourceEntityName));
         //                                DMEEditor.AddLogMessage("Success", $"Droped Entity {ent.EntityName}", DateTime.Now, -1, null, Errors.Ok);
         //                            }

@@ -61,7 +61,7 @@ namespace TheTechIdea.Beep.TreeNodes
             {
 
                 categoryBranch = new FileCategoryNode(TreeEditor, DMEEditor, br, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
-                TreeEditor.treeBranchHandler.AddBranch(br, categoryBranch);
+                TreeEditor.Treebranchhandler.AddBranch(br, categoryBranch);
                 categoryBranch.CreateChildNodes();
 
 
@@ -87,7 +87,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 viewbr.BranchDescription = conn.GuidID.ToString();
                 viewbr.GuidID = conn.GuidID.ToString();
                 viewbr.DataSourceName = conn.ConnectionName;
-                TreeEditor.treeBranchHandler.AddBranch(br, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(br, viewbr);
                 DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 }
                 foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.FILE))
                 {
-                    string categoryname=TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.ConnectionName, "FILE");
+                    string categoryname=TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "FILE");
                     if ((categoryname == null )|| (br.BranchText == categoryname))
                     {
                         if (!TreeEditor.Branches.Any(p => p.GuidID!=null && p.GuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase) && p.BranchClass == br.BranchClass))
@@ -359,14 +359,14 @@ namespace TheTechIdea.Beep.TreeNodes
             try
             {
                 bool missingdir = false;
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(Projectbr);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(Projectbr);
                 foreach (var item in DMEEditor.ConfigEditor.Projects)
                 {
                     string dirname = new System.IO.DirectoryInfo(item.Url).Name;
                     if (Directory.Exists(item.Url))
                     {
                         ProjectProjectNode FolderNode = new ProjectProjectNode(item.Url, TreeEditor, DMEEditor, Projectbr, dirname, TreeEditor.SeqID,item);
-                        TreeEditor.treeBranchHandler.AddBranch(Projectbr, FolderNode);
+                        TreeEditor.Treebranchhandler.AddBranch(Projectbr, FolderNode);
                         CreateProjectStructure(FolderNode, item.Url, TreeEditor, DMEEditor, Visutil);
                     }
                     else
@@ -409,7 +409,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 foreach (FileManager.Folder fld in folder.Item2.Folders)
                 {
                     ProjectFolderNode fnode = new ProjectFolderNode(TreeEditor, DMEEditor, br, fld.Name, TreeEditor.SeqID,fld, rootFolder);
-                    TreeEditor.treeBranchHandler.AddBranch(br, fnode);
+                    TreeEditor.Treebranchhandler.AddBranch(br, fnode);
                     TTraverseProjectFolder(rootFolder,fld, fnode, TreeEditor, DMEEditor, Visutil);
                 }
             }
@@ -493,7 +493,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     foreach (RootFolder prj in projects)
                     {
                         ProjectProjectNode fnode = new ProjectProjectNode(prj.Url,TreeEditor, DMEEditor, br, prj.Name, TreeEditor.SeqID,prj);
-                        TreeEditor.treeBranchHandler.AddBranch(br, fnode);
+                        TreeEditor.Treebranchhandler.AddBranch(br, fnode);
                         fnode.CreateChildNodes();
                         
                     }
@@ -519,7 +519,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     {
                         ProjectFileNode projectFileNode = new ProjectFileNode(TreeEditor, DMEEditor, FolderNode, fFile.Name, TreeEditor.SeqID, fld);
                         projectFileNode.FileDir = Path.GetDirectoryName(fFile.Url);
-                        TreeEditor.treeBranchHandler.AddBranch(FolderNode, projectFileNode);
+                        TreeEditor.Treebranchhandler.AddBranch(FolderNode, projectFileNode);
                     }
                 }
                 
@@ -534,7 +534,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     if (!TreeEditor.Branches.Any(b => b.ParentBranchID == FolderNode.ID && b.BranchText.Equals(dirname, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         ProjectFolderNode folder = new ProjectFolderNode(TreeEditor, DMEEditor, FolderNode, childfolder.Name, TreeEditor.SeqID,  childfolder, root);
-                        TreeEditor.treeBranchHandler.AddBranch(FolderNode, folder);
+                        TreeEditor.Treebranchhandler.AddBranch(FolderNode, folder);
                         folder.CreateChildNodes();
                     }
                 }
@@ -550,7 +550,7 @@ namespace TheTechIdea.Beep.TreeNodes
             {
  
                 ProjectFolderNode folder = new ProjectFolderNode(TreeEditor, DMEEditor, parentFolderNode, newfoldername, TreeEditor.SeqID, f,root);
-                TreeEditor.treeBranchHandler.AddBranch(parentFolderNode, folder);
+                TreeEditor.Treebranchhandler.AddBranch(parentFolderNode, folder);
                 folder.CreateChildNodes();
             }else
                 f = null;
@@ -564,7 +564,7 @@ namespace TheTechIdea.Beep.TreeNodes
             {
 
                 ProjectFolderNode folder = new ProjectFolderNode(TreeEditor, DMEEditor, parentFolderNode, newfolder.Name, TreeEditor.SeqID, newfolder,root);
-                TreeEditor.treeBranchHandler.AddBranch(parentFolderNode, folder);
+                TreeEditor.Treebranchhandler.AddBranch(parentFolderNode, folder);
                 folder.CreateChildNodes();
             }
            

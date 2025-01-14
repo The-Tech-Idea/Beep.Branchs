@@ -171,7 +171,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 viewbr.DataSource = DataSource;
                 viewbr.DataSourceName = i.ConnectionName;
                 viewbr.GuidID = i.GuidID;
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
                
 
                 DMEEditor.AddLogMessage("Success", "Added DataView Connection", DateTime.Now, 0, null, Errors.Ok);

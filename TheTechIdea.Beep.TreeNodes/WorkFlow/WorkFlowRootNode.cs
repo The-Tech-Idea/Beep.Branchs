@@ -243,13 +243,13 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 foreach (IWorkFlow item in DMEEditor.ConfigEditor.WorkFlows)
                 {
                     WorkFlowEntityNode  en = new WorkFlowEntityNode(TreeEditor, DMEEditor, this,item.DataWorkFlowName, TreeEditor.SeqID, EnumPointType.DataPoint, "workflowentity.png");
                     en.DataSource = DataSource;
-                    TreeEditor.treeBranchHandler.AddBranch(this, en);
-                    ChildBranchs.Add(en);
+                    TreeEditor.Treebranchhandler.AddBranch(this, en);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,en);
                 }
 
 
@@ -269,8 +269,8 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
             try
             {
                  categoryBranch = new WorkFlowCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, categoryBranch);
-                ChildBranchs.Add(categoryBranch);
+                TreeEditor.Treebranchhandler.AddBranch(this, categoryBranch);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,categoryBranch);
                 categoryBranch.CreateChildNodes();
 
 

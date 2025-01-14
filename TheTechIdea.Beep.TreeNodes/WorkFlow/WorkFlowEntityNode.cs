@@ -157,7 +157,7 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
                 string[] args = { "New Query Entity", null, null };
                 List<ObjectItem> ob = new List<ObjectItem>(); ;
                 ObjectItem it = new ObjectItem();
-                it.obj =TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
+                it.obj =TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
                 it.Name = "Branch";
                 ob.Add(it);
              

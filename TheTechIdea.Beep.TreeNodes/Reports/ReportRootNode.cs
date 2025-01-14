@@ -95,8 +95,8 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
             try
             {
                 Category = new ReportCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
-                TreeEditor.treeBranchHandler.AddBranch(this, Category);
-                this.ChildBranchs.Add(Category);
+                TreeEditor.Treebranchhandler.AddBranch(this, Category);
+                this.TreeEditor.AddBranchToParentInBranchsOnly(this,Category);
                 Category.CreateChildNodes();
 
             }
@@ -114,7 +114,7 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 CreateNodes();
 
                 DMEEditor.AddLogMessage("Success", "Added Child Nodes", DateTime.Now, 0, null, Errors.Ok);
@@ -224,11 +224,11 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 //foreach (var i in DMEEditor.ConfigEditor.ReportWritersClasses)
                 //{
 
-                //    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.Name, "REPORT") == null)
+                //    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.Name, "REPORT") == null)
                 //    {
                 //        // ObjectDataSourcetemp = i.FileName;
 
@@ -262,9 +262,9 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
             {
 
                 viewbr = new ReportNode(TreeEditor, DMEEditor, this, ReportName, TreeEditor.SeqID, EnumPointType.Function, "report.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
                 viewbr.CreateChildNodes();
-                ChildBranchs.Add(viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
 
                 DMEEditor.AddLogMessage("Success", "Added Report", DateTime.Now, 0, null, Errors.Ok);
             }

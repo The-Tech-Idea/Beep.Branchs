@@ -161,7 +161,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 CreateChildNodes();
                // DMEEditor.AddLogMessage("Success", "Show File", DateTime.Now, 0, null, Errors.Ok);
             }
@@ -177,7 +177,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         {
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 int i = 0;
                 DataSource = (IDataSource)DMEEditor.GetDataSource(BranchText);
                 if (DataSource != null)
@@ -287,8 +287,8 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //               // DMEEditor.viewEditor.Views.Remove(DMEEditor.viewEditor.Views.Where(x => x.ViewName == DataView.ViewName).FirstOrDefault());
         //                DMEEditor.ConfigEditor.RemoveDataConnection(BranchText);
         //                DMEEditor.RemoveDataDource(BranchText);
-        //                TreeEditor.treeBranchHandler.RemoveBranch(this);
-        //                TreeEditor.treeBranchHandler.RemoveEntityFromCategory("FILE",TreeEditor.treeBranchHandler.GetBranch(ParentBranchID).BranchText, BranchText);
+        //                TreeEditor.Treebranchhandler.RemoveBranch(this);
+        //                TreeEditor.Treebranchhandler.RemoveEntityFromCategory("FILE",TreeEditor.Treebranchhandler.GetBranch(ParentBranchID).BranchText, BranchText);
         //                DMEEditor.ConfigEditor.SaveCategoryFoldersValues();
         //                DMEEditor.AddLogMessage("Success", "Removed View from Views List", DateTime.Now, 0, null, Errors.Ok);
         //            }
@@ -299,7 +299,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //            };
 
 
-        //            TreeEditor.treeBranchHandler.RemoveBranch(this);
+        //            TreeEditor.Treebranchhandler.RemoveBranch(this);
         //        }
 
 
@@ -329,12 +329,12 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //            {
         //                foreach (int item in TreeEditor.SelectedBranchs)
         //                {
-        //                    IBranch br = TreeEditor.treeBranchHandler.GetBranch(item);
+        //                    IBranch br = TreeEditor.Treebranchhandler.GetBranch(item);
         //                    ents.Add(br.BranchText);
         //                    // EntityStructure = DataSource.GetEntityStructure(br.BranchText, true);
 
         //                }
-        //                IBranch pbr = TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
+        //                IBranch pbr = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
         //                List<ObjectItem> ob = new List<ObjectItem>(); ;
         //                ObjectItem it = new ObjectItem();
         //                it.obj = pbr;
@@ -439,8 +439,8 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                 fileitemsheet.DataSource = DataSource;
                 fileitemsheet.DataSourceName = DataSourceName;
 
-               // ChildBranchs.Add(fileitemsheet);
-                TreeEditor.treeBranchHandler.AddBranch(this,fileitemsheet);
+               // TreeEditor.AddBranchToParentInBranchsOnly(this,fileitemsheet);
+                TreeEditor.Treebranchhandler.AddBranch(this,fileitemsheet);
 
                 DMEEditor.AddLogMessage("Success", "Added sheet", DateTime.Now, 0, null, Errors.Ok);
             }

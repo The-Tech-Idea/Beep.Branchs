@@ -82,7 +82,7 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
 
             try
             {
-                //TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                //TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                // CreateNodes();
 
               //  DMEEditor.AddLogMessage("Success", "Added Child Nodes", DateTime.Now, 0, null, Errors.Ok);
@@ -280,7 +280,7 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
              //   AppTemplate ap = DMEEditor.ConfigEditor.ReportsDefinition[DMEEditor.ConfigEditor.ReportsDefinition.FindIndex(p => p.Name == BranchText)];
              //   DMEEditor.ConfigEditor.ReportsDefinition.Remove(ap);
                 DMEEditor.ConfigEditor.SaveReportDefinitionsValues();
-                IBranch parent=TreeEditor.treeBranchHandler.GetBranch(ParentBranchID);
+                IBranch parent=TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
                 if (parent != null)
                 {
                     parent.CreateChildNodes();

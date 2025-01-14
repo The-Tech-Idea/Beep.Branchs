@@ -148,7 +148,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                 {
                     if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==DialogResult.Yes)
                     {
-                       TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                       TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                        loadv = true;
                     }
                 }
@@ -227,7 +227,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
             try
 
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 WebApiEntities webent;
                 List<EntityStructure> ls = new List<EntityStructure>();
                  DataSource = DMEEditor.GetDataSource(BranchText);
@@ -300,8 +300,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                 webentmain.DataSource = DataSource;
                 webentmain.DataSourceName = DataSource.DatasourceName;
 
-                TreeEditor.treeBranchHandler.AddBranch(this, webentmain);
-                ChildBranchs.Add(webentmain);
+                TreeEditor.Treebranchhandler.AddBranch(this, webentmain);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,webentmain);
               //  TreeEditor.AddCommentsWaiting($"{startcnt} - Adding {item.EntityName} to WebAPI DataSource");
                 startcnt +=1;
                 CreateNode(DataSource.Entities, item, webentmain);
@@ -327,8 +327,8 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                     webent = new WebApiEntities(TreeEditor, DMEEditor, br, item.EntityName, TreeEditor.SeqID, branchType, iconimage, BranchText);
                     webent.DataSource = DataSource;
                     webent.DataSourceName = DataSource.DatasourceName;
-                    TreeEditor.treeBranchHandler.AddBranch(br, webent);
-                    ChildBranchs.Add(webent);
+                    TreeEditor.Treebranchhandler.AddBranch(br, webent);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,webent);
                   //  TreeEditor.AddCommentsWaiting($"{startcnt} - Adding {item.EntityName} to WebAPI DataSource");
                     if (entities.Where(i => i.ParentId == item.Id && i.Id != 0).Any())
                     {

@@ -153,7 +153,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                 viewbr.DataSource = DataSource;
                 viewbr.DataSourceName= i.ConnectionName;
                 viewbr.DataSourceConnectionGuidID= i.GuidID;
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
                 
                 DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }
@@ -171,7 +171,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
 
             try
             {
-                TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName == "NOSQL" && x.FolderName == BranchText))
                 {
                     foreach (string item in p.items)

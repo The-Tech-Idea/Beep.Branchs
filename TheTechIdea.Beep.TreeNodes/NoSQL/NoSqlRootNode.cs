@@ -207,8 +207,8 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                 viewbr.DataSourceConnectionGuidID = i.GuidID;
                 viewbr.DataSourceName = i.ConnectionName;
                
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
-                ChildBranchs.Add(viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
                 DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)
@@ -228,7 +228,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             try
             {
                 Catitem = new NoSqlCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
-                TreeEditor.treeBranchHandler.AddBranch(this, Catitem);
+                TreeEditor.Treebranchhandler.AddBranch(this, Catitem);
               
                 
             }
@@ -248,7 +248,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             {
                 foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.NOSQL))
                 {
-                    if (TreeEditor.treeBranchHandler.CheckifBranchExistinCategory(i.ConnectionName, "NOSQL") == null)
+                    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "NOSQL") == null)
                     {
                         if (!ChildBranchs.Any(p => p.DataSourceConnectionGuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
                         {

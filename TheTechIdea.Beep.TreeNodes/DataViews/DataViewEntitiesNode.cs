@@ -124,14 +124,15 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
            
             foreach (EntityStructure i in Childs)
             {
-                IBranch branch = TreeEditor.treeBranchHandler.GetBranchByMiscID(i.Id);
+                IBranch branch = TreeEditor.Treebranchhandler.GetBranchByMiscID(i.Id);
                 if (branch == null)
                 {
                    
                     dbent = new DataViewEntitiesNode(TreeEditor, DMEEditor, ParentBranch, i.EntityName, TreeEditor.SeqID, EnumPointType.Entity, ds.GeticonForViewType(i.Viewtype),ds.DatasourceName, i);
-                    TreeEditor.treeBranchHandler.AddBranch(ParentBranch, dbent);
+                    TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
+                    TreeEditor.Treebranchhandler.AddBranch(ParentBranch, dbent);
                     dbent.CreateChildNodes();
-                    ChildBranchs.Add(dbent);
+                  
                 }
                 else
                 {
@@ -139,9 +140,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     {
                        
                         dbent = new DataViewEntitiesNode(TreeEditor, DMEEditor, ParentBranch, i.EntityName, TreeEditor.SeqID, EnumPointType.Entity, ds.GeticonForViewType(i.Viewtype), ds.DatasourceName, i);
-                        TreeEditor.treeBranchHandler.AddBranch(ParentBranch, dbent);
+                        TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
+                        TreeEditor.Treebranchhandler.AddBranch(ParentBranch, dbent);
                         dbent.CreateChildNodes();
-                        ChildBranchs.Add(dbent);
+                      
                     }
                     else
                     {
@@ -175,11 +177,13 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         {
 
                             dbent = new DataViewEntitiesNode(TreeEditor, DMEEditor, this, i.EntityName, TreeEditor.SeqID, EnumPointType.Entity, ds.GeticonForViewType(i.Viewtype), ds.DatasourceName, i);
-                            TreeEditor.treeBranchHandler.AddBranch(this, dbent);
-                            ChildBranchs.Add(dbent);
-                            dbent.CreateChildNodes();
-                           
-                        }
+                            
+                            TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
+                           TreeEditor.Treebranchhandler.AddBranch(this, dbent);
+                           dbent.CreateChildNodes();
+                         
+
+                    }
                         else
                         {
                             dbent = ChildBranchs.Where(x => x.BranchText == i.EntityName).FirstOrDefault();
@@ -223,7 +227,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
-                        TreeEditor.treeBranchHandler.RemoveBranch(item);
+                        TreeEditor.Treebranchhandler.RemoveBranch(item);
                         ds.RemoveEntity(EntityStructure.Id);
                         // DMEEditor.viewEditor.Views.Where(x => x.ViewName == DataView.ViewName).FirstOrDefault().Entity.Remove(EntityStructure);
                     }
@@ -387,7 +391,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 };
                 if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == DialogResult.Yes)
                 {
-                    TreeEditor.treeBranchHandler.RemoveBranch(this);
+                    TreeEditor.Treebranchhandler.RemoveBranch(this);
                     //---- Remove From View ---- //
                     ds.RemoveEntity(EntityStructure.Id);
                     DMEEditor.AddLogMessage("Success", "Removed Entity Node", DateTime.Now, 0, null, Errors.Ok);
@@ -438,7 +442,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==DialogResult.Yes)
                 {
-                    TreeEditor.treeBranchHandler.RemoveChildBranchs(this);
+                    TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);
                     DMEEditor.AddLogMessage("Success", "Removed Child Entites", DateTime.Now, 0, null, Errors.Ok);
                 }

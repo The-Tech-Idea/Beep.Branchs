@@ -160,9 +160,9 @@ namespace TheTechIdea.Beep.TreeNodes.Reports
             {
 
                 viewbr = new ReportNode(TreeEditor, DMEEditor, this, ReportName, TreeEditor.SeqID, EnumPointType.DataPoint, "report.png");
-                TreeEditor.treeBranchHandler.AddBranch(this, viewbr);
+                TreeEditor.Treebranchhandler.AddBranch(this, viewbr);
                 viewbr.CreateChildNodes();
-                ChildBranchs.Add(viewbr);
+                TreeEditor.AddBranchToParentInBranchsOnly(this,viewbr);
 
                 DMEEditor.AddLogMessage("Success", "Added Database Connection", DateTime.Now, 0, null, Errors.Ok);
             }
