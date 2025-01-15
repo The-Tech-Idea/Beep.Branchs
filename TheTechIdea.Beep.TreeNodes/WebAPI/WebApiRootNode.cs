@@ -78,7 +78,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
         public ITree TreeEditor { get; set; }
         public List<string> BranchActions { get; set; }
         public object TreeStrucure { get; set; }
-        public  IVisManager  Visutil { get; set; }
+        public  IAppManager  Visutil { get; set; }
         public int MiscID { get; set; }
 
 

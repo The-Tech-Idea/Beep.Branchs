@@ -32,7 +32,7 @@ namespace TheTechIdea.Beep.TreeNodes.Dev
 
         public int Order { get; set; } = 0;
         public object TreeStrucure { get; set; }
-        public IVisManager Visutil { get; set; }
+        public IAppManager Visutil { get; set; }
         public int ID { get; set; }
         public IDMEEditor DMEEditor { get; set; }
         public IDataSource DataSource { get; set; }

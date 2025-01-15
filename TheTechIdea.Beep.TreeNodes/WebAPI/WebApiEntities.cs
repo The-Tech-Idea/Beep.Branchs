@@ -66,7 +66,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
         public string BranchDescription { get; set; }
         public string BranchClass { get; set; } = "WEBAPI";
         public object TreeStrucure { get ; set ; }
-        public  IVisManager  Visutil  { get ; set ; }
+        public  IAppManager  Visutil  { get ; set ; }
 
        // public event EventHandler<PassedArgs> BranchSelected;
        // public event EventHandler<PassedArgs> BranchDragEnter;

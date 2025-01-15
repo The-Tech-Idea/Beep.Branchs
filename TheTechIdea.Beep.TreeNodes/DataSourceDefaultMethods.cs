@@ -18,7 +18,7 @@ namespace TheTechIdea.Beep.TreeNodes
 {
     public static class DataSourceDefaultMethods
     {
-        public static IErrorsInfo RefreshEntities(IBranch DatabaseBranch,IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo RefreshEntities(IBranch DatabaseBranch,IDMEEditor DMEEditor, IAppManager Visutil)
         {
             ITree tree = (ITree)Visutil.Tree;
             string BranchText = DatabaseBranch.BranchText;
@@ -97,7 +97,7 @@ namespace TheTechIdea.Beep.TreeNodes
             }
             return DMEEditor.ErrorObject;
         }
-        public static IErrorsInfo GetEntities(IBranch DatabaseBranch, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo GetEntities(IBranch DatabaseBranch, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             if (Visutil == null) return DMEEditor.ErrorObject;
             ITree tree = (ITree)Visutil.Tree;

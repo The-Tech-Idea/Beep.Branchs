@@ -18,7 +18,7 @@ namespace TheTechIdea.Beep.TreeNodes
     public static class NodesHelpers
     {
         private static  List<string> files=new List<string>();
-        public static List<ConnectionProperties> LoadFiles(IDMEEditor DMEEditor, IVisManager Visutil)
+        public static List<ConnectionProperties> LoadFiles(IDMEEditor DMEEditor, IAppManager Visutil)
         {
             
             List<ConnectionProperties> retval = new List<ConnectionProperties>();
@@ -37,7 +37,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 return null;
             };
         }
-        public static List<ConnectionProperties> LoadFiles(string[] filenames,IDMEEditor DMEEditor, IVisManager Visutil)
+        public static List<ConnectionProperties> LoadFiles(string[] filenames,IDMEEditor DMEEditor, IAppManager Visutil)
         {
           
             List<ConnectionProperties> retval = new List<ConnectionProperties>();
@@ -54,7 +54,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 return null;
             };
         }
-        public static IBranch CreateCategoryNode(CategoryFolder p, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IBranch CreateCategoryNode(CategoryFolder p, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             FileCategoryNode categoryBranch = null;
             try
@@ -75,7 +75,7 @@ namespace TheTechIdea.Beep.TreeNodes
             return categoryBranch;
 
         }
-        public static IBranch CreateFileNode(ConnectionProperties conn, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IBranch CreateFileNode(ConnectionProperties conn, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             FileEntityNode viewbr = null;
             try
@@ -99,7 +99,7 @@ namespace TheTechIdea.Beep.TreeNodes
 
             return viewbr;
         }
-        public static IErrorsInfo CreateFileNodes(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo CreateFileNodes(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace TheTechIdea.Beep.TreeNodes
             return DMEEditor.ErrorObject;
 
         }
-        public static IBranch CreateFileNode(string FileName, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IBranch CreateFileNode(string FileName, IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             FileEntityNode viewbr = null;
             try
@@ -178,7 +178,7 @@ namespace TheTechIdea.Beep.TreeNodes
 
             return viewbr;
         }
-        public static IErrorsInfo AddFile(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo AddFile(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
 
             try
@@ -220,7 +220,7 @@ namespace TheTechIdea.Beep.TreeNodes
             };
             return DMEEditor.ErrorObject;
         }
-        public static IErrorsInfo AddFiles(IBranch br, List<ConnectionProperties> files, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo AddFiles(IBranch br, List<ConnectionProperties> files, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
 
             try
@@ -256,7 +256,7 @@ namespace TheTechIdea.Beep.TreeNodes
             };
             return DMEEditor.ErrorObject;
         }
-        public static IErrorsInfo AddFile(IBranch br, ConnectionProperties file, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo AddFile(IBranch br, ConnectionProperties file, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             try
             {
@@ -295,7 +295,7 @@ namespace TheTechIdea.Beep.TreeNodes
             };
             return DMEEditor.ErrorObject;
         }
-        public static IErrorsInfo AddFolder(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo AddFolder(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             try
             {
@@ -317,7 +317,7 @@ namespace TheTechIdea.Beep.TreeNodes
             };
             return DMEEditor.ErrorObject;
         }
-        public static IErrorsInfo CreateProjectChildNodes(IBranch ProjectsRoot, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo CreateProjectChildNodes(IBranch ProjectsRoot, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             DMEEditor.ErrorObject.Flag = Errors.Ok;
             try
@@ -334,7 +334,7 @@ namespace TheTechIdea.Beep.TreeNodes
             return DMEEditor.ErrorObject;
 
         }
-        public static IErrorsInfo RefreshProject(string Projectname, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo RefreshProject(string Projectname, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             DMEEditor.ErrorObject.Flag = Errors.Ok;
             try
@@ -353,7 +353,7 @@ namespace TheTechIdea.Beep.TreeNodes
             return DMEEditor.ErrorObject;
 
         }
-        public static IErrorsInfo RefreshProject(IBranch Projectbr, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static IErrorsInfo RefreshProject(IBranch Projectbr, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             DMEEditor.ErrorObject.Flag = Errors.Ok;
             try
@@ -396,7 +396,7 @@ namespace TheTechIdea.Beep.TreeNodes
             return DMEEditor.ErrorObject;
 
         }
-        public static void CreateNewProject(IBranch br, string path, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil,ProjectFolderType foldertype)
+        public static void CreateNewProject(IBranch br, string path, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil,ProjectFolderType foldertype)
         {
             //FileHelpers fileHelpers = new FileHelpers(DMEEditor);
             Tuple<IErrorsInfo,FileManager.RootFolder> folder = DMEEditor.Utilfunction.CreateProject(path);
@@ -442,7 +442,7 @@ namespace TheTechIdea.Beep.TreeNodes
            
         }
         #region "Create Project Nodes"
-        public static void CreateProjectStructure(IBranch br, string projectGuidID, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static void CreateProjectStructure(IBranch br, string projectGuidID, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             IBranch projectFolderNode;
            // FileHelpers fileHelpers = new FileHelpers(DMEEditor);
@@ -462,7 +462,7 @@ namespace TheTechIdea.Beep.TreeNodes
 
 
         }
-        public static void CreateProjectStructure(IBranch br, RootFolder folder, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static void CreateProjectStructure(IBranch br, RootFolder folder, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             IBranch projectFolderNode;
             // FileHelpers fileHelpers = new FileHelpers(DMEEditor);
@@ -482,7 +482,7 @@ namespace TheTechIdea.Beep.TreeNodes
 
 
         }
-        public static void CreateProjects(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil, ProjectFolderType foldertype)
+        public static void CreateProjects(IBranch br, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil, ProjectFolderType foldertype)
         {
             //FileHelpers fileHelpers = new FileHelpers(DMEEditor);
             List<RootFolder> projects = DMEEditor.ConfigEditor.Projects.Where(p => p.FolderType == foldertype).ToList();
@@ -502,7 +502,7 @@ namespace TheTechIdea.Beep.TreeNodes
                
             }
         }
-        public static void TTraverseProjectFolder(RootFolder root,Folder fld, IBranch FolderNode, ITree TreeEditor, IDMEEditor DMEEditor, IVisManager Visutil)
+        public static void TTraverseProjectFolder(RootFolder root,Folder fld, IBranch FolderNode, ITree TreeEditor, IDMEEditor DMEEditor, IAppManager Visutil)
         {
             foreach (FFile fFile in fld.Files)
             {

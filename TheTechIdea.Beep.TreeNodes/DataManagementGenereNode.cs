@@ -46,7 +46,7 @@ namespace TheTechIdea.Beep.TreeNodes
         public string ObjectType { get; set; } = "Beep";
         public int Order { get; set; } = 0;
         public object TreeStrucure { get; set; }
-        public IVisManager Visutil { get; set; }
+        public IAppManager Visutil { get; set; }
         public int ID { get; set; } = -1;
         public IDMEEditor DMEEditor { get; set; }
         public IDataSource DataSource { get; set; }

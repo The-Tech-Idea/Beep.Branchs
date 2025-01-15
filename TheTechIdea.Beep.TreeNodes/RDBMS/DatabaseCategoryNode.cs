@@ -92,7 +92,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         public List<string> BranchActions { get; set; }
         public List<Delegate> Delegates { get; set; }
         public object TreeStrucure { get ; set ; }
-        public  IVisManager  Visutil  { get ; set ; }
+        public  IAppManager  Visutil  { get ; set ; }
         public int MiscID { get; set; }
         public string ObjectType { get; set; } = "Beep";
         // public event EventHandler<PassedArgs> BranchSelected;

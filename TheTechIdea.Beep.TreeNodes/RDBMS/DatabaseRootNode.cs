@@ -94,7 +94,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         public int ID { get ; set ; }
         public int Order { get; set; } = 3;
         public int MiscID { get; set; }
-        public  IVisManager  Visutil { get; set; }
+        public  IAppManager  Visutil { get; set; }
         PassedArgs Passedarguments { get; set; } = new PassedArgs();
         public object TreeStrucure { get ; set ; }
         public string ObjectType { get; set; } = "Beep";
