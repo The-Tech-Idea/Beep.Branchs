@@ -375,7 +375,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 }
                 if (missingdir)
                 {
-                    if (Visutil.Controlmanager.InputBoxYesNo("Beep", "There are missing Project Directories") == DialogResult.OK)
+                    if (Visutil.Controlmanager.InputBoxYesNo("Beep", "There are missing Project Directories") == BeepDialogResult.OK)
                     {
                         foreach (var item in DMEEditor.ConfigEditor.Projects)
                         {

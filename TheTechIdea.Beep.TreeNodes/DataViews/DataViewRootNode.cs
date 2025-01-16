@@ -175,7 +175,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == DialogResult.OK)
+                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json")==false )
                     {
@@ -288,7 +288,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == DialogResult.OK)
+                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json") == false)
                     {

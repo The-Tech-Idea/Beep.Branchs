@@ -329,7 +329,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //    bool entityexist = true;
         //    try
         //    {
-        //      if(Visutil.Controlmanager.InputBoxYesNo("Beep DM","Are you sure you ?")== DialogResult.Yes)
+        //      if(Visutil.Controlmanager.InputBoxYesNo("Beep DM","Are you sure you ?")== BeepDialogResult.Yes)
         //        {
                    
         //            EntityStructure = DataSource.GetEntityStructure(BranchText, true);

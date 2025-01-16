@@ -279,7 +279,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
         //    try
         //    {
-        //        if (Visutil.Controlmanager.InputBoxYesNo("Remove", "Area you Sure ? you want to remove File???") == Beep.Vis.Module.DialogResult.Yes)
+        //        if (Visutil.Controlmanager.InputBoxYesNo("Remove", "Area you Sure ? you want to remove File???") == Beep.Vis.Module.BeepDialogResult.Yes)
         //        {
 
         //            try
