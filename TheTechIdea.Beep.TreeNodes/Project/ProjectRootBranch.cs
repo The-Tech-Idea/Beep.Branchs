@@ -72,7 +72,25 @@ namespace TheTechIdea.Beep.TreeNodes.Project
         public string MiscStringID { get; set; }
         public IBranch CreateCategoryNode(CategoryFolder p)
         {
+            //ProjectFolderNode categoryBranch = null;
+            //try
+            //{
+            //    IBranch parent = this;// TreeEditor.Branches.FirstOrDefault(x => x.ID == p.ID);
+            //    categoryBranch = new ProjectFolderNode(TreeEditor, DMEEditor, parent, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
+            //    TreeEditor.Treebranchhandler.AddBranch(parent, categoryBranch);
+            //    TreeEditor.AddBranchToParentInBranchsOnly(this, categoryBranch);
+            //    categoryBranch.CreateChildNodes();
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    DMEEditor.Logger.WriteLog($"Error Creating Category  View Node ({ex.Message}) ");
+            //    DMEEditor.ErrorObject.Flag = Errors.Failed;
+            //    DMEEditor.ErrorObject.Ex = ex;
+            //}
             return null;
+
         }
 
         public IErrorsInfo CreateChildNodes()

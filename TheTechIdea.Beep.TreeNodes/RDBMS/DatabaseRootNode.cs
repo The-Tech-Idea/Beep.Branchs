@@ -174,26 +174,29 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
            
             return DMEEditor.ErrorObject;
         }
-        public  IBranch  CreateCategoryNode(CategoryFolder p)
+        public IBranch CreateCategoryNode(CategoryFolder p)
         {
-            DatabaseCategoryNode Category = null;
+            DatabaseCategoryNode categoryBranch = null;
             try
             {
-                 Category = new DatabaseCategoryNode(TreeEditor, DMEEditor, this,p.FolderName, TreeEditor.SeqID, EnumPointType.Category,TreeEditor.CategoryIcon);
-                TreeEditor.Treebranchhandler.AddBranch(this, Category);
-                Category.CreateChildNodes();
-               
+                IBranch parent = this;// TreeEditor.Branches.FirstOrDefault(x => x.ID == p.ID);
+                categoryBranch = new DatabaseCategoryNode(TreeEditor, DMEEditor, parent, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
+                TreeEditor.Treebranchhandler.AddBranch(parent, categoryBranch);
+                TreeEditor.AddBranchToParentInBranchsOnly(this, categoryBranch);
+                categoryBranch.CreateChildNodes();
+
+
             }
             catch (Exception ex)
             {
-                DMEEditor.Logger.WriteLog($"Error Creating Category Node File Node ({ex.Message}) ");
+                DMEEditor.Logger.WriteLog($"Error Creating Category  View Node ({ex.Message}) ");
                 DMEEditor.ErrorObject.Flag = Errors.Failed;
                 DMEEditor.ErrorObject.Ex = ex;
             }
-            return Category;
+            return categoryBranch;
 
         }
-    
+
         public IErrorsInfo ExecuteBranchAction(string ActionName)
         {
             throw new NotImplementedException();

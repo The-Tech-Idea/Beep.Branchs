@@ -95,7 +95,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
             FileCategoryNode categoryBranch = null;
             try
             {
-                IBranch parent = TreeEditor.Branches.FirstOrDefault(x => x.ID == p.ID);
+                IBranch parent = this;// TreeEditor.Branches.FirstOrDefault(x => x.ID == p.ID);
                 if (parent == null)
                 {
                     parent = this;

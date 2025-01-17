@@ -165,9 +165,27 @@ namespace TheTechIdea.Beep.TreeNodes.Config
 
         }
 
-        public  IBranch  CreateCategoryNode(CategoryFolder p)
+        public IBranch CreateCategoryNode(CategoryFolder p)
         {
-            throw new NotImplementedException();
+            ConfigCategoryNode categoryBranch = null;
+            try
+            {
+                IBranch parent = this;// TreeEditor.Branches.FirstOrDefault(x => x.ID == p.ID);
+                categoryBranch = new ConfigCategoryNode(TreeEditor, DMEEditor, parent, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
+                TreeEditor.Treebranchhandler.AddBranch(parent, categoryBranch);
+                TreeEditor.AddBranchToParentInBranchsOnly(this, categoryBranch);
+                categoryBranch.CreateChildNodes();
+
+
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.Logger.WriteLog($"Error Creating Category  View Node ({ex.Message}) ");
+                DMEEditor.ErrorObject.Flag = Errors.Failed;
+                DMEEditor.ErrorObject.Ex = ex;
+            }
+            return categoryBranch;
+
         }
         #endregion"Other Methods"
 

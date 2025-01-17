@@ -229,8 +229,10 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             {
                 Catitem = new NoSqlCategoryNode(TreeEditor, DMEEditor, this, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, TreeEditor.CategoryIcon);
                 TreeEditor.Treebranchhandler.AddBranch(this, Catitem);
-              
-                
+                TreeEditor.AddBranchToParentInBranchsOnly(this, Catitem);
+                Catitem.CreateChildNodes();
+
+
             }
             catch (Exception ex)
             {
