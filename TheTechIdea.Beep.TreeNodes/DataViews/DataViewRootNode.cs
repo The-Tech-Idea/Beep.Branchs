@@ -208,7 +208,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     }
                     else
                     {
-                        //MessageBox.Show("Please Select Other Name, Data Connection by this name Exist");
+                        //MessageBox.Config("Please Select Other Name, Data Connection by this name Exist");
                     }
                   
                 }

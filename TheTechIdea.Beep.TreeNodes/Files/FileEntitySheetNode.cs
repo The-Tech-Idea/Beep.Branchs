@@ -191,8 +191,8 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //    };
         //    return DMEEditor.ErrorObject;
         //}
-        //[CommandAttribute(Caption = "Show", Hidden = false,  DoubleClick =true, iconimage = "edit.png")]
-        //public IErrorsInfo Show()
+        //[CommandAttribute(Caption = "Config", Hidden = false,  DoubleClick =true, iconimage = "edit.png")]
+        //public IErrorsInfo Config()
         //{
 
         //    try
@@ -222,11 +222,11 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //        Visutil.ShowPage("uc_CrudView", Passedarguments);
         //        //  Visutil.ShowPage("uc_txtfileManager",   DMEEditor, args, Passedarguments);
         //     //   Visutil.ShowPage("uc_getentities",   Passedarguments);
-        //    //    DMEEditor.AddLogMessage("Success", "Show File", DateTime.Now, 0, null, Errors.Ok);
+        //    //    DMEEditor.AddLogMessage("Success", "Config File", DateTime.Now, 0, null, Errors.Ok);
         //    }
         //    catch (Exception ex)
         //    {
-        //        string mes = "Could not Show File";
+        //        string mes = "Could not Config File";
         //        DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
         //    };
         //    return DMEEditor.ErrorObject;

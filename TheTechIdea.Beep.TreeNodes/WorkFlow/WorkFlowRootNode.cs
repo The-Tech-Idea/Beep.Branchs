@@ -196,7 +196,7 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
             }
             catch (Exception ex)
             {
-                string mes = "Could not Show Module " + BranchText;
+                string mes = "Could not Config Module " + BranchText;
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             };
             return DMEEditor.ErrorObject;
@@ -231,7 +231,7 @@ namespace TheTechIdea.Beep.TreeNodes.WorkFlow
             }
             catch (Exception ex)
             {
-                string mes = "Could not Show Module " + BranchText;
+                string mes = "Could not Config Module " + BranchText;
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             };
             return DMEEditor.ErrorObject;

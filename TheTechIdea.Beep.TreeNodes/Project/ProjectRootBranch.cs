@@ -199,7 +199,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
             }
             catch (Exception ex)
             {
-                string mes = "Could not Show File";
+                string mes = "Could not Config File";
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             };
             return DMEEditor.ErrorObject;

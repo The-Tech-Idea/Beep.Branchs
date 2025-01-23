@@ -138,7 +138,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
         }
         #endregion "Interface Methods"
         #region "Exposed Interface"
-        [CommandAttribute(Caption = "Show", Hidden = false,DoubleClick =true, ObjectType = "Beep")]
+        [CommandAttribute(Caption = "Config", Hidden = false,DoubleClick =true, ObjectType = "Beep")]
         public IErrorsInfo Show()
         {
 
@@ -165,7 +165,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
             }
             catch (Exception ex)
             {
-                string mes = "Could not Show Module " + BranchText;
+                string mes = "Could not Config Module " + BranchText;
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             };
             return DMEEditor.ErrorObject;

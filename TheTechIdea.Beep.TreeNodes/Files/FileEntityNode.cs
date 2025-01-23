@@ -163,7 +163,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
             {
                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                 CreateChildNodes();
-               // DMEEditor.AddLogMessage("Success", "Show File", DateTime.Now, 0, null, Errors.Ok);
+               // DMEEditor.AddLogMessage("Success", "Config File", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)
             {
