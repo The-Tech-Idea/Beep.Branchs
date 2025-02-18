@@ -185,7 +185,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                 DMEEditor.Logger.WriteLog($"Error in Connecting to DataSource ({ex.Message}) ");
                 DMEEditor.ErrorObject.Flag = Errors.Failed;
                 DMEEditor.ErrorObject.Ex = ex;
-                passedArgs.ParameterString1 = "Could not Open Connection";
+                passedArgs.Messege = "Could not Open Connection";
                 Visutil.PasstoWaitForm(passedArgs);
                 Visutil.CloseWaitForm();
             }
@@ -209,7 +209,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                 DMEEditor.Logger.WriteLog($"Error in Connecting to DataSource ({ex.Message}) ");
                 DMEEditor.ErrorObject.Flag = Errors.Failed;
                 DMEEditor.ErrorObject.Ex = ex;
-                passedArgs.ParameterString1 = "Could not Open Connection";
+                passedArgs.Messege = "Could not Open Connection";
                 Visutil.PasstoWaitForm(passedArgs);
                 Visutil.CloseWaitForm();
             }
@@ -282,7 +282,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //                {
                            
         //                    int i = 0;
-        //                    passedArgs.ParameterString1 = $"Creating POCO {DataSource.EntitiesNames.Count} Entities";
+        //                    passedArgs.Messege = $"Creating POCO {DataSource.EntitiesNames.Count} Entities";
         //                    Visutil.PasstoWaitForm(passedArgs);
         //                    foreach (string tb in DataSource.EntitiesNames)
         //                    {
@@ -292,14 +292,14 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //                        DMEEditor.classCreator.CreateClass(ent.EntityName, ent.Fields, DMEEditor.ConfigEditor.ExePath);
         //                        i += 1;
         //                    }
-        //                    passedArgs.ParameterString1 = "Done";
+        //                    passedArgs.Messege = "Done";
         //                    Visutil.PasstoWaitForm(passedArgs);
         //                }
 
         //            }
         //            else
         //            {
-        //                passedArgs.ParameterString1 = "Could not Open Connection";
+        //                passedArgs.Messege = "Could not Open Connection";
         //                Visutil.PasstoWaitForm(passedArgs);
         //            }
 
@@ -314,7 +314,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //        DMEEditor.Logger.WriteLog($"Error in Creating POCO Entites ({ex.Message}) ");
         //        DMEEditor.ErrorObject.Flag = Errors.Failed;
         //        DMEEditor.ErrorObject.Ex = ex;
-        //        passedArgs.ParameterString1 = "Could not Open Connection";
+        //        passedArgs.Messege = "Could not Open Connection";
         //        Visutil.PasstoWaitForm(passedArgs);
         //        Visutil.CloseWaitForm();
         //    }

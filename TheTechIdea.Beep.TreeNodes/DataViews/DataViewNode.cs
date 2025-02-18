@@ -667,6 +667,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 string iconimage;
                 DataSource = DMEEditor.GetDataSource(BranchText);
                 ds = (IDataViewDataSource)DMEEditor.GetDataSource(BranchText);
+                Visutil.CloseWaitForm();
                 Visutil.ShowWaitForm(passedArgs);
                 if (DataSource != null)
                 {
@@ -680,9 +681,9 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                                 ds.LoadView();
                             }
                         }
-                        passedArgs.ParameterString1 = "Connection Successful";
+                        passedArgs.Messege = "Connection Successful";
                         Visutil.PasstoWaitForm(passedArgs);
-                        passedArgs.ParameterString1 = "Getting Entities";
+                        passedArgs.Messege = "Getting Entities";
                         Visutil.PasstoWaitForm(passedArgs);
 
                         List<string> ename = ds.Entities.Select(o => o.EntityName).ToList();
@@ -713,14 +714,14 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                                         dbent.DataSource = DataSource;
                                         TreeEditor.AddBranchToParentInBranchsOnly(this,dbent);
                                        
-                                        TreeEditor.Treebranchhandler.AddBranch(this, dbent);
+                                    //    TreeEditor.Treebranchhandler.AddBranch(this, dbent);
                                     dbent.CreateChildNodes();
                                     i += 1;
                                   //  }
 
                                 }
                             }
-                            passedArgs.ParameterString1 = $"Getting {existing.Count} Entities";
+                            passedArgs.Messege = $"Getting {existing.Count} Entities";
                             Visutil.PasstoWaitForm(passedArgs);
                             //------------------------------- Draw Existing Entities
                             foreach (string tb in existing) //
@@ -753,24 +754,24 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         }
                         else
                         {
-                            passedArgs.ParameterString1 = passedArgs.ParameterString1 + Environment.NewLine + "No Entities Found";
+                            passedArgs.Messege = passedArgs.Messege + Environment.NewLine + "No Entities Found";
                             Visutil.PasstoWaitForm(passedArgs);
                         }
 
 
-                        passedArgs.ParameterString1 = passedArgs.ParameterString1 + Environment.NewLine + "Done";
+                        passedArgs.Messege = passedArgs.Messege + Environment.NewLine + "Done";
                         Visutil.PasstoWaitForm(passedArgs);
                         DMEEditor.ConfigEditor.SaveDataSourceEntitiesValues(new TheTechIdea.Beep.ConfigUtil.DatasourceEntities { datasourcename = DataSourceName, Entities = DataSource.Entities });
                     }
                     else
                     {
-                        passedArgs.ParameterString1 = passedArgs.ParameterString1 + Environment.NewLine + "Could not Open Connection";
+                        passedArgs.Messege = passedArgs.Messege + Environment.NewLine + "Could not Open Connection";
                         Visutil.PasstoWaitForm(passedArgs);
                     }
                 }
                 else
                 {
-                    passedArgs.ParameterString1 = passedArgs.ParameterString1 + Environment.NewLine + "Could not Get Datsource";
+                    passedArgs.Messege = passedArgs.Messege + Environment.NewLine + "Could not Get Datsource";
                     Visutil.PasstoWaitForm(passedArgs);
                 }
                 Visutil.CloseWaitForm();
@@ -780,7 +781,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 DMEEditor.Logger.WriteLog($"Error in Connecting to DataSource ({ex.Message}) ");
                 DMEEditor.ErrorObject.Flag = Errors.Failed;
                 DMEEditor.ErrorObject.Ex = ex;
-                passedArgs.ParameterString1 = "Could not Open Connection";
+                passedArgs.Messege = "Could not Open Connection";
                 Visutil.PasstoWaitForm(passedArgs);
                 Visutil.CloseWaitForm();
             }
