@@ -36,7 +36,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     DataSource.Openconnection();
                     if (DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
                     {
-                        if (Visutil.Controlmanager.InputBoxYesNo("Beep DM", "Are you sure, this might take some time?") == BeepDialogResult.Yes)
+                        if (Visutil.DialogManager.InputBoxYesNo("Beep DM", "Are you sure, this might take some time?") == BeepDialogResult.Yes)
                         {
                             passedArgs.Messege = "Connection Successful";
                             Visutil.PasstoWaitForm(passedArgs);

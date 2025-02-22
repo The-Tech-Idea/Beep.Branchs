@@ -175,7 +175,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
+                if (Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json")==false )
                     {
@@ -214,7 +214,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.Controlmanager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }
@@ -232,7 +232,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                string filename = Visutil.Controlmanager.LoadFileDialog("json", DMEEditor.ConfigEditor.Config.Folders.Where(i => i.FolderFilesType == FolderFileTypes.DataView).FirstOrDefault().FolderPath, "json files (*.json)|*.txt|All files (*.*)|*.*");
+                string filename = Visutil.DialogManager.LoadFileDialog("json", DMEEditor.ConfigEditor.Config.Folders.Where(i => i.FolderFilesType == FolderFileTypes.DataView).FirstOrDefault().FolderPath, "json files (*.json)|*.txt|All files (*.*)|*.*");
                 if (!string.IsNullOrEmpty(filename))
                 {
                     viewname = Path.GetFileName(filename);
@@ -269,7 +269,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.Controlmanager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }
@@ -288,7 +288,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.Controlmanager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
+                if (Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json") == false)
                     {
@@ -338,7 +338,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.Controlmanager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }

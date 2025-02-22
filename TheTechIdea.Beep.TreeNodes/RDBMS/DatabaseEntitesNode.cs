@@ -187,8 +187,8 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //            Objects = new List<ObjectItem> { new ObjectItem { Name = "Branch", obj = this } }
         //        };
         //        DMEEditor.Passedarguments = args;
-        //        IBranch pbr = TreeEditor.Branches.Where(x => x.BranchType == EnumPointType.Root && x.BranchClass == "VIEW").FirstOrDefault();
-        //        TreeEditor.Treebranchhandler.SendActionFromBranchToBranch(pbr,this, "Create View using Table");
+        //        IBranch CurrentBranch = TreeEditor.Branches.Where(x => x.BranchType == EnumPointType.Root && x.BranchClass == "VIEW").FirstOrDefault();
+        //        TreeEditor.Treebranchhandler.SendActionFromBranchToBranch(CurrentBranch,this, "Create View using Table");
 
         //    }
         //    catch (Exception ex)
@@ -204,7 +204,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
 
         ////    try
         ////    {
-        ////        // IBranch pbr = TreeEditor.Branches.Where(x => x.BranchType == EnumBranchType.Root && x.BranchClass == "VIEW").FirstOrDefault();
+        ////        // IBranch CurrentBranch = TreeEditor.Branches.Where(x => x.BranchType == EnumBranchType.Root && x.BranchClass == "VIEW").FirstOrDefault();
               
         ////        EntityStructure = DataSource.GetEntityStructure(BranchText,true);
                 
@@ -221,7 +221,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         ////        };
         ////        TreeEditor.args = args;
                
-        ////       // TreeEditor.SendActionFromBranchToBranch(pbr, this, "Create View using Table");
+        ////       // TreeEditor.SendActionFromBranchToBranch(CurrentBranch, this, "Create View using Table");
 
         ////    }
         ////    catch (Exception ex)
@@ -329,7 +329,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //    bool entityexist = true;
         //    try
         //    {
-        //      if(Visutil.Controlmanager.InputBoxYesNo("Beep DM","Are you sure you ?")== BeepDialogResult.Yes)
+        //      if(Visutil.DialogManager.InputBoxYesNo("Beep DM","Are you sure you ?")== BeepDialogResult.Yes)
         //        {
                    
         //            EntityStructure = DataSource.GetEntityStructure(BranchText, true);

@@ -253,10 +253,10 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //                    // EntityStructure = DataSource.GetEntityStructure(br.BranchText, true);
 
         //                }
-        //                IBranch pbr = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
+        //                IBranch CurrentBranch = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
         //                List<ObjectItem> ob = new List<ObjectItem>(); ;
         //                ObjectItem it = new ObjectItem();
-        //                it.obj = pbr;
+        //                it.obj = CurrentBranch;
         //                it.Name = "ParentBranch";
         //                ob.Add(it);
 
@@ -282,7 +282,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
         //        }
 
-        //        // TreeEditor.SendActionFromBranchToBranch(pbr, this, "Create View using Table");
+        //        // TreeEditor.SendActionFromBranchToBranch(CurrentBranch, this, "Create View using Table");
 
         //    }
         //    catch (Exception ex)

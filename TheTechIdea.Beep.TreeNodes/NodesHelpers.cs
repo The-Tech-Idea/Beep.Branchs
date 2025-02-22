@@ -26,7 +26,7 @@ namespace TheTechIdea.Beep.TreeNodes
             {
                 string extens = DMEEditor.ConfigEditor.CreateFileExtensionString();
                 List<string> filenames = new List<string>();
-                filenames = Visutil.Controlmanager.LoadFilesDialog("*", DMEEditor.ConfigEditor.Config.Folders.Where(c => c.FolderFilesType == FolderFileTypes.DataFiles).FirstOrDefault().FolderPath, extens);
+                filenames = Visutil.DialogManager.LoadFilesDialog("*", DMEEditor.ConfigEditor.Config.Folders.Where(c => c.FolderFilesType == FolderFileTypes.DataFiles).FirstOrDefault().FolderPath, extens);
                 retval = DMEEditor.Utilfunction.LoadFiles(filenames.ToArray());
                 return retval;
             }
@@ -300,7 +300,7 @@ namespace TheTechIdea.Beep.TreeNodes
             try
             {
                // List<ConnectionProperties> files = new List<ConnectionProperties>();
-                string foldername = Visutil.Controlmanager.SelectFolderDialog();
+                string foldername = Visutil.DialogManager.SelectFolderDialog();
                 if (!string.IsNullOrEmpty(foldername))
                 {
                     CreateNewProject(br, foldername, TreeEditor, DMEEditor, Visutil, ProjectFolderType.Files);
@@ -375,7 +375,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 }
                 if (missingdir)
                 {
-                    if (Visutil.Controlmanager.InputBoxYesNo("Beep", "There are missing Project Directories") == BeepDialogResult.OK)
+                    if (Visutil.DialogManager.InputBoxYesNo("Beep", "There are missing Project Directories") == BeepDialogResult.OK)
                     {
                         foreach (var item in DMEEditor.ConfigEditor.Projects)
                         {

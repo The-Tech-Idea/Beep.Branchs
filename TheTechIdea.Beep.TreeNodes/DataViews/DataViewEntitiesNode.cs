@@ -223,7 +223,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?")==BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?")==BeepDialogResult.Yes)
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
@@ -389,7 +389,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     EventType = "REMOVEENTITY"
 
                 };
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveBranch(this);
                     //---- Remove From View ---- //
@@ -423,7 +423,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     DMEEditor.AddLogMessage("Success", "Got child Nodes", DateTime.Now, 0, null, Errors.Ok);
                 }else
                 {
-                    Visutil.Controlmanager.MsgBox("DM Engine", "Couldnot Get DataSource For Entity");
+                    Visutil.DialogManager.MsgBox("DM Engine", "Couldnot Get DataSource For Entity");
                 }
              
             }
@@ -440,7 +440,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.Controlmanager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);

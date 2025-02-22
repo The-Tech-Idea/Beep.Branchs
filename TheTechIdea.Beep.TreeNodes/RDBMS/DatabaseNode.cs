@@ -222,7 +222,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         //    DMEEditor.ErrorObject.Flag = Errors.Ok;
         //    try
         //    {
-        //        if (Visutil.Controlmanager.InputBoxYesNo("Beep DM", "Are you sure you ?") ==Beep.Vis.Module.BeepDialogResult.Yes)
+        //        if (Visutil.DialogManager.InputBoxYesNo("Beep DM", "Are you sure you ?") ==Beep.Vis.Module.BeepDialogResult.Yes)
         //        {
         //            if (TreeEditor.SelectedBranchs.Count > 0)
         //            {
@@ -278,7 +278,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
 
         //            if (DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
         //            {
-        //                if (Visutil.Controlmanager.InputBoxYesNo("Beep DM", "Are you sure, this might take some time?") == Beep.Vis.Module.BeepDialogResult.Yes)
+        //                if (Visutil.DialogManager.InputBoxYesNo("Beep DM", "Are you sure, this might take some time?") == Beep.Vis.Module.BeepDialogResult.Yes)
         //                {
                            
         //                    int i = 0;

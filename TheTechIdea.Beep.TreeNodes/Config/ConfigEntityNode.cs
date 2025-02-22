@@ -138,7 +138,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
         }
         #endregion "Interface Methods"
         #region "Exposed Interface"
-        [CommandAttribute(Caption = "Config", Hidden = false,DoubleClick =true, ObjectType = "Beep")]
+        [CommandAttribute(Caption = "Show", Hidden = false,DoubleClick =true, ObjectType = "Beep")]
         public IErrorsInfo Show()
         {
 

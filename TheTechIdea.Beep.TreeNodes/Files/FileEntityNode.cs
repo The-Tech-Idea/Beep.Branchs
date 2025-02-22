@@ -279,7 +279,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
         //    try
         //    {
-        //        if (Visutil.Controlmanager.InputBoxYesNo("Remove", "Area you Sure ? you want to remove File???") == Beep.Vis.Module.BeepDialogResult.Yes)
+        //        if (Visutil.DialogManager.InputBoxYesNo("Remove", "Area you Sure ? you want to remove File???") == Beep.Vis.Module.BeepDialogResult.Yes)
         //        {
 
         //            try
@@ -334,10 +334,10 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         //                    // EntityStructure = DataSource.GetEntityStructure(br.BranchText, true);
 
         //                }
-        //                IBranch pbr = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
+        //                IBranch CurrentBranch = TreeEditor.Treebranchhandler.GetBranch(ParentBranchID);
         //                List<ObjectItem> ob = new List<ObjectItem>(); ;
         //                ObjectItem it = new ObjectItem();
-        //                it.obj = pbr;
+        //                it.obj = CurrentBranch;
         //                it.Name = "ParentBranch";
         //                ob.Add(it);
 
@@ -363,7 +363,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
         //        }
 
-        //        // TreeEditor.SendActionFromBranchToBranch(pbr, this, "Create View using Table");
+        //        // TreeEditor.SendActionFromBranchToBranch(CurrentBranch, this, "Create View using Table");
 
         //    }
         //    catch (Exception ex)
@@ -408,7 +408,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                     {
                         string mes = "Error : Could Not Find File";
                         DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                        Visutil.Controlmanager.MsgBox("Beep", mes);
+                        Visutil.DialogManager.MsgBox("Beep", mes);
                     }
 
 
@@ -417,7 +417,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                 {
                     string mes = "Error : Could Not Find File DataSource";
                     DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                    Visutil.Controlmanager.MsgBox("Beep", mes);
+                    Visutil.DialogManager.MsgBox("Beep", mes);
                 }
 
                 DMEEditor.AddLogMessage("Success", "Created child Nodes", DateTime.Now, 0, null, Errors.Ok);

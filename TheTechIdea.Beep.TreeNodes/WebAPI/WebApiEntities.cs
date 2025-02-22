@@ -189,7 +189,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                         bool loadv = false;
                         if (ChildBranchs.Count > 0)
                         {
-                            if (Visutil.Controlmanager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==BeepDialogResult.Yes)
                             {
                                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 loadv = true;
@@ -319,7 +319,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                 }
                  
 
-                // TreeEditor.SendActionFromBranchToBranch(pbr, this, "Create View using Table");
+                // TreeEditor.SendActionFromBranchToBranch(CurrentBranch, this, "Create View using Table");
 
             }
             catch (Exception ex)

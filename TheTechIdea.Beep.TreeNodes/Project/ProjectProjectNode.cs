@@ -196,7 +196,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                 if (!string.IsNullOrEmpty(RootFolder.Url))
                 {
                     string foldername = string.Empty;
-                    Visutil.Controlmanager.InputBox("Enter Folder Name", "Folder Name", ref foldername);
+                    Visutil.DialogManager.InputBox("Enter Folder Name", "Folder Name", ref foldername);
                     //---- check if project folder exist
                     if (!string.IsNullOrEmpty(foldername))
                     {

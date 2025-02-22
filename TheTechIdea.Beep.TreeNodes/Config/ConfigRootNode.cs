@@ -149,7 +149,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
                     {
                         ConfigEntityNode entityNode = new ConfigEntityNode(TreeEditor, DMEEditor, this, item.NodeName, TreeEditor.SeqID, EnumPointType.Function,item.Imagename, item.className);
                         entityNode.AddinTreeStructure = item;
-                        TreeEditor.AddBranchToParentInBranchsOnly(this,entityNode);
+                       // TreeEditor.AddBranchToParentInBranchsOnly(this,entityNode);
                         TreeEditor.Treebranchhandler.AddBranch(this, entityNode);
                        
                     }
