@@ -102,7 +102,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                 }
                 categoryBranch = new FileCategoryNode(TreeEditor, DMEEditor, parent, p.FolderName, TreeEditor.SeqID, EnumPointType.Category, "category.png");
                 TreeEditor.Treebranchhandler.AddBranch(parent, categoryBranch);
-                TreeEditor.AddBranchToParentInBranchsOnly(this,categoryBranch);
+             //   TreeEditor.AddBranchToParentInBranchsOnly(this,categoryBranch);
                 categoryBranch.CreateChildNodes();
 
 
