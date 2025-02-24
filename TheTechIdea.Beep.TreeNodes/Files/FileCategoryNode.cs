@@ -21,8 +21,6 @@ namespace TheTechIdea.Beep.TreeNodes.Files
         public FileCategoryNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
 
-
-
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
             ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
