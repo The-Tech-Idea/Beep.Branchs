@@ -154,7 +154,7 @@ namespace TheTechIdea.Beep.TreeNodes.Config
                     CurrentEntity = BranchText,
                     ObjectName = BranchText,
                     Id = BranchID,
-                    ObjectType = AddinTreeStructure.ObjectType,
+           //         ObjectType = AddinTreeStructure.ObjectType,
                     DataSource = DataSource,
                     EventType = "Run"
 
