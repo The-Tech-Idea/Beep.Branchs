@@ -671,6 +671,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 Visutil.ShowWaitForm(passedArgs);
                 if (DataSource != null)
                 {
+
                     ds.Openconnection();
                     if (ds.ConnectionStatus == System.Data.ConnectionState.Open)
                     {
