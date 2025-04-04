@@ -1,140 +1,206 @@
+Apologies for the confusion! It seems I provided the content directly in my previous response rather than explicitly labeling it as your `README.md` text. The text for your `README.md` file for the `Beep.Branchs` repository on GitHub is below. This is the complete, finalized version based on our discussions, incorporating the `AssemblyHandler` loading mechanism and the `BranchLoaderExtension` example:
+
+---
+
+### Text for Your README.md
+
+```markdown
 # Beep.Branchs
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
-**Current Status: Alpha** - Actively developed, expect bugs, contributions welcome!
-
-`Beep.Branchs` is a component of the Beep Data Management Engine (BeepDM) framework, providing tree node implementations (`IBranch`) for visualizing and interacting with various data source categories in a hierarchical structure. These nodes integrate with BeepDM’s visualization system (`IVisManager`) and configuration management (`IConfigEditor`), enabling users to manage data sources such as relational databases (RDBMS), NoSQL databases, files, data views, and reports.
+**Status: Alpha** - Under active development, expect changes. Contributions welcome!
 
 ## Overview
 
-This repository contains C# classes that implement the `IBranch` interface, representing different types of nodes in a tree structure. Each node type corresponds to a specific data source category or functional role, such as root nodes, category nodes, data points, or entities. These nodes are used within BeepDM to build a navigable tree view of data sources and their associated entities.
+`Beep.Branchs` is a component of the [BeepDM](https://github.com/The-Tech-Idea/BeepDM) framework, providing tree node implementations (`IBranch`) for managing and visualizing data sources in a hierarchical structure. These nodes represent categories like Data Views, Files, RDBMS, Reports, and NoSQL, integrating with BeepDM’s visualization (`IVisManager`) and configuration (`IConfigEditor`) systems. Nodes are dynamically loaded at runtime using the `AssemblyHandler` class, making the system extensible via custom extensions.
 
-### Key Features
-- **Hierarchical Structure**: Supports root, category, data point, and entity nodes for organizing data sources.
-- **Extensible**: Nodes are add-ins (`[AddinAttribute]`) that can be customized or extended.
-- **Integration**: Works with `IDMEEditor`, `IConfigEditor`, and `IDataSource` for configuration and data access.
-- **Commands**: Provides exposed methods (via `[CommandAttribute]`) for user interactions like creating, editing, or refreshing nodes.
+### Purpose
+This repository contains C# classes that define tree nodes for:
+- **Data Views**: Federated views across multiple data sources.
+- **Files**: File-based data sources (e.g., CSV, Excel).
+- **RDBMS**: Relational database connections.
+- **Reports**: Report definitions and generation.
+- **NoSQL**: NoSQL database connections.
 
-## Branch Node Categories
+Each node type (root, category, data point, entity) supports specific commands for user interaction, such as creating, editing, or refreshing data sources.
 
-### 1. Data Views (`TreeNodes.DataViews`)
-Nodes for managing federated data views across multiple data sources.
+## Features
+- **Tree Structure**: Root, category, data point, and entity nodes.
+- **Dynamic Loading**: Nodes loaded via `AssemblyHandler` from assemblies.
+- **Extensibility**: Custom `IBranch` types via `ILoaderExtention`.
+- **Commands**: Exposed methods (e.g., `Edit`, `GetEntities`) for UI interaction.
 
-- **`DataViewRootNode`**: Root node for all data views.
-  - **Attributes**: `[AddinAttribute(Caption = "DataView", BranchType = Root)]`
-  - **Commands**: `CreateView`, `AddViewFile`, `CreateView(IBranch)`
-  - **Purpose**: Manages top-level data view operations and creates child nodes for views or categories.
+## Loading Mechanism
 
-- **`DataViewCategoryNode`**: Category node grouping data views.
-  - **Attributes**: `[AddinAttribute(Caption = "DataView", BranchType = Category)]`
-  - **Purpose**: Organizes data views under a category, creating child `DataViewNode` instances.
+Branch nodes are loaded dynamically by `AssemblyHandler` (`TheTechIdea.Beep.Tools`), which implements `IAssemblyHandler`. It scans assemblies for `IBranch` implementations and stores them in `ConfigEditor.BranchesClasses`.
 
-- **`DataViewNode`**: Represents an individual data view.
-  - **Attributes**: `[AddinAttribute(Caption = "DataView", BranchType = DataPoint)]`
-  - **Commands**: `Edit`, `CreateViewEntites`, `SaveView`, `RemoveView`, `CreateComposedLayer`, `ClearView`
-  - **Purpose**: Manages a specific data view, including editing and entity management.
+### How Nodes Are Loaded
+1. **Assembly Discovery**:
+   - `LoadAllAssembly`: Scans folders (`ProjectClasses`, `Addin`, `LoadingExtensions`) and runtime assemblies.
+   - Uses `Assembly.LoadFrom` for DLLs and runtime dependency resolution.
 
-- **`DataViewEntitiesNode`**: Represents entities within a data view.
-  - **Attributes**: `[AddinAttribute(Caption = "DataView", BranchType = Entity)]`
-  - **Commands**: `EditEntity`, `LinkEntity`, `RemoveEntity`, `GetChilds`, `RemoveChilds`, `DataEdit`, `FieldProperties`
-  - **Purpose**: Handles entity-specific operations within a data view.
+2. **Scanning**:
+   - `ScanAssembly`: Detects `IBranch` types using reflection, checking for `[AddinAttribute]`.
+   - Populates `ConfigEditor.BranchesClasses` with node definitions.
 
-### 2. Files (`TreeNodes.Files`)
-Nodes for managing file-based data sources.
+3. **Extensions**:
+   - `GetExtensionScanners`: Loads `ILoaderExtention` implementations (e.g., `BranchLoaderExtension`) from `LoadingExtensions`.
+   - Extensions enhance scanning for custom `IBranch` types.
 
-- **`FileRootNode`**: Root node for file-based data sources.
-  - **Attributes**: `[AddinAttribute(Caption = "Files", BranchType = Root)]`
-  - **Commands**: `AddFile`, `AddFolder`
-  - **Purpose**: Top-level node for file operations, creating file or category nodes.
+### Example Loading Flow
+```csharp
+var handler = new AssemblyHandler(configEditor, errorObject, logger, util);
+handler.LoadAllAssembly(progress, token); // Loads IBranch nodes into ConfigEditor.BranchesClasses
+```
 
-- **`FileCategoryNode`**: Category node for grouping files.
-  - **Attributes**: `[AddinAttribute(Caption = "Files", BranchType = Category)]`
-  - **Commands**: `AddFile`, `AddFolder`
-  - **Purpose**: Organizes files under categories.
+## Node Categories
 
-- **`FileEntityNode`**: Represents a file data source.
-  - **Attributes**: `[AddinAttribute(Caption = "Files", BranchType = DataPoint)]`
-  - **Commands**: `GetSheets`, `RefreshSheets`, `EditFileConnection`
-  - **Purpose**: Manages a specific file, creating child sheet nodes.
+### Data Views (`TreeNodes.DataViews`)
+- `DataViewRootNode`: `[AddinAttribute(Caption = "DataView", BranchType = Root)]`
+  - Commands: `CreateView`, `AddViewFile`, `CreateView(IBranch)`
+- `DataViewCategoryNode`: `[AddinAttribute(Caption = "DataView", BranchType = Category)]`
+- `DataViewNode`: `[AddinAttribute(Caption = "DataView", BranchType = DataPoint)]`
+  - Commands: `Edit`, `CreateViewEntites`, `SaveView`, `RemoveView`, `CreateComposedLayer`, `ClearView`
+- `DataViewEntitiesNode`: `[AddinAttribute(Caption = "DataView", BranchType = Entity)]`
+  - Commands: `EditEntity`, `LinkEntity`, `RemoveEntity`, `GetChilds`, `RemoveChilds`, `DataEdit`, `FieldProperties`
 
-- **`FileEntitySheetNode`**: Represents a sheet within a file (e.g., Excel).
-  - **Attributes**: `[AddinAttribute(Caption = "Files", BranchType = Entity)]`
-  - **Purpose**: Displays individual sheets within a file.
+### Files (`TreeNodes.Files`)
+- `FileRootNode`: `[AddinAttribute(Caption = "Files", BranchType = Root)]`
+  - Commands: `AddFile`, `AddFolder`
+- `FileCategoryNode`: `[AddinAttribute(Caption = "Files", BranchType = Category)]`
+  - Commands: `AddFile`, `AddFolder`
+- `FileEntityNode`: `[AddinAttribute(Caption = "Files", BranchType = DataPoint)]`
+  - Commands: `GetSheets`, `RefreshSheets`, `EditFileConnection`
+- `FileEntitySheetNode`: `[AddinAttribute(Caption = "Files", BranchType = Entity)]`
+- `FileFolderNode`: `[AddinAttribute(Caption = "Folder", BranchType = Function)]`
 
-- **`FileFolderNode`**: Represents a folder in the file hierarchy.
-  - **Attributes**: `[AddinAttribute(Caption = "Folder", BranchType = Function)]`
-  - **Purpose**: Placeholder for folder navigation (minimal implementation).
+### RDBMS (`TreeNodes.RDBMS`)
+- `DatabaseRootNode`: `[AddinAttribute(Caption = "RDBMS", BranchType = Root)]`
+  - Commands: `CreateNewLocalDatabase`, `NewDBConnection`
+- `DatabaseCategoryNode`: `[AddinAttribute(Caption = "RDBMS", BranchType = Category)]`
+- `DatabaseNode`: `[AddinAttribute(Caption = "RDBMS", BranchType = DataPoint)]`
+  - Commands: `EditDBConnection`, `GetDatabaseEntites`, `RefreshDatabaseEntites`
+- `DatabaseEntitesNode`: `[AddinAttribute(Caption = "RDBMS", BranchType = Entity)]`
 
-### 3. RDBMS (`TreeNodes.RDBMS`)
-Nodes for managing relational database management systems.
+### Reports (`TreeNodes.Reports`)
+- `QueryRootNode`: `[AddinAttribute(Caption = "Reports", BranchType = Root)]` (should be `ReportRootNode`)
+  - Commands: `CreateReport`
+- `ReportCategoryNode`: `[AddinAttribute(Caption = "Reports", BranchType = Category)]`
+- `ReportNode`: `[AddinAttribute(Caption = "Reports", BranchType = Function)]`
+  - Commands: `EditReport`, `CreateReport`, `GenerateReport`, `Remove`
 
-- **`DatabaseRootNode`**: Root node for RDBMS data sources.
-  - **Attributes**: `[AddinAttribute(Caption = "RDBMS", BranchType = Root)]`
-  - **Commands**: `CreateNewLocalDatabase`, `NewDBConnection`
-  - **Purpose**: Manages RDBMS connections at the top level.
+### NoSQL (`TreeNodes.NoSQL`)
+- `NoSqlRootNode`: `[AddinAttribute(Caption = "NoSQL", BranchType = Root)]`
+  - Commands: `NewNOSQLConnection`
+- `NoSqlCategoryNode`: `[AddinAttribute(Caption = "NoSQL", BranchType = Category)]`
+- `NoSqlSourceNode`: `[AddinAttribute(Caption = "NoSQL", BranchType = DataPoint)]`
+  - Commands: `CreateDatabaseEntites`, `EditNOSQLConnection`
+- `NoSqlEntityNode`: `[AddinAttribute(Caption = "NoSQL", BranchType = Entity)]`
 
-- **`DatabaseCategoryNode`**: Category node for grouping RDBMS connections.
-  - **Attributes**: `[AddinAttribute(Caption = "RDBMS", BranchType = Category)]`
-  - **Purpose**: Organizes RDBMS connections under categories.
+## Extending with `BranchLoaderExtension`
 
-- **`DatabaseNode`**: Represents an RDBMS connection.
-  - **Attributes**: `[AddinAttribute(Caption = "RDBMS", BranchType = DataPoint)]`
-  - **Commands**: `EditDBConnection`, `GetDatabaseEntites`, `RefreshDatabaseEntites`
-  - **Purpose**: Manages a specific RDBMS connection, creating entity nodes.
+Create custom `IBranch` loaders using `ILoaderExtention`. Below is an example:
 
-- **`DatabaseEntitesNode`**: Represents entities (tables) within an RDBMS.
-  - **Attributes**: `[AddinAttribute(Caption = "RDBMS", BranchType = Entity)]`
-  - **Purpose**: Displays individual tables or entities.
+```csharp
+namespace AssemblyLoaderExtension
+{
+    public class BranchLoaderExtension : ILoaderExtention
+    {
+        public IAssemblyHandler Loader { get; set; }
 
-### 4. Reports (`TreeNodes.Reports`)
-Nodes for managing report definitions.
+        public BranchLoaderExtension(IAssemblyHandler ploader)
+        {
+            Loader = ploader;
+        }
 
-- **`QueryRootNode`**: Root node for reports (mislabeled; intended as `ReportRootNode`).
-  - **Attributes**: `[AddinAttribute(Caption = "Reports", BranchType = Root)]`
-  - **Commands**: `CreateReport`
-  - **Purpose**: Manages report-related operations at the top level.
+        public IErrorsInfo Scan(Assembly assembly)
+        {
+            var er = new ErrorsInfo();
+            try
+            {
+                foreach (var type in assembly.GetTypes())
+                {
+                    if (type.GetInterfaces().Contains(typeof(IBranch)))
+                    {
+                        Loader.ConfigEditor.BranchesClasses.Add(
+                            Loader.GetAssemblyClassDefinition(type.GetTypeInfo(), "IBranch"));
+                    }
+                }
+                er.Flag = Errors.Ok;
+            }
+            catch (Exception ex)
+            {
+                er.Flag = Errors.Failed;
+                er.Ex = ex;
+            }
+            return er;
+        }
 
-- **`ReportCategoryNode`**: Category node for grouping reports.
-  - **Attributes**: `[AddinAttribute(Caption = "Reports", BranchType = Category)]`
-  - **Purpose**: Organizes reports under categories.
+        public IErrorsInfo Scan() => LoadAllAssembly();
 
-- **`ReportNode`**: Represents an individual report.
-  - **Attributes**: `[AddinAttribute(Caption = "Reports", BranchType = Function)]`
-  - **Commands**: `EditReport`, `CreateReport`, `GenerateReport`, `Remove`
-  - **Purpose**: Manages a specific report, including editing and generation.
+        private IErrorsInfo LoadAllAssembly()
+        {
+            var er = new ErrorsInfo();
+            foreach (var item in Loader.Assemblies)
+            {
+                Scan(item.DllLib);
+            }
+            return er;
+        }
+    }
+}
+```
 
-### 5. NoSQL (`TreeNodes.NoSQL`)
-Nodes for managing NoSQL data sources.
-
-- **`NoSqlRootNode`**: Root node for NoSQL data sources.
-  - **Attributes**: `[AddinAttribute(Caption = "NoSQL", BranchType = Root)]`
-  - **Commands**: `NewNOSQLConnection`
-  - **Purpose**: Manages NoSQL connections at the top level.
-
-- **`NoSqlCategoryNode`**: Category node for grouping NoSQL connections.
-  - **Attributes**: `[AddinAttribute(Caption = "NoSQL", BranchType = Category)]`
-  - **Purpose**: Organizes NoSQL connections under categories.
-
-- **`NoSqlSourceNode`**: Represents a NoSQL data source.
-  - **Attributes**: `[AddinAttribute(Caption = "NoSQL", BranchType = DataPoint)]`
-  - **Commands**: `CreateDatabaseEntites`, `EditNOSQLConnection`
-  - **Purpose**: Manages a specific NoSQL connection, creating entity nodes.
-
-- **`NoSqlEntityNode`**: Represents entities within a NoSQL data source.
-  - **Attributes**: `[AddinAttribute(Caption = "NoSQL", BranchType = Entity)]`
-  - **Purpose**: Displays individual entities (e.g., collections).
+### Deployment
+1. Compile into a DLL (e.g., `BranchLoaderExtension.dll`).
+2. Place in the `LoadingExtensions` folder.
+3. `AssemblyHandler` loads it via `GetExtensionScanners`.
 
 ## Usage
 
-These branch nodes are integrated into BeepDM via the `ITree` and `IVisManager` components. To use them:
-
-1. **Initialization**: Nodes are instantiated by BeepDM’s tree editor (`ITree`) based on configurations in `IConfigEditor`.
-2. **Configuration**: Use `SetConfig` to initialize each node with `ITree`, `IDMEEditor`, and parent node details.
-3. **Population**: Call `CreateChildNodes` to populate the tree with child nodes based on data source configurations.
-4. **Interaction**: Use exposed commands (e.g., `Edit`, `GetEntities`) to interact with nodes via the UI.
-
-### Example: Adding a File Node
+### Basic Setup
 ```csharp
+var treeEditor = // ITree instance
+var dmeEditor = // IDMEEditor instance
+var handler = new AssemblyHandler(configEditor, errorObject, logger, util);
+handler.LoadAllAssembly(progress, token);
 var rootNode = new FileRootNode(treeEditor, dmeEditor, null, "Files", treeEditor.SeqID, EnumPointType.Root, "file.png", null);
-rootNode.CreateChildNodes(); // Populates with FileCategoryNode or FileEntityNode
-rootNode.AddFile(); // Triggers file addition UI
+rootNode.CreateChildNodes();
+```
+
+### With Extension
+```csharp
+handler.GetExtensionScanners(progress, token); // Loads custom IBranch via BranchLoaderExtension
+```
+
+## Dependencies
+- `TheTechIdea.Beep`
+- `TheTechIdea.Beep.Vis`
+- `TheTechIdea.Beep.ConfigUtil`
+- `TheTechIdea.Beep.Tools`
+
+## Installation
+Clone the repository:
+```bash
+git clone https://github.com/The-Tech-Idea/Beep.Branchs.git
+```
+
+## Contributing
+Fork, branch, and submit a pull request. See [CONTRIBUTING.md](CONTRIBUTING.md) (TBD) for details.
+
+## License
+[MIT License](LICENSE)
+
+## Links
+- [BeepDM](https://github.com/The-Tech-Idea/BeepDM)
+- [BeepDM Wiki](https://github.com/The-Tech-Idea/BeepDM/wiki)
+```
+
+---
+
+### Instructions
+1. **Copy the Text**: Copy the above Markdown text.
+2. **Edit on GitHub**: Go to `https://github.com/The-Tech-Idea/Beep.Branchs/edit/master/README.md`, paste this text, and commit the changes.
+3. **Verify**: Ensure it renders correctly on GitHub.
+
+This is your complete `README.md` content. Let me know if you need further tweaks!
