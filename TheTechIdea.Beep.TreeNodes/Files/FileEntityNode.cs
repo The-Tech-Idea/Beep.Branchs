@@ -435,6 +435,16 @@ namespace TheTechIdea.Beep.TreeNodes.Files
 
             try
             {
+                if(ChildBranchs.Count > 0)
+                {
+                    foreach (var item in ChildBranchs)
+                    {
+                        if (item.BranchText == Sheetname)
+                        {
+                            return DMEEditor.ErrorObject;
+                        }
+                    }
+                }
                 FileEntitySheetNode fileitemsheet = new FileEntitySheetNode(TreeEditor, DMEEditor, this, Sheetname, TreeEditor.SeqID, EnumPointType.Entity, IconImageName, BranchText);
                 fileitemsheet.DataSource = DataSource;
                 fileitemsheet.DataSourceName = DataSourceName;
