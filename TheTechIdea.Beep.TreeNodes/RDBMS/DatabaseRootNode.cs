@@ -10,6 +10,7 @@ using TheTechIdea.Beep.DataBase;
 using TheTechIdea.Beep.Vis;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.RDBMS
 {
@@ -118,7 +119,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                 {
                     if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "RDBMS")==null)
                     {
-                       if(!ChildBranchs.Any(p => p.DataSourceConnectionGuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
+                       if(!ChildBranchs.Any(p => p.GuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             CreateDBNode(i);
                             i.Drawn = true;
@@ -155,12 +156,14 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         {
             try
             {
-                DatabaseNode database = new DatabaseNode(i,TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, i.ConnectionName);
+                ConnectionDriversConfig drv  = DMEEditor.ConfigEditor.DataDriversClasses.Where(p => p.PackageName == i.DriverName).FirstOrDefault();
+                DatabaseNode database = new DatabaseNode(i,TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, drv.iconname);
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
-        
-             
+                database.GuidID = i.GuidID;
+                database.IconImageName = drv.iconname;
+
                 TreeEditor.AddBranchToParentInBranchsOnly(this,database);
                 TreeEditor.Treebranchhandler.AddBranch(this, database);
 
