@@ -109,13 +109,17 @@ namespace TheTechIdea.Beep.TreeNodes
             {
                 string iconimage;
                 IDataSource DataSource = DMEEditor.GetDataSource(BranchText);
+               
+                Visutil.ShowWaitForm(passedArgs);
+                passedArgs.Messege = $"Getting Entities From {DataSourceName}";
+                Visutil.PasstoWaitForm(passedArgs);
                 if (DataSource != null)
                 {
                     DataSource.Openconnection();
                    
                     if(DataSource.ConnectionStatus!= System.Data.ConnectionState.Open)
                     {
-                        Visutil.ShowWaitForm(passedArgs);
+                     
                         if (DataSource.Entities.Count == 0)
                         {
                             var ents = DMEEditor.ConfigEditor.LoadDataSourceEntitiesValues(BranchText);
@@ -133,7 +137,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     if (DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
                     {
 
-                        Visutil.ShowWaitForm(passedArgs);
+                       // Visutil.ShowWaitForm(passedArgs);
                         passedArgs.Messege = "Connection Successful";
                         Visutil.PasstoWaitForm(passedArgs);
                         passedArgs.Messege = "Getting Entities";
