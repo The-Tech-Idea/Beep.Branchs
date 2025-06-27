@@ -168,15 +168,15 @@ namespace TheTechIdea.Beep.TreeNodes.AI
                         br.TreeEditor = TreeEditor;
                         br.BranchID = id;
                         br.ID = id;
-                        TreeEditor.Treebranchhandler.AddBranch(this, br);
+                      
                        
                         br.Visutil = Visutil;
 
                         br.DMEEditor = DMEEditor;
+                    TreeEditor.Treebranchhandler.AddBranch(this, br);
+                    //   TreeEditor.AddBranchToParentInBranchsOnly(this,br);
 
-                        TreeEditor.AddBranchToParentInBranchsOnly(this,br);
-
-                        br.CreateChildNodes();
+                    br.CreateChildNodes();
 
               
                  
