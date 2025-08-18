@@ -27,6 +27,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
+		<Folder Include="DataViews\" />
 		<Folder Include="InMemory\" />
 		<Folder Include="Library\" />
 	</ItemGroup>
@@ -45,6 +46,14 @@
     <EmbeddedResource Remove="Json\**" />
     <None Remove="App\**" />
     <None Remove="Json\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="DataViews\DataViewCategoryNode.cs" />
+    <Compile Remove="DataViews\DataViewEntitiesNode.cs" />
+    <Compile Remove="DataViews\DataViewNode.cs" />
+    <Compile Remove="DataViews\DataViewRootNode.cs" />
   </ItemGroup>
 
 
@@ -281,8 +290,8 @@
 
 
   <ItemGroup>
-    <PackageReference Include="TheTechIdea.Beep.DataManagementEngine" Version="2.0.35" />
-    <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="2.0.20" />
+    <PackageReference Include="TheTechIdea.Beep.DataManagementEngine" Version="2.0.36" />
+    <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="2.0.22" />
   </ItemGroup>
 	
 	

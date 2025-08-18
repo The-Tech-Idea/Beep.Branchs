@@ -36,7 +36,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             BranchType = pBranchType;
             IconImageName = pimagename;
 
-            ds = (IDataViewDataSource)DMEEditor.GetDataSource(pDSName);
+            ds =DMEEditor.GetDataSource(pDSName).;
             DataView = ds.DataView;
             EntityStructure = entityStructure;
             if (string.IsNullOrEmpty(entityStructure.Caption) || string.IsNullOrWhiteSpace(entityStructure.Caption))
@@ -90,7 +90,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         public object TreeStrucure { get; set; }
         public  IAppManager  Visutil { get; set; }
         public int MiscID { get; set; }
-        IDataViewDataSource ds;
+        IDataSource ds;
         public IDMDataView DataView
         {
             get

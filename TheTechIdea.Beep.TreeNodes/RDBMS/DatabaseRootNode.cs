@@ -157,12 +157,13 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
             try
             {
                 ConnectionDriversConfig drv  = DMEEditor.ConfigEditor.DataDriversClasses.Where(p => p.PackageName == i.DriverName).FirstOrDefault();
-                DatabaseNode database = new DatabaseNode(i,TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, drv.iconname);
+                string icon = drv is null ? "unknowndatasource.svg" : drv.iconname;
+                DatabaseNode database = new DatabaseNode(i,TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, icon);
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
                 database.GuidID = i.GuidID;
-                database.IconImageName = drv.iconname;
+                database.IconImageName = icon;
 
               //  TreeEditor.AddBranchToParentInBranchsOnly(this,database);
                 TreeEditor.Treebranchhandler.AddBranch(this, database);
