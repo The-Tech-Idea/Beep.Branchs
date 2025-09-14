@@ -252,7 +252,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
                     EventType = "NEW"
 
                 };
-                Visutil.ShowPage("uc_CreateLocalDatabase",  Passedarguments);
+                Visutil.ShowPage("uc_CreateLocalDB",  Passedarguments, DisplayType.Popup);
               //  Visutil.ShowFormFromAddin(Visutil.LLoader.AddIns.Where(x => x.ObjectName == "uc_CreateLocalDatabase").FirstOrDefault().DllPath, DMEEditor.ConfigEditor.Config.DSEntryFormName, DMEEditor, args, null);
 
                 DMEEditor.AddLogMessage("Success", "create Local Database", DateTime.Now, 0, null, Errors.Failed);
