@@ -28,7 +28,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="DataViews\" />
-		<Folder Include="InMemory\" />
 		<Folder Include="Library\" />
 	</ItemGroup>
 	<Target Name="CopyPackage" AfterTargets="Pack">
