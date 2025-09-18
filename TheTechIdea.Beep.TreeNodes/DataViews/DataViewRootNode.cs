@@ -198,7 +198,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         DMEEditor.ConfigEditor.DataConnections.Add(f);
                         DMEEditor.ConfigEditor.SaveDataconnectionsValues();
                        
-                        IDataViewDataSource ds = (IDataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
+                        DataViewDataSource ds = (DataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
                         ds.DataView = ds.GenerateView(f.ConnectionName, f.ConnectionName);
                         DataView = ds.DataView;
                         ds.WriteDataViewFile(fullname);
@@ -257,7 +257,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                             DMEEditor.ConfigEditor.DataConnections.Add(f);
                             DMEEditor.ConfigEditor.SaveDataconnectionsValues();
 
-                            IDataViewDataSource ds = (IDataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
+                            DataViewDataSource ds = (DataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
                             DataSource = DMEEditor.GetDataSource(f.ConnectionName);
                             DataView = ds.DataView;
                             ds.WriteDataViewFile(fullname);
@@ -309,7 +309,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         f.DriverName = "DataViewReader";
 
                         DMEEditor.ConfigEditor.DataConnections.Add(f);
-                        IDataViewDataSource ds = (IDataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
+                        DataViewDataSource ds = (DataViewDataSource)DMEEditor.GetDataSource(f.ConnectionName);
                        
                         if (EntitySource != null)
                         {

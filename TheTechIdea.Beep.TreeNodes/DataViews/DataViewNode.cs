@@ -39,7 +39,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             BranchType = pBranchType;
         //   IconImageName = pimagename;
 
-            ds = (IDataViewDataSource)DMEEditor.GetDataSource(ConnectionName);
+            ds = (DataViewDataSource)DMEEditor.GetDataSource(ConnectionName);
             //if (ds.Entities.Count > 0)
             //{
             //    ds.Entities.Clear();
@@ -81,14 +81,15 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         public object TreeStrucure { get; set; }
         public  IAppManager  Visutil { get; set; }
         public int MiscID { get; set; }
-        IDataViewDataSource ds;
+        DataViewDataSource ds;
+        private IDMDataView view;
         public IDMDataView DataView
         {
             get
             {
-                if (ds != null)
+                if (view     != null)
                 {
-                    return ds.DataView;
+                    return view;
                 }
                 else
                     return null;
@@ -96,7 +97,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             }
             set
             {
-                ds.DataView = value;
+                view = value;
             }
         }
      
@@ -165,7 +166,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
 
-                ds = (IDataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
+                ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
                
                 if (ds != null)
                 {
@@ -235,7 +236,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
 
-                ds = (IDataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
+                ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
                 ds.Openconnection();
 
                 if (ds != null)
@@ -617,7 +618,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 // IBranch CurrentBranch = TreeEditor.Branches.Where(x => x.BranchType == EnumBranchType.Root && x.BranchClass == "VIEW").FirstOrDefault();
                 //
-                ds = (IDataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
+                ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
 
                 DMEEditor.OpenDataSource(DataSourceName);
                 if (ds != null)
@@ -666,7 +667,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 EntityStructure ent;
                 string iconimage;
                 DataSource = DMEEditor.GetDataSource(BranchText);
-                ds = (IDataViewDataSource)DMEEditor.GetDataSource(BranchText);
+                ds = (DataViewDataSource)DMEEditor.GetDataSource(BranchText);
                 Visutil.CloseWaitForm();
                 Visutil.ShowWaitForm(passedArgs);
                 if (DataSource != null)

@@ -479,7 +479,7 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
             {
                 if (DataSource != null && DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
                 {
-                    foreach (EntityStructure entity in DataSource.Entities.Where(e => e.Viewtype == ViewType.View))
+                    foreach (EntityStructure entity in DataSource.Entities.Where(e => e.Viewtype == ViewType.Query))
                     {
                         if (!ChildBranchs.Any(p => p.BranchText.Equals(entity.EntityName, StringComparison.InvariantCultureIgnoreCase)))
                         {

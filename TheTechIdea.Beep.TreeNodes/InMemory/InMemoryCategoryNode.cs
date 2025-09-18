@@ -207,7 +207,7 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
                 var connectionProps = new ConnectionProperties
                 {
                     ConnectionName = dbName,
-                    DatabaseType = DataSourceType.InMemory,
+                    DatabaseType = DataSourceType.SqlLite, // Changed from DataSourceType.InMemory which doesn't exist
                     ConnectionString = ":memory:",
                     Category = DatasourceCategory.INMEMORY,
                     IsInMemory = true

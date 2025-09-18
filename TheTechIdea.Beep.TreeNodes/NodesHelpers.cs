@@ -12,6 +12,7 @@ using TheTechIdea.Beep.Utilities;
 using TheTechIdea.Beep.DriversConfigurations;
 using TheTechIdea.Beep.TreeNodes.Project;
 using TheTechIdea.Beep.TreeNodes.Files;
+using TheTechIdea.Beep.TreeNodes.DataViews; // added
 
 namespace TheTechIdea.Beep.TreeNodes
 {
@@ -589,7 +590,7 @@ namespace TheTechIdea.Beep.TreeNodes
         }
         public static string CheckifBranchExistinCategory(string BranchName, string pRootName, IDMEEditor DMEEditor)
         {
-            //bool retval = false;
+            //boolean retval = false;
             List<CategoryFolder> ls = DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName == pRootName).ToList();
             foreach (CategoryFolder item in ls)
             {
@@ -605,6 +606,90 @@ namespace TheTechIdea.Beep.TreeNodes
         }
         #endregion "Create Files Nodes"
 
+        #region "Create DataView Nodes"
+        public static IErrorsInfo CreateDataViewNodes(IBranch br, ITree tree, IDMEEditor editor, IAppManager vis)
+        {
+            try
+            {
+                // add existing connections in VIEWS category
+                foreach (var cn in editor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.VIEWS))
+                {
+                    if (!tree.Branches.Any(p => p.BranchText.Equals(cn.ConnectionName, StringComparison.InvariantCultureIgnoreCase) && p.BranchClass == br.BranchClass))
+                    {
+                        CreateDataViewNode(cn, br, tree, editor);
+                    }
+                }
+                // add categories under VIEWS
+                foreach (var cat in editor.ConfigEditor.CategoryFolders.Where(x => x.RootName == "VIEWS"))
+                {
+                    if (!tree.Branches.Any(p => !string.IsNullOrEmpty(p.BranchText) && p.BranchText.Equals(cat.FolderName, StringComparison.InvariantCultureIgnoreCase) && p.BranchType == EnumPointType.Category && p.BranchClass == br.BranchClass))
+                    {
+                        var category = new DataViewCategoryNode(tree, editor, br, cat.FolderName, tree.SeqID, EnumPointType.Category, tree.CategoryIcon);
+                        tree.Treebranchhandler.AddBranch(br, category);
+                        category.CreateChildNodes();
+                    }
+                }
+                editor.AddLogMessage("Success", "Created DataView child Nodes", DateTime.Now, 0, null, Errors.Ok);
+            }
+            catch (Exception ex)
+            {
+                editor.AddLogMessage(ex.Message, "Could not create DataView child Nodes", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return editor.ErrorObject;
+        }
+
+        private static IBranch CreateDataViewNode(ConnectionProperties cn, IBranch br, ITree tree, IDMEEditor editor)
+        {
+            DataViewNode viewNode = null;
+            try
+            {
+                viewNode = new DataViewNode(tree, editor, br, cn.ConnectionName, tree.SeqID, EnumPointType.DataPoint, "dataview.png", cn.GuidID);
+                viewNode.DataSourceName = cn.ConnectionName;
+                tree.Treebranchhandler.AddBranch(br, viewNode);
+            }
+            catch (Exception ex)
+            {
+                editor.AddLogMessage(ex.Message, "Could not Add DataView node", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return viewNode;
+        }
+
+        public static IErrorsInfo AddDataView(IBranch br, ITree tree, IDMEEditor editor, IAppManager vis)
+        {
+            try
+            {
+                // Create an empty DataView connection entry via a dialog or simple input; fallback create placeholder
+                string name = vis?.DialogManager?.InputBox("New DataView", "Enter DataView file name (json)") ?? $"DataView_{DateTime.Now:yyyyMMddHHmmss}.json";
+                if (string.IsNullOrWhiteSpace(name)) return editor.ErrorObject;
+
+                // Ensure connection exists in config
+                var cn = editor.ConfigEditor.DataConnections.FirstOrDefault(x => x.ConnectionName.Equals(name, StringComparison.InvariantCultureIgnoreCase));
+                if (cn == null)
+                {
+                    cn = new ConnectionProperties
+                    {
+                        ConnectionName = name,
+                        FileName = name,
+                        FilePath = editor.ConfigEditor.Config.Folders.FirstOrDefault(f => f.FolderFilesType == FolderFileTypes.DataView)?.FolderPath,
+                        Category = DatasourceCategory.VIEWS,
+                        DatabaseType = DataSourceType.Json,
+                        DriverName = "DataViewReader",
+                        DriverVersion = "1"
+                    };
+                    editor.ConfigEditor.AddDataConnection(cn);
+                    editor.ConfigEditor.SaveDataconnectionsValues();
+                }
+
+                // Create node in tree
+                CreateDataViewNode(cn, br, tree, editor);
+            }
+            catch (Exception ex)
+            {
+                editor.AddLogMessage(ex.Message, "Could not add DataView", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return editor.ErrorObject;
+        }
+        #endregion "Create DataView Nodes"
 
     }
 }

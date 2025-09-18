@@ -270,10 +270,11 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
             {
                 var dbName = $"InMemoryDB_{DateTime.Now:yyyyMMdd_HHmmss}";
                 
+                // Use a generic memory database type - could be DuckDB or other
                 var connectionProps = new ConnectionProperties
                 {
                     ConnectionName = dbName,
-                    DatabaseType = DataSourceType.InMemory,
+                    DatabaseType = DataSourceType.DuckDB, // Default to DuckDB for in-memory
                     ConnectionString = ":memory:",
                     Category = DatasourceCategory.INMEMORY,
                     IsInMemory = true
@@ -325,8 +326,7 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
                     .Where(c => c.Category == DatasourceCategory.INMEMORY || 
                                c.IsInMemory == true ||
                                c.ConnectionString.Contains(":memory:") ||
-                               c.DatabaseType == DataSourceType.DuckDB ||
-                               c.DatabaseType == DataSourceType.InMemory).ToList();
+                               c.DatabaseType == DataSourceType.DuckDB).ToList();
 
                 foreach (var conn in inMemoryConnections)
                 {

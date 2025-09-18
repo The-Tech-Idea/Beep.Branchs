@@ -87,7 +87,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
 
-                foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName == "VIEW" && x.FolderName == BranchText))
+                foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName == "VIEWS" && x.FolderName == BranchText))
                 {
                     foreach (string item in p.items)
                     {
