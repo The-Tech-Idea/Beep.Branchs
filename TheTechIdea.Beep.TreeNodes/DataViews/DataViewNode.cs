@@ -250,7 +250,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         bool loadv = false;
                         if (ChildBranchs.Count > 0)
                         {
-                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") == BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?").Result == BeepDialogResult.Yes)
                             {
                                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 ds.LoadView();
@@ -351,7 +351,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             string file=string.Empty;
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Area you Sure ? you want to remove View???") == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Area you Sure ? you want to remove View???").Result == BeepDialogResult.Yes)
                 {
                     ConnectionProperties cn = DMEEditor.ConfigEditor.DataConnections.Where(x => x.ConnectionName.Equals(Path.GetFileName(DataSourceName),StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                     if(cn==null)
@@ -393,7 +393,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         };
                         if(string.IsNullOrEmpty(file) == false)
                         {
-                            if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Do you want to Delete the View File ???") == BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Do you want to Delete the View File ???").Result == BeepDialogResult.Yes)
                             {
 
                                 File.Delete(file);

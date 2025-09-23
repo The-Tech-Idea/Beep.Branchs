@@ -225,7 +225,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?")==BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?").Result == BeepDialogResult.Yes)
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
@@ -391,7 +391,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     EventType = "REMOVEENTITY"
 
                 };
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?") == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?").Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveBranch(this);
                     //---- Remove From View ---- //
@@ -442,7 +442,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?")==BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?").Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);

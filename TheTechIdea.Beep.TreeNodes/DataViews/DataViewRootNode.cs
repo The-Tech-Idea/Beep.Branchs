@@ -173,10 +173,13 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
+                DialogReturn res = new DialogReturn();
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
+                res = Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)");
+                if (res.Result == BeepDialogResult.OK)
                 {
+                    viewname = res.Value;
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json")==false )
                     {
                        
@@ -232,7 +235,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                string filename = Visutil.DialogManager.LoadFileDialog("json", DMEEditor.ConfigEditor.Config.Folders.Where(i => i.FolderFilesType == FolderFileTypes.DataView).FirstOrDefault().FolderPath, "json files (*.json)|*.txt|All files (*.*)|*.*");
+                DialogReturn res = Visutil.DialogManager.LoadFileDialog("json", DMEEditor.ConfigEditor.Config.Folders.Where(i => i.FolderFilesType == FolderFileTypes.DataView).FirstOrDefault().FolderPath, "json files (*.json)|*.txt|All files (*.*)|*.*");
+                string filename = res.Value;
                 if (!string.IsNullOrEmpty(filename))
                 {
                     viewname = Path.GetFileName(filename);
@@ -288,7 +292,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                if (Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)", ref viewname) == BeepDialogResult.OK)
+                DialogReturn res = Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)");
+                if (res.Result == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json") == false)
                     {

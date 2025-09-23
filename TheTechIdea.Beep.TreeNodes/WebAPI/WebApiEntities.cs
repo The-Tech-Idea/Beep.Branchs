@@ -189,7 +189,7 @@ namespace TheTechIdea.Beep.TreeNodes.WebAPI
                         bool loadv = false;
                         if (ChildBranchs.Count > 0)
                         {
-                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?") ==BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?").Result == BeepDialogResult.Yes)
                             {
                                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 loadv = true;

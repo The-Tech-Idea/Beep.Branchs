@@ -148,11 +148,13 @@ namespace TheTechIdea.Beep.TreeNodes.Project
             try
             {
 
-                string folderpath = Visutil.DialogManager.SelectFolderDialog();
+               DialogReturn res= Visutil.DialogManager.SelectFolderDialog();
+                string folderpath=res.Value;
                 if (!string.IsNullOrEmpty(folderpath ))
                 {
                     string foldername = string.Empty;
-                     Visutil.DialogManager.InputBox("Enter Project Name", "Project Name", ref foldername);
+                    res = Visutil.DialogManager.InputBox("Enter Project Name", "Project Name");
+                    foldername = res.Value;
                     //---- check if project folder exist
                     if (!string.IsNullOrEmpty(foldername))
                     {

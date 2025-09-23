@@ -300,8 +300,9 @@ namespace TheTechIdea.Beep.TreeNodes
         {
             try
             {
-               // List<ConnectionProperties> files = new List<ConnectionProperties>();
-                string foldername = Visutil.DialogManager.SelectFolderDialog();
+                // List<ConnectionProperties> files = new List<ConnectionProperties>();
+                DialogReturn res = Visutil.DialogManager.SelectFolderDialog();
+                string foldername = res.Value;
                 if (!string.IsNullOrEmpty(foldername))
                 {
                     CreateNewProject(br, foldername, TreeEditor, DMEEditor, Visutil, ProjectFolderType.Files);
@@ -376,7 +377,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 }
                 if (missingdir)
                 {
-                    if (Visutil.DialogManager.InputBoxYesNo("Beep", "There are missing Project Directories") == BeepDialogResult.OK)
+                    if (Visutil.DialogManager.InputBoxYesNo("Beep", "There are missing Project Directories").Result == BeepDialogResult.OK)
                     {
                         foreach (var item in DMEEditor.ConfigEditor.Projects)
                         {
@@ -659,7 +660,8 @@ namespace TheTechIdea.Beep.TreeNodes
             try
             {
                 // Create an empty DataView connection entry via a dialog or simple input; fallback create placeholder
-                string name = vis?.DialogManager?.InputBox("New DataView", "Enter DataView file name (json)") ?? $"DataView_{DateTime.Now:yyyyMMddHHmmss}.json";
+                DialogReturn res = vis?.DialogManager?.InputBox("New DataView", "Enter DataView file name (json)");
+                string name = res.Value;
                 if (string.IsNullOrWhiteSpace(name)) return editor.ErrorObject;
 
                 // Ensure connection exists in config
