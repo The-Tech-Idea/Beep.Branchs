@@ -438,7 +438,7 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
                             foreach (var field in EntityStructure.Fields.Take(5)) // Show first 5 fields
                             {
                                 DMEEditor.AddLogMessage("Info", 
-                                                       $"  Field: {field.fieldname} ({field.fieldtype})", 
+                                                       $"  Field: {field.FieldName} ({field.Fieldtype})", 
                                                        DateTime.Now, 0, null, Errors.Ok);
                             }
                         }

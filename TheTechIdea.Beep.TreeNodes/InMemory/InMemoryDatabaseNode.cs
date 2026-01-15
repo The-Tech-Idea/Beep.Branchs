@@ -284,23 +284,23 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
                     {
                         new EntityField
                         {
-                            fieldname = "ID",
-                            fieldtype = "int",
+                           FieldName = "ID",
+                            Fieldtype = "int",
                             AllowDBNull = false,
                             IsKey = true,
                             IsAutoIncrement = true
                         },
                         new EntityField
                         {
-                            fieldname = "Name",
-                            fieldtype = "varchar",
+                           FieldName = "Name",
+                            Fieldtype = "varchar",
                             Size1 = 255,
                             AllowDBNull = true
                         },
                         new EntityField
                         {
-                            fieldname = "CreatedDate",
-                            fieldtype = "datetime",
+                           FieldName = "CreatedDate",
+                            Fieldtype = "datetime",
                             AllowDBNull = false
                         }
                     }
