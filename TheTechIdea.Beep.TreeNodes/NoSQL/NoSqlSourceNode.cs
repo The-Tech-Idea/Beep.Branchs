@@ -45,6 +45,27 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                 BranchID = pID;
             }
         }
+        public NoSqlSourceNode(ConnectionProperties i, ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
+        {
+            TreeEditor = pTreeEditor;
+            DMEEditor = pDMEEditor;
+            ParentBranchID = pParentNode!=null? pParentNode.ID : -1;
+            BranchText = pBranchText;
+            BranchType = pBranchType;
+            DataSourceName = pBranchText;
+            IconImageName = pimagename;
+
+            if (i != null)
+            {
+               DataSourceConnectionGuidID = i.GuidID;
+            }
+
+            if (pID != 0)
+            {
+                ID = pID;
+                BranchID = pID;
+            }
+        }
         public bool Visible { get; set; } = true;
         public string MenuID { get; set; }
         public bool IsDataSourceNode { get; set; } = true;

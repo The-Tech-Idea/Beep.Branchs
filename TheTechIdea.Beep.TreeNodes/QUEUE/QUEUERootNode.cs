@@ -2,22 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TheTechIdea.Beep.Vis.Modules;
-using TheTechIdea;
-using TheTechIdea.Beep;
-using TheTechIdea.Beep.DataBase;
-using TheTechIdea.Beep.Vis;
 using TheTechIdea.Beep.ConfigUtil;
 using TheTechIdea.Beep.Editor;
+using TheTechIdea.Beep.DataBase;
+using TheTechIdea.Beep.Utilities;
+using TheTechIdea.Beep.Addin;
+using TheTechIdea;
+using TheTechIdea.Beep;
+using TheTechIdea.Beep.Vis;
 using TheTechIdea.Beep.DriversConfigurations;
 
-namespace TheTechIdea.Beep.TreeNodes.NoSQL
+namespace TheTechIdea.Beep.TreeNodes.QUEUE
 {
-    [AddinAttribute(Caption = "NoSQL", BranchType = EnumPointType.Category, Name = "NoSqlCategoryNode.Beep", misc = "Beep", iconimage = "category.png", menu = "Beep", ObjectType = "Beep")]
-    public class NoSqlCategoryNode : IBranch 
+    [AddinAttribute(Caption = "QUEUE", BranchType = EnumPointType.Root, Name = "QUEUERootNode.Beep", misc = "Beep", iconimage = "queue.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.QUEUE)]
+    [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
+    public class QUEUERootNode : IBranch  
     {
-        public NoSqlCategoryNode() { }
+        public QUEUERootNode()
+        {
+            IsDataSourceNode = true;
+        }
 
-        public NoSqlCategoryNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
+        public QUEUERootNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
@@ -38,15 +44,6 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             {
                 TreeEditor = pTreeEditor;
                 DMEEditor = pDMEEditor;
-                ParentBranchID = pParentNode != null ? pParentNode.ID : -1;
-                BranchText = pBranchText;
-                BranchType = pBranchType;
-                IconImageName = pimagename;
-                if (pID != 0)
-                {
-                    ID = pID;
-                    BranchID = ID;
-                }
             }
             catch (Exception ex)
             {
@@ -67,39 +64,38 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
         public IBranch ParentBranch { get; set; }
         public string Name { get; set; }
         public EntityStructure EntityStructure { get; set; }
-        public int ID { get; set; }
-        public string BranchText { get; set; }
+        public string BranchText { get; set; } = "QUEUE";
         public IDMEEditor DMEEditor { get; set; }
         public IDataSource DataSource { get; set; }
         public string DataSourceName { get; set; }
-        public int Level { get; set; }
-        public EnumPointType BranchType { get; set; } = EnumPointType.Category;
+        public int Level { get; set; } = 0;
+        public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "category.png";
+        public string IconImageName { get; set; } = "database.png";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }
-        public string BranchClass { get; set; } = "NoSQL";
+        public string BranchClass { get; set; } = "QUEUE";
         public List<IBranch> ChildBranchs { get; set; } = new List<IBranch>();
         public ITree TreeEditor { get; set; }
         public List<string> BranchActions { get; set; }
         public List<Delegate> Delegates { get; set; }
-        public object TreeStrucure { get; set; }
-        public IAppManager Visutil { get; set; }
+        public int ID { get; set; }
+        public int Order { get; set; } = 3;
         public int MiscID { get; set; }
+        public IAppManager Visutil { get; set; }
+        public object TreeStrucure { get; set; }
         public string ObjectType { get; set; } = "Beep";
 
         public IErrorsInfo CreateChildNodes()
         {
             try
             {
-                TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
-                foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName.Equals("NOSQL", StringComparison.InvariantCultureIgnoreCase) && x.FolderName == BranchText))
+                foreach (ConnectionProperties i in DMEEditor.ConfigEditor.DataConnections.Where(c => c.Category == DatasourceCategory.QUEUE && c.IsComposite == false))
                 {
-                    foreach (string item in p.items)
+                    if (TreeEditor.Treebranchhandler.CheckifBranchExistinCategory(i.ConnectionName, "QUEUE") == null)
                     {
-                        ConnectionProperties i = DMEEditor.ConfigEditor.DataConnections.Where(x => x.ConnectionName == item).FirstOrDefault();
-                        if (i != null)
+                        if (!ChildBranchs.Any(p => p.GuidID.Equals(i.GuidID, StringComparison.InvariantCultureIgnoreCase)))
                         {
                             CreateDBNode(i);
                             i.Drawn = true;
@@ -109,7 +105,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             }
             catch (Exception ex)
             {
-                string mes = "Could not Add Connection";
+                string mes = "Could not Create Child Nodes";
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             }
             return DMEEditor.ErrorObject;
@@ -119,9 +115,9 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
         {
             try
             {
-                ConnectionDriversConfig drv = DMEEditor.ConfigEditor.DataDriversClasses.Where(p => p.PackageName == i.DriverName).FirstOrDefault();
+                DriversConfigurations.ConnectionDriversConfig drv = DMEEditor.ConfigEditor.DataDriversClasses.Where(p => p.PackageName == i.DriverName).FirstOrDefault();
                 string icon = drv is null ? "unknowndatasource.svg" : drv.iconname;
-                NoSqlSourceNode database = new NoSqlSourceNode(i, TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, icon);
+                QUEUENode database = new QUEUENode(i, TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, icon);
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
@@ -135,12 +131,12 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
                 string mes = "Could not Add Database Connection";
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             }
-
             return DMEEditor.ErrorObject;
         }
 
         public IBranch CreateCategoryNode(CategoryFolder p)
         {
+            // Implementation for Category node can be added later as needed
             throw new NotImplementedException();
         }
 
@@ -149,3 +145,4 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
         public IErrorsInfo RemoveChildNodes() { throw new NotImplementedException(); }
     }
 }
+

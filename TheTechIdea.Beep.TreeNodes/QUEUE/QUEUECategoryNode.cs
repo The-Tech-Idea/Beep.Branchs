@@ -10,14 +10,14 @@ using TheTechIdea.Beep.ConfigUtil;
 using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.DriversConfigurations;
 
-namespace TheTechIdea.Beep.TreeNodes.NoSQL
+namespace TheTechIdea.Beep.TreeNodes.QUEUE
 {
-    [AddinAttribute(Caption = "NoSQL", BranchType = EnumPointType.Category, Name = "NoSqlCategoryNode.Beep", misc = "Beep", iconimage = "category.png", menu = "Beep", ObjectType = "Beep")]
-    public class NoSqlCategoryNode : IBranch 
+    [AddinAttribute(Caption = "QUEUE", BranchType = EnumPointType.Category, Name = "QUEUECategoryNode.Beep", misc = "Beep", iconimage = "category.png", menu = "Beep", ObjectType = "Beep")]
+    public class QUEUECategoryNode : IBranch 
     {
-        public NoSqlCategoryNode() { }
+        public QUEUECategoryNode() { }
 
-        public NoSqlCategoryNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
+        public QUEUECategoryNode(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
             TreeEditor = pTreeEditor;
             DMEEditor = pDMEEditor;
@@ -79,7 +79,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }
-        public string BranchClass { get; set; } = "NoSQL";
+        public string BranchClass { get; set; } = "QUEUE";
         public List<IBranch> ChildBranchs { get; set; } = new List<IBranch>();
         public ITree TreeEditor { get; set; }
         public List<string> BranchActions { get; set; }
@@ -94,7 +94,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             try
             {
                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
-                foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName.Equals("NOSQL", StringComparison.InvariantCultureIgnoreCase) && x.FolderName == BranchText))
+                foreach (CategoryFolder p in DMEEditor.ConfigEditor.CategoryFolders.Where(x => x.RootName.Equals("QUEUE", StringComparison.InvariantCultureIgnoreCase) && x.FolderName == BranchText))
                 {
                     foreach (string item in p.items)
                     {
@@ -121,7 +121,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
             {
                 ConnectionDriversConfig drv = DMEEditor.ConfigEditor.DataDriversClasses.Where(p => p.PackageName == i.DriverName).FirstOrDefault();
                 string icon = drv is null ? "unknowndatasource.svg" : drv.iconname;
-                NoSqlSourceNode database = new NoSqlSourceNode(i, TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, icon);
+                QUEUENode database = new QUEUENode(i, TreeEditor, DMEEditor, this, i.ConnectionName, TreeEditor.SeqID, EnumPointType.DataPoint, icon);
                 database.DataSource = DataSource;
                 database.DataSourceName = i.ConnectionName;
                 database.DataSourceConnectionGuidID = i.GuidID;
