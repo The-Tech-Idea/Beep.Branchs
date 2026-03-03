@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -408,7 +408,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                     {
                         string mes = "Error : Could Not Find File";
                         DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                        Visutil.DialogManager.MsgBox("Beep", mes);
+                        Visutil.DialogManager.MsgBoxAsync("Beep", mes).GetAwaiter().GetResult();
                     }
 
 
@@ -417,7 +417,7 @@ namespace TheTechIdea.Beep.TreeNodes.Files
                 {
                     string mes = "Error : Could Not Find File DataSource";
                     DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                    Visutil.DialogManager.MsgBox("Beep", mes);
+                    Visutil.DialogManager.MsgBoxAsync("Beep", mes).GetAwaiter().GetResult();
                 }
 
                 DMEEditor.AddLogMessage("Success", "Created child Nodes", DateTime.Now, 0, null, Errors.Ok);

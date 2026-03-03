@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -153,7 +153,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                 if (!string.IsNullOrEmpty(folderpath ))
                 {
                     string foldername = string.Empty;
-                    res = Visutil.DialogManager.InputBox("Enter Project Name", "Project Name");
+                    res = Visutil.DialogManager.InputBoxAsync("Enter Project Name", "Project Name").GetAwaiter().GetResult();
                     foldername = res.Value;
                     //---- check if project folder exist
                     if (!string.IsNullOrEmpty(foldername))

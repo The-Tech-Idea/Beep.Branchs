@@ -1,4 +1,4 @@
-﻿using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -197,7 +197,7 @@ namespace TheTechIdea.Beep.TreeNodes.Project
                 if (!string.IsNullOrEmpty(RootFolder.Url))
                 {
                     string foldername = string.Empty;
-                    res = Visutil.DialogManager.InputBox("Enter Folder Name", "Folder Name");
+                    res = Visutil.DialogManager.InputBoxAsync("Enter Folder Name", "Folder Name").GetAwaiter().GetResult();
                     foldername = res.Value;
                     //---- check if project folder exist
                     if (!string.IsNullOrEmpty(foldername))

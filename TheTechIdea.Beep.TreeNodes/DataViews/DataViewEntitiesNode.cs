@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,8 +37,9 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             IconImageName = pimagename;
 
             ds = (DataViewDataSource)DMEEditor.GetDataSource(pDSName);
-         
-            DataView = (IDMDataView)ds;
+
+            // IDataViewOperations.DataView returns the IDMDataView data model — do NOT cast ds directly
+            DataView = ds?.DataView;
             EntityStructure = entityStructure;
             if (string.IsNullOrEmpty(entityStructure.Caption) || string.IsNullOrWhiteSpace(entityStructure.Caption))
             {
@@ -207,6 +208,46 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 string mes = "Could not Create Child Node";
                 DMEEditor.AddLogMessage(ex.Message, mes, DateTime.Now, -1, mes, Errors.Failed);
             };
+
+            // Add a Relations sub-node for this entity
+            try
+            {
+                if (ds != null && DataView != null)
+                {
+                    var joinsNode = new DataViewJoinsNode(TreeEditor, DMEEditor, this,
+                        EntityStructure.EntityName, ds.DatasourceName, TreeEditor.SeqID);
+                    joinsNode.Visutil = Visutil;
+                    TreeEditor.AddBranchToParentInBranchsOnly(this, joinsNode);
+                    TreeEditor.Treebranchhandler.AddBranch(this, joinsNode);
+                }
+            }
+            catch { /* Relations node is best-effort — don't fail the whole expansion */ }
+
+            // Add Fields/Columns for this entity
+            try
+            {
+                if (ds != null)
+                {
+                    var fields = ds.GetEntityFields(EntityStructure.EntityName);
+                    if (fields != null)
+                    {
+                        foreach (var f in fields)
+                        {
+                            string icon = f.IsKey ? "primary_key.png" : "field.png";
+                            var fieldNode = new DataViewEntityNode(TreeEditor, DMEEditor, this,
+                                f.FieldName, TreeEditor.SeqID, EnumPointType.Field, icon, DataSourceName);
+                            fieldNode.Visutil = Visutil;
+                            TreeEditor.AddBranchToParentInBranchsOnly(this, fieldNode);
+                            TreeEditor.Treebranchhandler.AddBranch(this, fieldNode);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, $"Could not add fields for '{EntityStructure.EntityName}'", DateTime.Now, -1, null, Errors.Failed);
+            }
+
             return DMEEditor.ErrorObject;
         }
 
@@ -225,7 +266,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?").Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove Entities?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
@@ -391,7 +432,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     EventType = "REMOVEENTITY"
 
                 };
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?").Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove Entity?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveBranch(this);
                     //---- Remove From View ---- //
@@ -425,7 +466,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     DMEEditor.AddLogMessage("Success", "Got child Nodes", DateTime.Now, 0, null, Errors.Ok);
                 }else
                 {
-                    Visutil.DialogManager.MsgBox("DM Engine", "Couldnot Get DataSource For Entity");
+                    Visutil.DialogManager.MsgBoxAsync("DM Engine", "Couldnot Get DataSource For Entity").GetAwaiter().GetResult();
                 }
              
             }
@@ -442,7 +483,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?").Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove child  Entities?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);
@@ -548,6 +589,151 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         public  IBranch  CreateCategoryNode(CategoryFolder p)
         {
             throw new NotImplementedException();
+        }
+
+        // ── Federation Commands ────────────────────────────────────────────────
+
+        [CommandAttribute(Caption = "Show Relations", iconimage = "relations.png", ObjectType = "Beep")]
+        public IErrorsInfo ShowRelations()
+        {
+            try
+            {
+                var joins = ds?.GetJoinsFor(EntityStructure.EntityName);
+                if (joins == null || joins.Count == 0)
+                    Visutil.DialogManager.MsgBoxAsync("Relations", $"No joins defined for '{EntityStructure.EntityName}'.").GetAwaiter().GetResult();
+                else
+                {
+                    var sb = new StringBuilder();
+                    foreach (var j in joins)
+                        sb.AppendLine($"{j.LeftEntityName}.{j.LeftColumn} → {j.RightEntityName}.{j.RightColumn} [{j.JoinType}]{(j.IsManuallyDefined ? " (manual)" : string.Empty)}");
+                    Visutil.DialogManager.MsgBoxAsync($"Relations for {EntityStructure.EntityName}", sb.ToString()).GetAwaiter().GetResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "ShowRelations failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Add Relation", iconimage = "linkicon.png", ObjectType = "Beep")]
+        public IErrorsInfo AddRelationFrom()
+        {
+            try
+            {
+                var ob = new List<ObjectItem>
+                {
+                    new ObjectItem { Name = "Branch",      obj = this },
+                    new ObjectItem { Name = "DataView",    obj = DataView },
+                    new ObjectItem { Name = "LeftEntity",  obj = EntityStructure.EntityName },
+                    new ObjectItem { Name = "TitleText",   obj = $"Add Relation from {EntityStructure.EntityName}" }
+                };
+                var args = new PassedArgs
+                {
+                    DMView = DataView, CurrentEntity = EntityStructure.EntityName,
+                    ObjectType = "ADDJOIN", EventType = "ADDJOIN",
+                    DatasourceName = ds?.DatasourceName, Objects = ob
+                };
+                Visutil.ShowPage("uc_RelationBuilder", args);
+                ds?.WriteDataViewFile(ds.DatasourceName);
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "AddRelationFrom failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Preview Data", iconimage = "preview.png", ObjectType = "Beep")]
+        public IErrorsInfo PreviewEntity()
+        {
+            try
+            {
+                ds?.Openconnection();
+                var data = ds?.GetEntityPreview(EntityStructure.EntityName, 50);
+                var ob = new List<ObjectItem>
+                {
+                    new ObjectItem { Name = "DataSource", obj = data },
+                    new ObjectItem { Name = "TitleText", obj = $"Preview — {EntityStructure.EntityName}" }
+                };
+                var args = new PassedArgs
+                {
+                    DMView = DataView, CurrentEntity = EntityStructure.EntityName,
+                    ObjectType = "PREVIEWENTITY", EventType = "PREVIEWENTITY",
+                    DatasourceName = ds?.DatasourceName, Objects = ob
+                };
+                Visutil.ShowPage("uc_DataViewer", args);
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "PreviewEntity failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Set Filter", iconimage = "filter.png", ObjectType = "Beep")]
+        public IErrorsInfo SetFilter()
+        {
+            try
+            {
+                string current = ds?.GetEntityFilter(EntityStructure.EntityName) ?? string.Empty;
+                DialogReturn input = Visutil.DialogManager.InputBoxAsync("Set Filter",
+                    $"WHERE clause for '{EntityStructure.EntityName}' (current: {current}):\n(leave empty to clear)").GetAwaiter().GetResult();
+                if (input.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject; // cancelled
+                string expr = input.Value;
+                if (string.IsNullOrWhiteSpace(expr))
+                    ds?.ClearEntityFilter(EntityStructure.EntityName);
+                else
+                    ds?.SetEntityFilter(EntityStructure.EntityName, expr);
+                ds?.WriteDataViewFile(ds.DatasourceName);
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "SetFilter failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Refresh Schema", iconimage = "refresh.png", ObjectType = "Beep")]
+        public IErrorsInfo RefreshSchema()
+        {
+            try
+            {
+                var changes = ds?.RefreshEntitySchema(EntityStructure.EntityName);
+                Visutil.DialogManager.MsgBoxAsync("Refresh Schema",
+                    changes == null || changes.Count == 0
+                        ? "\u2714 Schema is up to date — no changes detected."
+                        : string.Join(Environment.NewLine, changes)).GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "RefreshSchema failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Rename Entity", iconimage = "edit_entity.png", ObjectType = "Beep")]
+        public IErrorsInfo RenameEntityCommand()
+        {
+            try
+            {
+                DialogReturn renameInput = Visutil.DialogManager.InputBoxAsync("Rename Entity",
+                    $"New name for '{EntityStructure.EntityName}' (current: {EntityStructure.EntityName}):").GetAwaiter().GetResult();
+                if (renameInput.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject;
+                string newName = renameInput.Value;
+                if (string.IsNullOrWhiteSpace(newName) || newName == EntityStructure.EntityName)
+                    return DMEEditor.ErrorObject;
+                ds?.RenameEntity(EntityStructure.Id, newName);
+                BranchText = newName.ToUpperInvariant();
+                Name       = BranchText;
+                ds?.WriteDataViewFile(ds.DatasourceName);
+                TreeEditor.ChangeBranchText(this, BranchText);
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "RenameEntityCommand failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
         }
 
         #endregion Exposed Interface"

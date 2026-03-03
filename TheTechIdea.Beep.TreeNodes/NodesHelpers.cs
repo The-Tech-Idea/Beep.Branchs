@@ -1,4 +1,4 @@
-﻿using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -377,7 +377,7 @@ namespace TheTechIdea.Beep.TreeNodes
                 }
                 if (missingdir)
                 {
-                    if (Visutil.DialogManager.InputBoxYesNo("Beep", "There are missing Project Directories").Result == BeepDialogResult.OK)
+                    if (Visutil.DialogManager.InputBoxYesNoAsync("Beep", "There are missing Project Directories").GetAwaiter().GetResult().Result == BeepDialogResult.OK)
                     {
                         foreach (var item in DMEEditor.ConfigEditor.Projects)
                         {
@@ -660,7 +660,9 @@ namespace TheTechIdea.Beep.TreeNodes
             try
             {
                 // Create an empty DataView connection entry via a dialog or simple input; fallback create placeholder
-                DialogReturn res = vis?.DialogManager?.InputBox("New DataView", "Enter DataView file name (json)");
+                DialogReturn res = vis?.DialogManager != null
+                    ? vis.DialogManager.InputBoxAsync("New DataView", "Enter DataView file name (json)").GetAwaiter().GetResult()
+                    : new DialogReturn { Result = BeepDialogResult.Cancel, Value = string.Empty };
                 string name = res.Value;
                 if (string.IsNullOrWhiteSpace(name)) return editor.ErrorObject;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TheTechIdea.Beep.Addin;
 using TheTechIdea.Beep.ConfigUtil;
 using TheTechIdea.Beep.DataBase;
+using TheTechIdea.Beep.DataView;
 using TheTechIdea.Beep.Editor;
 using TheTechIdea.Beep.Utilities;
 using TheTechIdea.Beep.Vis;
@@ -23,6 +24,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             BranchType = pBranchType;
             IconImageName = pimagename;
             DataSourceName = dataViewName;
+            
+            // Get the DataSource
+            ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
+
             if (pID != 0) { ID = pID; BranchID = pID; }
         }
 
@@ -58,6 +63,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         public IAppManager Visutil { get; set; }
         public int MiscID { get; set; }
 
+        private DataViewDataSource ds;
+
         public IBranch CreateCategoryNode(CategoryFolder p)
         {
             throw new NotImplementedException();
@@ -67,7 +74,13 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         {
             try
             {
-                // no children for now
+                // If this is a JoinLeaf, maybe show Left/Right entities as children
+                if (BranchType == EnumPointType.JoinLeaf && ds != null)
+                {
+                    // For now, no recursive expansion of joins to avoid cycles
+                    // But we could show the joined columns here
+                }
+
                 DMEEditor.AddLogMessage("Success", "Created DataView entity node", DateTime.Now, 0, null, Errors.Ok);
             }
             catch (Exception ex)
@@ -80,6 +93,87 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         public IErrorsInfo ExecuteBranchAction(string ActionName) => DMEEditor.ErrorObject;
         public IErrorsInfo MenuItemClicked(string ActionNam) => DMEEditor.ErrorObject;
         public IErrorsInfo RemoveChildNodes() => DMEEditor.ErrorObject;
+
+        [CommandAttribute(Caption = "Preview Data", iconimage = "preview.png", ObjectType = "Beep")]
+        public IErrorsInfo PreviewData()
+        {
+            try
+            {
+                if (ds == null) ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
+                if (ds != null)
+                {
+                    ds.Openconnection();
+                    var data = ds.GetEntityPreview(BranchText, 50);
+                    var ob = new List<ObjectItem>
+                    {
+                        new ObjectItem { Name = "DataSource", obj = data },
+                        new ObjectItem { Name = "TitleText", obj = $"Preview — {BranchText}" }
+                    };
+                    var args = new PassedArgs
+                    {
+                        DMView = ds.DataView, CurrentEntity = BranchText,
+                        ObjectType = "PREVIEWENTITY", EventType = "PREVIEWENTITY",
+                        DatasourceName = DataSourceName, Objects = ob
+                    };
+                    Visutil.ShowPage("uc_DataViewer", args);
+                }
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "PreviewData failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Set Filter", iconimage = "filter.png", ObjectType = "Beep")]
+        public IErrorsInfo SetFilter()
+        {
+            try
+            {
+                if (ds != null)
+                {
+                    string current = ds.GetEntityFilter(BranchText) ?? string.Empty;
+                    DialogReturn input = Visutil.DialogManager.InputBoxAsync("Set Filter",
+                        $"WHERE clause for '{BranchText}' (current: {current}):\n(leave empty to clear)").GetAwaiter().GetResult();
+                    if (input.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject;
+                    string expr = input.Value;
+
+                    if (string.IsNullOrWhiteSpace(expr))
+                        ds.ClearEntityFilter(BranchText);
+                    else
+                        ds.SetEntityFilter(BranchText, expr);
+                    
+                    ds.WriteDataViewFile(DataSourceName);
+                }
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "SetFilter failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
+        [CommandAttribute(Caption = "Refresh Schema", iconimage = "refresh.png", ObjectType = "Beep")]
+        public IErrorsInfo RefreshSchema()
+        {
+            try
+            {
+                if (ds != null)
+                {
+                    var changes = ds.RefreshEntitySchema(BranchText);
+                    Visutil.DialogManager.MsgBoxAsync("Refresh Schema",
+                        changes == null || changes.Count == 0
+                            ? "\u2714 Schema is up to date."
+                            : string.Join(Environment.NewLine, changes)).GetAwaiter().GetResult();
+                }
+            }
+            catch (Exception ex)
+            {
+                DMEEditor.AddLogMessage(ex.Message, "RefreshSchema failed.", DateTime.Now, -1, null, Errors.Failed);
+            }
+            return DMEEditor.ErrorObject;
+        }
+
         public IErrorsInfo SetConfig(ITree pTreeEditor, IDMEEditor pDMEEditor, IBranch pParentNode, string pBranchText, int pID, EnumPointType pBranchType, string pimagename)
         {
             try
@@ -91,6 +185,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 BranchType = pBranchType;
                 IconImageName = pimagename;
                 if (pID != 0) ID = pID;
+                ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
             }
             catch (Exception ex)
             {

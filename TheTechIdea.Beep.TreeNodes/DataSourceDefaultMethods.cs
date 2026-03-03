@@ -1,4 +1,4 @@
-﻿using TheTechIdea.Beep.Vis.Modules;
+using TheTechIdea.Beep.Vis.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,7 +36,7 @@ namespace TheTechIdea.Beep.TreeNodes
                     DataSource.Openconnection();
                     if (DataSource.ConnectionStatus == System.Data.ConnectionState.Open)
                     {
-                        if (Visutil.DialogManager.InputBoxYesNo("Beep DM", "Are you sure, this might take some time?").Result == BeepDialogResult.Yes)
+                        if (Visutil.DialogManager.InputBoxYesNoAsync("Beep DM", "Are you sure, this might take some time?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
                         {
                             passedArgs.Messege = "Connection Successful";
                             Visutil.PasstoWaitForm(passedArgs);
