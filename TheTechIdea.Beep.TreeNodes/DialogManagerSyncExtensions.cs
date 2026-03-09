@@ -1,13 +1,23 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TheTechIdea.Beep.Vis.Modules;
 
 namespace TheTechIdea.Beep.Vis.Modules
 {
+    /// <summary>
+    /// Synchronous convenience wrappers around <see cref="IDialogManager"/>.
+    /// 
+    /// These are safe to call from the UI thread because every underlying
+    /// async method returns an already-completed <see cref="Task"/> when
+    /// invoked on the UI thread (no SynchronizationContext continuation
+    /// is needed).
+    /// </summary>
     internal static class DialogManagerSyncExtensions
     {
         public static void MsgBox(this IDialogManager dialogManager, string title, string promptText)
         {
             if (dialogManager == null) return;
+            // Task is already completed when called on UI thread → GetResult() returns immediately.
             dialogManager.MsgBoxAsync(title, promptText).GetAwaiter().GetResult();
         }
 
