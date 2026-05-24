@@ -14,7 +14,7 @@
 		<RepositoryUrl>https://github.com/The-Tech-Idea/</RepositoryUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Title>$(AssemblyName)</Title>
-		<Version>1.0.6</Version>
+		<Version>1.0.7</Version>
 		<EnableDynamicLoading>true</EnableDynamicLoading>
 	</PropertyGroup>
 	<ItemGroup>
@@ -24,8 +24,8 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="TheTechIdea.Beep.DataManagementModels" Version="2.0.1444" />
-	  <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="2.0.42" />
+	  <PackageReference Include="TheTechIdea.Beep.DataManagementModels" Version="3.0.0" />
+	  <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="2.0.43" />
 	</ItemGroup>
 	<Target Name="CopyPackage" AfterTargets="Pack">
 		<Copy SourceFiles="$(OutputPath)$(PackageId).$(PackageVersion).nupkg" DestinationFolder="..\..\..\LocalNugetFiles" />
