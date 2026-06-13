@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.VectorDB
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "vectordb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

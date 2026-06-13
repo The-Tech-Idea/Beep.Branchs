@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.RDBMS
 {
-    [AddinAttribute(Caption = "RDBMS",BranchType = EnumPointType.Root, Name = "DatabaseRootNode.Beep", misc = "Beep", iconimage = "database.png", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.RDBMS)]
+    [AddinAttribute(Caption = "RDBMS",BranchType = EnumPointType.Root, Name = "DatabaseRootNode.Beep", misc = "Beep", iconimage = "relationaldb.png", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.RDBMS)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class DatabaseRootNode : IBranch  
     {
@@ -82,7 +82,7 @@ namespace TheTechIdea.Beep.TreeNodes.RDBMS
         public int Level { get; set; } = 0;
         public  EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get ; set ; }
-        public string IconImageName { get ; set ; }= "database.png";
+        public string IconImageName { get ; set ; }= "relationaldb.svg";
         public string BranchStatus { get ; set ; }
         public int ParentBranchID { get ; set ; }
         public string BranchDescription { get ; set ; }

@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.QUEUE
 {
-    [AddinAttribute(Caption = "QUEUE", BranchType = EnumPointType.Root, Name = "QUEUERootNode.Beep", misc = "Beep", iconimage = "queue.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.QUEUE)]
+    [AddinAttribute(Caption = "QUEUE", BranchType = EnumPointType.Root, Name = "QUEUERootNode.Beep", misc = "Beep", iconimage = "queuedb.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.QUEUE)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class QUEUERootNode : IBranch  
     {
@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.QUEUE
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "queuedb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

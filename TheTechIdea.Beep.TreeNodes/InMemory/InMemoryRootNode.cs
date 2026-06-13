@@ -17,10 +17,10 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
     /// Root node for in-memory database management in the Beep framework.
     /// Supports DuckDB, SQLite in-memory, and other in-memory data stores.
     /// </summary>
-    [AddinAttribute(Caption = "In-Memory Databases", misc = "Beep", BranchType = EnumPointType.Genre, 
-                    FileType = "Beep", iconimage = "inmemoryroot.png", menu = "InMemory", 
+    [AddinAttribute(Caption = "In-Memory Databases", misc = "Beep", BranchType = EnumPointType.Root, 
+                    FileType = "Beep", iconimage = "inmemorydb.svg", menu = "InMemory", 
                     ObjectType = "Beep", ClassType = "ROOT")]
-    [AddinVisSchema(BranchType = EnumPointType.Genre, BranchClass = "INMEMORY")]
+    [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "INMEMORY")]
     public class InMemoryRootNode : IBranch
     {
         #region Properties
@@ -50,7 +50,7 @@ namespace TheTechIdea.Beep.TreeNodes.InMemory
         public int Level { get; set; }
         public EnumPointType BranchType { get; set; } = EnumPointType.Genre;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "inmemoryroot.png";
+        public string IconImageName { get; set; } = "inmemorydb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

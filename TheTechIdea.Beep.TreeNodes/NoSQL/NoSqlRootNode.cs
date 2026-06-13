@@ -65,7 +65,7 @@ namespace TheTechIdea.Beep.TreeNodes.NoSQL
         public int Level { get; set; }
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "nosql.png";
+        public string IconImageName { get; set; } = "nosqldb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.Connector
 {
-    [AddinAttribute(Caption = "Connector", BranchType = EnumPointType.Root, Name = "ConnectorRootNode.Beep", misc = "Beep", iconimage = "connector.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.Connector)]
+    [AddinAttribute(Caption = "Connector", BranchType = EnumPointType.Root, Name = "ConnectorRootNode.Beep", misc = "Beep", iconimage = "connectordb.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.Connector)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class ConnectorRootNode : IBranch  
     {
@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.Connector
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "connectordb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

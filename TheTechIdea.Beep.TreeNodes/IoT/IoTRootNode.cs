@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.IoT
 {
-    [AddinAttribute(Caption = "IoT", BranchType = EnumPointType.Root, Name = "IoTRootNode.Beep", misc = "Beep", iconimage = "iot.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.IoT)]
+    [AddinAttribute(Caption = "IoT", BranchType = EnumPointType.Root, Name = "IoTRootNode.Beep", misc = "Beep", iconimage = "iotdb.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.IoT)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class IoTRootNode : IBranch  
     {
@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.IoT
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "iotdb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

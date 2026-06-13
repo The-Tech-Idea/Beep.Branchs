@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.STREAM
 {
-    [AddinAttribute(Caption = "STREAM", BranchType = EnumPointType.Root, Name = "STREAMRootNode.Beep", misc = "Beep", iconimage = "stream.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.STREAM)]
+    [AddinAttribute(Caption = "STREAM", BranchType = EnumPointType.Root, Name = "STREAMRootNode.Beep", misc = "Beep", iconimage = "streamdb.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.STREAM)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class STREAMRootNode : IBranch  
     {
@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.STREAM
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "streamdb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }

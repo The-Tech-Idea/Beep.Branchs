@@ -14,7 +14,7 @@ using TheTechIdea.Beep.DriversConfigurations;
 
 namespace TheTechIdea.Beep.TreeNodes.Blockchain
 {
-    [AddinAttribute(Caption = "Blockchain", BranchType = EnumPointType.Root, Name = "BlockchainRootNode.Beep", misc = "Beep", iconimage = "blockchain.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.Blockchain)]
+    [AddinAttribute(Caption = "Blockchain", BranchType = EnumPointType.Root, Name = "BlockchainRootNode.Beep", misc = "Beep", iconimage = "blockchaindb.svg", menu = "DataSource", ObjectType = "Beep", Category = DatasourceCategory.Blockchain)]
     [AddinVisSchema(BranchType = EnumPointType.Root, BranchClass = "DATASOURCEROOT", RootNodeName = "DataSourcesRootNode")]
     public class BlockchainRootNode : IBranch  
     {
@@ -71,7 +71,7 @@ namespace TheTechIdea.Beep.TreeNodes.Blockchain
         public int Level { get; set; } = 0;
         public EnumPointType BranchType { get; set; } = EnumPointType.Root;
         public int BranchID { get; set; }
-        public string IconImageName { get; set; } = "database.png";
+        public string IconImageName { get; set; } = "blockchaindb.svg";
         public string BranchStatus { get; set; }
         public int ParentBranchID { get; set; }
         public string BranchDescription { get; set; }
