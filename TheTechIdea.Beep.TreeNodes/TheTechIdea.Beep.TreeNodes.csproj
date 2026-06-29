@@ -53,9 +53,13 @@
 
 
   <ItemGroup>
-    <PackageReference Include="TheTechIdea.Beep.DataManagementEngine" Version="3.0.1" />
-    <PackageReference Include="TheTechIdea.Beep.DataManagementModels" Version="3.0.0" />
     <PackageReference Include="TheTechIdea.Beep.Vis.Modules" Version="2.0.43" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BeepDM\DataManagementEngineStandard\DataManagementEngine.csproj" />
+    <ProjectReference Include="..\..\BeepDM\DataManagementModelsStandard\DataManagementModels.csproj" />
   </ItemGroup>
 	
 	
