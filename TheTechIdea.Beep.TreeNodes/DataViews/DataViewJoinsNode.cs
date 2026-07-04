@@ -185,8 +185,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
                 if (ds == null) return DMEEditor.ErrorObject;
-                if (Visutil.DialogManager.InputBoxYesNoAsync("Clear Manual Relations",
-                    "Remove all manually-defined joins from this view?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("Clear Manual Relations",
+                    "Remove all manually-defined joins from this view?").Result == BeepDialogResult.Yes)
                 {
                     ds.ClearManualJoins();
                     ds.WriteDataViewFile(DataSourceName);
@@ -208,10 +208,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 if (ds == null) return DMEEditor.ErrorObject;
                 var errors = ds.ValidateJoins();
-                Visutil.DialogManager.MsgBoxAsync("Validate Relations",
+                Visutil.DialogManager.MsgBox("Validate Relations",
                     errors.Count == 0
                         ? "✔ All joins are valid."
-                        : string.Join(Environment.NewLine, errors)).GetAwaiter().GetResult();
+                        : string.Join(Environment.NewLine, errors));
             }
             catch (Exception ex)
             {

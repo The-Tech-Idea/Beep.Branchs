@@ -133,8 +133,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 if (ds != null)
                 {
                     string current = ds.GetEntityFilter(BranchText) ?? string.Empty;
-                    DialogReturn input = Visutil.DialogManager.InputBoxAsync("Set Filter",
-                        $"WHERE clause for '{BranchText}' (current: {current}):\n(leave empty to clear)").GetAwaiter().GetResult();
+                    DialogReturn input = Visutil.DialogManager.InputBox("Set Filter",
+                        $"WHERE clause for '{BranchText}' (current: {current}):\n(leave empty to clear)");
                     if (input.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject;
                     string expr = input.Value;
 
@@ -161,10 +161,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 if (ds != null)
                 {
                     var changes = ds.RefreshEntitySchema(BranchText);
-                    Visutil.DialogManager.MsgBoxAsync("Refresh Schema",
+                    Visutil.DialogManager.MsgBox("Refresh Schema",
                         changes == null || changes.Count == 0
                             ? "\u2714 Schema is up to date."
-                            : string.Join(Environment.NewLine, changes)).GetAwaiter().GetResult();
+                            : string.Join(Environment.NewLine, changes));
                 }
             }
             catch (Exception ex)

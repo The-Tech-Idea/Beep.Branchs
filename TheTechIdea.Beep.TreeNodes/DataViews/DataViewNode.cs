@@ -250,7 +250,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         bool loadv = false;
                         if (ChildBranchs.Count > 0)
                         {
-                            if (Visutil.DialogManager.InputBoxYesNoAsync("Beep", "Do you want to over write th existing View Structure?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Beep", "Do you want to over write th existing View Structure?").Result == BeepDialogResult.Yes)
                             {
                                 TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                                 ds.LoadView();
@@ -300,7 +300,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                             {
                                 string mes = "Error : Could Not Find DataView File";
                                 DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                                Visutil.DialogManager.MsgBoxAsync("Beep", mes).GetAwaiter().GetResult();
+                                Visutil.DialogManager.MsgBox("Beep", mes);
                                
                             }
                             SaveView();
@@ -311,7 +311,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 {
                     string mes = "Error : Could Not Find DataView File";
                     DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                    Visutil.DialogManager.MsgBoxAsync("Beep", mes).GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("Beep", mes);
                 }
             }
             catch (Exception ex)
@@ -319,7 +319,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 
                 string mes = "Error :  Filling DataView Entites ({ex.Message})";
                 DMEEditor.AddLogMessage("Beep", mes, DateTime.Now, -1, mes, Errors.Failed);
-                Visutil.DialogManager.MsgBoxAsync("Beep", mes).GetAwaiter().GetResult();
+                Visutil.DialogManager.MsgBox("Beep", mes);
             }
             return DMEEditor.ErrorObject;
 
@@ -351,7 +351,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             string file=string.Empty;
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNoAsync("Remove View", "Area you Sure ? you want to remove View???").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Area you Sure ? you want to remove View???").Result == BeepDialogResult.Yes)
                 {
                     ConnectionProperties cn = DMEEditor.ConfigEditor.DataConnections.Where(x => x.ConnectionName.Equals(Path.GetFileName(DataSourceName),StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
                     if(cn==null)
@@ -393,7 +393,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                         };
                         if(string.IsNullOrEmpty(file) == false)
                         {
-                            if (Visutil.DialogManager.InputBoxYesNoAsync("Remove View", "Do you want to Delete the View File ???").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                            if (Visutil.DialogManager.InputBoxYesNo("Remove View", "Do you want to Delete the View File ???").Result == BeepDialogResult.Yes)
                             {
 
                                 File.Delete(file);
@@ -674,10 +674,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
                 if (ds == null) return DMEEditor.ErrorObject;
                 var errors = ds.ValidateView();
-                Visutil.DialogManager.MsgBoxAsync("Validate View",
+                Visutil.DialogManager.MsgBox("Validate View",
                     errors.Count == 0
                         ? "\u2714 View is valid."
-                        : string.Join(Environment.NewLine, errors)).GetAwaiter().GetResult();
+                        : string.Join(Environment.NewLine, errors));
             }
             catch (Exception ex)
             {
@@ -713,8 +713,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 ds = (DataViewDataSource)DMEEditor.GetDataSource(DataSourceName);
                 if (ds == null || ds.DataView == null) return DMEEditor.ErrorObject;
                 string current = ds.DataView.ExecutionMode.ToString();
-                DialogReturn inputDialog = Visutil.DialogManager.InputBoxAsync("Execution Mode",
-                    $"Current: {current}\nEnter mode (Cached / DirectQuery):").GetAwaiter().GetResult();
+                DialogReturn inputDialog = Visutil.DialogManager.InputBox("Execution Mode",
+                    $"Current: {current}\nEnter mode (Cached / DirectQuery):");
                 if (inputDialog.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject;
                 string input = inputDialog.Value;
                 if (string.IsNullOrWhiteSpace(input)) return DMEEditor.ErrorObject;
@@ -724,7 +724,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     ds.WriteDataViewFile(DataSourceName);
                 }
                 else
-                    Visutil.DialogManager.MsgBoxAsync("Execution Mode", $"Unknown mode '{input}'. Use Cached or DirectQuery.").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("Execution Mode", $"Unknown mode '{input}'. Use Cached or DirectQuery.");
             }
             catch (Exception ex)
             {
@@ -779,7 +779,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 if (s.BrokenEntities.Count > 0)     sb.AppendLine($"Broken:      {string.Join(", ", s.BrokenEntities)}");
                 if (s.UnconnectedEntities.Count > 0) sb.AppendLine($"Orphaned:    {string.Join(", ", s.UnconnectedEntities)}");
                 sb.AppendLine($"Cache TTL:   {s.CacheTTLSeconds}s  Expired: {s.IsCacheExpired}");
-                Visutil.DialogManager.MsgBoxAsync("View Summary", sb.ToString()).GetAwaiter().GetResult();
+                Visutil.DialogManager.MsgBox("View Summary", sb.ToString());
             }
             catch (Exception ex)
             {

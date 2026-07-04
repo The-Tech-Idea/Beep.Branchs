@@ -176,7 +176,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 DialogReturn res = new DialogReturn();
                 string viewname = null;
                 string fullname = null;
-                res = Visutil.DialogManager.InputBoxAsync("Create View", "Please Enter Name of View (Name Should not exist already in Views)").GetAwaiter().GetResult();
+                res = Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)");
                 if (res.Result == BeepDialogResult.OK)
                 {
                     viewname = res.Value;
@@ -217,7 +217,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.DialogManager.MsgBoxAsync("DM Engine", "Please Try another name . DataSource Exist").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }
@@ -273,7 +273,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.DialogManager.MsgBoxAsync("DM Engine", "Please Try another name . DataSource Exist").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }
@@ -292,7 +292,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 string viewname = null;
                 string fullname = null;
-                DialogReturn res = Visutil.DialogManager.InputBoxAsync("Create View", "Please Enter Name of View (Name Should not exist already in Views)").GetAwaiter().GetResult();
+                DialogReturn res = Visutil.DialogManager.InputBox("Create View", "Please Enter Name of View (Name Should not exist already in Views)");
                 if (res.Result == BeepDialogResult.OK)
                 {
                     if ((viewname != null) && DMEEditor.ConfigEditor.DataConnectionExist(viewname+".json") == false)
@@ -343,7 +343,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                 }
                 else
                 {
-                    Visutil.DialogManager.MsgBoxAsync("DM Engine", "Please Try another name . DataSource Exist").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("DM Engine", "Please Try another name . DataSource Exist");
                 }
 
             }

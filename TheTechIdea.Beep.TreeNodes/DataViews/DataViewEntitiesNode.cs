@@ -266,7 +266,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove Entities?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entities?").Result == BeepDialogResult.Yes)
                 {
                     foreach (IBranch item in ChildBranchs)
                     {
@@ -432,7 +432,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     EventType = "REMOVEENTITY"
 
                 };
-                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove Entity?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove Entity?").Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveBranch(this);
                     //---- Remove From View ---- //
@@ -466,7 +466,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
                     DMEEditor.AddLogMessage("Success", "Got child Nodes", DateTime.Now, 0, null, Errors.Ok);
                 }else
                 {
-                    Visutil.DialogManager.MsgBoxAsync("DM Engine", "Couldnot Get DataSource For Entity").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("DM Engine", "Couldnot Get DataSource For Entity");
                 }
              
             }
@@ -483,7 +483,7 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
 
             try
             {
-                if (Visutil.DialogManager.InputBoxYesNoAsync("DM Engine","Are you sure you want to remove child  Entities?").GetAwaiter().GetResult().Result == BeepDialogResult.Yes)
+                if (Visutil.DialogManager.InputBoxYesNo("DM Engine","Are you sure you want to remove child  Entities?").Result == BeepDialogResult.Yes)
                 {
                     TreeEditor.Treebranchhandler.RemoveChildBranchs(this);
                     ds.RemoveChildEntities(EntityStructure.Id);
@@ -600,13 +600,13 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             {
                 var joins = ds?.GetJoinsFor(EntityStructure.EntityName);
                 if (joins == null || joins.Count == 0)
-                    Visutil.DialogManager.MsgBoxAsync("Relations", $"No joins defined for '{EntityStructure.EntityName}'.").GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox("Relations", $"No joins defined for '{EntityStructure.EntityName}'.");
                 else
                 {
                     var sb = new StringBuilder();
                     foreach (var j in joins)
                         sb.AppendLine($"{j.LeftEntityName}.{j.LeftColumn} → {j.RightEntityName}.{j.RightColumn} [{j.JoinType}]{(j.IsManuallyDefined ? " (manual)" : string.Empty)}");
-                    Visutil.DialogManager.MsgBoxAsync($"Relations for {EntityStructure.EntityName}", sb.ToString()).GetAwaiter().GetResult();
+                    Visutil.DialogManager.MsgBox($"Relations for {EntityStructure.EntityName}", sb.ToString());
                 }
             }
             catch (Exception ex)
@@ -677,8 +677,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
                 string current = ds?.GetEntityFilter(EntityStructure.EntityName) ?? string.Empty;
-                DialogReturn input = Visutil.DialogManager.InputBoxAsync("Set Filter",
-                    $"WHERE clause for '{EntityStructure.EntityName}' (current: {current}):\n(leave empty to clear)").GetAwaiter().GetResult();
+                DialogReturn input = Visutil.DialogManager.InputBox("Set Filter",
+                    $"WHERE clause for '{EntityStructure.EntityName}' (current: {current}):\n(leave empty to clear)");
                 if (input.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject; // cancelled
                 string expr = input.Value;
                 if (string.IsNullOrWhiteSpace(expr))
@@ -700,10 +700,10 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
             try
             {
                 var changes = ds?.RefreshEntitySchema(EntityStructure.EntityName);
-                Visutil.DialogManager.MsgBoxAsync("Refresh Schema",
+                Visutil.DialogManager.MsgBox("Refresh Schema",
                     changes == null || changes.Count == 0
                         ? "\u2714 Schema is up to date — no changes detected."
-                        : string.Join(Environment.NewLine, changes)).GetAwaiter().GetResult();
+                        : string.Join(Environment.NewLine, changes));
             }
             catch (Exception ex)
             {
@@ -717,8 +717,8 @@ namespace TheTechIdea.Beep.TreeNodes.DataViews
         {
             try
             {
-                DialogReturn renameInput = Visutil.DialogManager.InputBoxAsync("Rename Entity",
-                    $"New name for '{EntityStructure.EntityName}' (current: {EntityStructure.EntityName}):").GetAwaiter().GetResult();
+                DialogReturn renameInput = Visutil.DialogManager.InputBox("Rename Entity",
+                    $"New name for '{EntityStructure.EntityName}' (current: {EntityStructure.EntityName}):");
                 if (renameInput.Result != BeepDialogResult.OK) return DMEEditor.ErrorObject;
                 string newName = renameInput.Value;
                 if (string.IsNullOrWhiteSpace(newName) || newName == EntityStructure.EntityName)
